@@ -30,6 +30,16 @@
     
     [str characterAtIndex:80];
     
+    [str hasPrefix:nil];
+    [str hasSuffix:nil];
+    [str containsString:nil];
+    [str rangeOfString:nil];
+    [str rangeOfString:nil options:0];
+    [str rangeOfComposedCharacterSequenceAtIndex:30];
+    [str stringByAppendingString:nil];
+    
+    NSArray *arr = [str componentsSeparatedByString:nil];
+    
     
     NSMutableString *mutableStr = [NSMutableString stringWithString:@"mutableString"];
     
