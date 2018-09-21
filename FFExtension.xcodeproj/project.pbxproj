@@ -15,6 +15,13 @@
 		4F4FA86C21549FB600148F47 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA86B21549FB600148F47 /* main.m */; };
 		4F4FA87621549FB600148F47 /* FFExtensionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA87521549FB600148F47 /* FFExtensionTests.m */; };
 		4F4FA88121549FB600148F47 /* FFExtensionUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA88021549FB600148F47 /* FFExtensionUITests.m */; };
+		4F4FA89121549FF800148F47 /* FFManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA89021549FF800148F47 /* FFManager.m */; };
+		4F4FA8972154BDF800148F47 /* NSObject+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA8962154BDF800148F47 /* NSObject+FFExtension.m */; };
+		4F4FA89A2154BE3200148F47 /* NSString+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA8992154BE3200148F47 /* NSString+FFExtension.m */; };
+		4F4FA89D2154BE4100148F47 /* NSArray+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA89C2154BE4100148F47 /* NSArray+FFExtension.m */; };
+		4F4FA8A02154BE4D00148F47 /* NSDictionary+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA89F2154BE4D00148F47 /* NSDictionary+FFExtension.m */; };
+		4F4FA8A32154CF0A00148F47 /* NSObject+methodSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA8A22154CF0A00148F47 /* NSObject+methodSwizzle.m */; };
+		4F4FA8A62154D86500148F47 /* SSZTestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA8A52154D86500148F47 /* SSZTestObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +58,20 @@
 		4F4FA87C21549FB600148F47 /* FFExtensionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FFExtensionUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F4FA88021549FB600148F47 /* FFExtensionUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FFExtensionUITests.m; sourceTree = "<group>"; };
 		4F4FA88221549FB600148F47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4F4FA88F21549FF800148F47 /* FFManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFManager.h; sourceTree = "<group>"; };
+		4F4FA89021549FF800148F47 /* FFManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FFManager.m; sourceTree = "<group>"; };
+		4F4FA8952154BDF800148F47 /* NSObject+FFExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+FFExtension.h"; sourceTree = "<group>"; };
+		4F4FA8962154BDF800148F47 /* NSObject+FFExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+FFExtension.m"; sourceTree = "<group>"; };
+		4F4FA8982154BE3200148F47 /* NSString+FFExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+FFExtension.h"; sourceTree = "<group>"; };
+		4F4FA8992154BE3200148F47 /* NSString+FFExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+FFExtension.m"; sourceTree = "<group>"; };
+		4F4FA89B2154BE4100148F47 /* NSArray+FFExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+FFExtension.h"; sourceTree = "<group>"; };
+		4F4FA89C2154BE4100148F47 /* NSArray+FFExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+FFExtension.m"; sourceTree = "<group>"; };
+		4F4FA89E2154BE4D00148F47 /* NSDictionary+FFExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+FFExtension.h"; sourceTree = "<group>"; };
+		4F4FA89F2154BE4D00148F47 /* NSDictionary+FFExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+FFExtension.m"; sourceTree = "<group>"; };
+		4F4FA8A12154CF0A00148F47 /* NSObject+methodSwizzle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+methodSwizzle.h"; sourceTree = "<group>"; };
+		4F4FA8A22154CF0A00148F47 /* NSObject+methodSwizzle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+methodSwizzle.m"; sourceTree = "<group>"; };
+		4F4FA8A42154D86500148F47 /* SSZTestObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSZTestObject.h; sourceTree = "<group>"; };
+		4F4FA8A52154D86500148F47 /* SSZTestObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSZTestObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,10 +122,13 @@
 		4F4FA85B21549FB400148F47 /* FFExtension */ = {
 			isa = PBXGroup;
 			children = (
+				4F4FA88E21549FDB00148F47 /* Classes */,
 				4F4FA85C21549FB400148F47 /* AppDelegate.h */,
 				4F4FA85D21549FB400148F47 /* AppDelegate.m */,
 				4F4FA85F21549FB400148F47 /* ViewController.h */,
 				4F4FA86021549FB400148F47 /* ViewController.m */,
+				4F4FA8A42154D86500148F47 /* SSZTestObject.h */,
+				4F4FA8A52154D86500148F47 /* SSZTestObject.m */,
 				4F4FA86221549FB400148F47 /* Main.storyboard */,
 				4F4FA86521549FB600148F47 /* Assets.xcassets */,
 				4F4FA86721549FB600148F47 /* LaunchScreen.storyboard */,
@@ -130,6 +154,25 @@
 				4F4FA88221549FB600148F47 /* Info.plist */,
 			);
 			path = FFExtensionUITests;
+			sourceTree = "<group>";
+		};
+		4F4FA88E21549FDB00148F47 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				4F4FA88F21549FF800148F47 /* FFManager.h */,
+				4F4FA89021549FF800148F47 /* FFManager.m */,
+				4F4FA8A12154CF0A00148F47 /* NSObject+methodSwizzle.h */,
+				4F4FA8A22154CF0A00148F47 /* NSObject+methodSwizzle.m */,
+				4F4FA8952154BDF800148F47 /* NSObject+FFExtension.h */,
+				4F4FA8962154BDF800148F47 /* NSObject+FFExtension.m */,
+				4F4FA8982154BE3200148F47 /* NSString+FFExtension.h */,
+				4F4FA8992154BE3200148F47 /* NSString+FFExtension.m */,
+				4F4FA89B2154BE4100148F47 /* NSArray+FFExtension.h */,
+				4F4FA89C2154BE4100148F47 /* NSArray+FFExtension.m */,
+				4F4FA89E2154BE4D00148F47 /* NSDictionary+FFExtension.h */,
+				4F4FA89F2154BE4D00148F47 /* NSDictionary+FFExtension.m */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,9 +305,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F4FA8A32154CF0A00148F47 /* NSObject+methodSwizzle.m in Sources */,
+				4F4FA8A02154BE4D00148F47 /* NSDictionary+FFExtension.m in Sources */,
 				4F4FA86121549FB400148F47 /* ViewController.m in Sources */,
+				4F4FA89121549FF800148F47 /* FFManager.m in Sources */,
 				4F4FA86C21549FB600148F47 /* main.m in Sources */,
+				4F4FA8A62154D86500148F47 /* SSZTestObject.m in Sources */,
 				4F4FA85E21549FB400148F47 /* AppDelegate.m in Sources */,
+				4F4FA8972154BDF800148F47 /* NSObject+FFExtension.m in Sources */,
+				4F4FA89D2154BE4100148F47 /* NSArray+FFExtension.m in Sources */,
+				4F4FA89A2154BE3200148F47 /* NSString+FFExtension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

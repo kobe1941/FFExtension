@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "FFManager.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [FFManager startWorkWithOption:FFHookOptionAll];
+    NSArray *arr = @[@"SSZ"];
+    [FFManager addUnrecognizedSelectorWithClassPrefixs:arr];
+    
+    
     return YES;
 }
 
