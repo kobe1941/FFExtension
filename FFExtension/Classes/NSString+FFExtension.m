@@ -25,10 +25,18 @@
     [self ff_instancenSwizzleWithClass:originClass originSelector:@selector(rangeOfComposedCharacterSequenceAtIndex:) swizzleSelector:@selector(ff_rangeOfComposedCharacterSequenceAtIndex:)];
     [self ff_instancenSwizzleWithClass:originClass originSelector:@selector(rangeOfComposedCharacterSequencesForRange:) swizzleSelector:@selector(ff_rangeOfComposedCharacterSequencesForRange:)];
     [self ff_instancenSwizzleWithClass:originClass originSelector:@selector(stringByAppendingString:) swizzleSelector:@selector(ff_stringByAppendingString:)];
+    [self ff_instancenSwizzleWithClass:originClass originSelector:@selector(stringByReplacingOccurrencesOfString:withString:) swizzleSelector:@selector(ff_stringByReplacingOccurrencesOfString:withString:)];
+    [self ff_instancenSwizzleWithClass:originClass originSelector:@selector(stringByReplacingCharactersInRange:withString:) swizzleSelector:@selector(ff_stringByReplacingCharactersInRange:withString:)];
     
     
     ///< mutable
-    [self ff_instancenSwizzleWithClass:NSClassFromString(@"__NSCFString") originSelector:@selector(characterAtIndex:) swizzleSelector:@selector(ff_characterAtIndex:)];
+    Class mutableClass = NSClassFromString(@"__NSCFString");
+    [self ff_instancenSwizzleWithClass:mutableClass originSelector:@selector(characterAtIndex:) swizzleSelector:@selector(ff_characterAtIndex:)];
+    [self ff_instancenSwizzleWithClass:mutableClass originSelector:@selector(replaceCharactersInRange:withString:) swizzleSelector:@selector(ff_replaceCharactersInRange:withString:)];
+    [self ff_instancenSwizzleWithClass:mutableClass originSelector:@selector(insertString:atIndex:) swizzleSelector:@selector(ff_insertString:atIndex:)];
+    [self ff_instancenSwizzleWithClass:mutableClass originSelector:@selector(deleteCharactersInRange:) swizzleSelector:@selector(ff_deleteCharactersInRange:)];
+    [self ff_instancenSwizzleWithClass:mutableClass originSelector:@selector(appendString:) swizzleSelector:@selector(ff_appendString:)];
+    
     
 }
 
@@ -126,16 +134,67 @@
     return self;
 }
 
+- (NSString *)ff_stringByReplacingOccurrencesOfString:(NSString *)target withString:(NSString *)replacement
+{
+    if (target && replacement) {
+        return [self ff_stringByReplacingOccurrencesOfString:target withString:replacement];
+    }
+    
+    return self;
+}
 
-/*
-- (void)replaceCharactersInRange:(NSRange)range withString:(NSString *)aString;
-- (void)insertString:(NSString *)aString atIndex:(NSUInteger)loc;
-- (void)deleteCharactersInRange:(NSRange)range;
-- (void)appendString:(NSString *)aString;
-- (void)appendFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
-- (void)setString:(NSString *)aString;
+- (NSString *)ff_stringByReplacingCharactersInRange:(NSRange)range withString:(NSString *)replacement
+{
+    if (replacement && range.location + range.length < self.length) {
+        return [self ff_stringByReplacingCharactersInRange:range withString:replacement];
+    }
+    
+    return self;
+}
 
-*/
+- (void)ff_replaceCharactersInRange:(NSRange)range withString:(NSString *)aString
+{
+    if (aString && range.location + range.length < self.length) {
+       return [self ff_replaceCharactersInRange:range withString:aString];
+    }
+    
+}
+
+- (void)ff_insertString:(NSString *)aString atIndex:(NSUInteger)loc
+{
+    if (aString && loc < self.length) {
+        [self ff_insertString:aString atIndex:loc];
+    }
+    
+}
+
+- (void)ff_deleteCharactersInRange:(NSRange)range
+{
+    if (range.location + range.length < self.length) {
+        return [self ff_deleteCharactersInRange:range];
+    }
+    
+}
+
+- (void)ff_appendString:(NSString *)aString
+{
+    if (aString) {
+        return [self ff_appendString:aString];
+    }
+    
+}
+
+- (void)ff_setString:(NSString *)aString
+{
+    if (aString) {
+        return [self ff_setString:aString];
+    }
+    
+    
+}
+
+ 
+
 
 
 @end

@@ -37,13 +37,20 @@
     [str rangeOfString:nil options:0];
     [str rangeOfComposedCharacterSequenceAtIndex:30];
     [str stringByAppendingString:nil];
-    
+    [str stringByReplacingOccurrencesOfString:@"s" withString:nil];
+    [str stringByReplacingCharactersInRange:NSMakeRange(5, 2) withString:nil];
     NSArray *arr = [str componentsSeparatedByString:nil];
     
     
     NSMutableString *mutableStr = [NSMutableString stringWithString:@"mutableString"];
-    
     [mutableStr characterAtIndex:90];
+    [mutableStr replaceCharactersInRange:NSMakeRange(0, 30) withString:nil];
+    [mutableStr insertString:nil atIndex:57];
+    [mutableStr deleteCharactersInRange:NSMakeRange(5, 20)];
+    [mutableStr appendString:nil];
+
+    mutableStr.string = nil;
+    
 }
 
 - (void)testUnrecognizedSelector
