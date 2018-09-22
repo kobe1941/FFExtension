@@ -21,7 +21,166 @@
     // Do any additional setup after loading the view, typically from a nib.
     
 //    [self testUnrecognizedSelector];
-    [self testNSStringHook];
+//    [self testNSStringHook];
+    [self testArrayHook];
+}
+
+- (void)testArrayHook
+{
+//    NSArray *tempArr = [[self class] findAllOf:[NSMutableArray class]];
+//    NSLog(@"NSMutableArray result = %@", tempArr);
+    
+
+    
+    NSArray *array = @[@"1,", @"2"];
+    array[3];
+    [array objectAtIndex:4];
+    [array arrayByAddingObject:nil];
+    [array containsObject:nil];
+    
+    array = [[NSArray alloc] initWithObjects:@"1", @"2", nil, nil];
+    array = [[NSArray alloc] initWithArray:nil];
+    
+    array[3];
+    [array objectAtIndex:4];
+    
+    [array arrayByAddingObject:nil];
+    [array arrayByAddingObjectsFromArray:nil];
+    
+    NSString *str = nil;
+    array = @[@"1", @"2", str, @"4"];
+    
+    [array arrayByAddingObject:nil];
+    [array arrayByAddingObjectsFromArray:nil];
+    [array containsObject:nil];
+    
+    NSString *temp[5];
+    temp[1] = @"111";
+    array = [[NSArray alloc] initWithObjects:temp count:4];
+    array = [NSArray arrayWithObjects:temp count:4];
+    
+    array = [[NSArray alloc] initWithArray:nil copyItems:YES];
+    array = [[NSArray alloc] initWithContentsOfFile:nil];
+    array = [[NSArray alloc] initWithContentsOfURL:nil];
+    
+    array = [NSArray array];
+    array[3];
+    [array objectAtIndex:4];
+    [array arrayByAddingObject:nil];
+    
+    array = [NSArray new];
+    array[3];
+    [array objectAtIndex:4];
+    [array arrayByAddingObject:nil];
+    
+    array = [NSArray arrayWithObjects:@"1", @"2", NULL, nil, nil];
+    array = [NSArray arrayWithArray:nil];
+    array = [NSArray arrayWithObject:nil];
+    array = [NSArray arrayWithObjects:temp count:4];
+    array = [NSArray arrayWithContentsOfURL:nil];
+    array = [NSArray arrayWithContentsOfFile:nil];
+    array = [NSArray arrayWithContentsOfURL:nil error:nil];
+    
+    array = @[@"12", @"g", @"uty",@"fwef",@"gerg"];
+    [array arrayByAddingObject:nil];
+    [array arrayByAddingObjectsFromArray:nil];
+    array[4];
+    [array objectAtIndex:56];
+    [array firstObjectCommonWithArray:nil];
+    
+    [array indexOfObject:nil];
+    [array indexOfObject:@23 inRange:NSMakeRange(10, 2)];
+    
+    NSRange range = NSMakeRange(2, 20);
+    
+    array = @[@"1", @"2", @"3"];//__NSArrayI
+    [array subarrayWithRange:NSMakeRange(20, 12)];
+    [array indexOfObjectIdenticalTo:nil];
+    [array indexOfObjectIdenticalTo:nil inRange:NSMakeRange(20, 10)];
+    [array isEqualToArray:nil];
+    
+    [array indexOfObject:nil inRange:NSMakeRange(10, 2)];
+//    array = @[@"1"];//__NSSingleObjectArrayI
+    [array objectAtIndexedSubscript:23];
+    [array subarrayWithRange:NSMakeRange(20, 12)];
+    [array indexOfObject:nil inRange:NSMakeRange(10, 2)];
+//    array = @[];//NSArray0
+    [array subarrayWithRange:NSMakeRange(20, 12)];
+    [array indexOfObject:nil inRange:NSMakeRange(10, 2)];
+    [array indexOfObjectIdenticalTo:nil];
+    __unsafe_unretained id cArray[1];
+    [array getObjects:cArray range:range];
+    
+    [array objectAtIndexedSubscript:23];
+    NSIndexSet *set = [NSIndexSet indexSetWithIndex:67];
+    [array objectsAtIndexes:nil];
+    [array objectsAtIndexes:set];
+    
+    NSString *tempStr = [array componentsJoinedByString:nil];
+    
+    
+//    array = [NSMutableArray arrayWithContentsOfURL:nil];
+    NSMutableArray *mutableArray = array.mutableCopy;
+    [mutableArray containsObject:nil];
+    [array subarrayWithRange:NSMakeRange(20, 12)];
+//    mutableArray = [NSMutableArray new];
+    [mutableArray subarrayWithRange:NSMakeRange(20, 12)];
+    [mutableArray addObject:nil];
+    [mutableArray insertObject:nil atIndex:0];
+    [mutableArray insertObject:@212 atIndex:12];
+    
+    [mutableArray removeObject:nil];
+    [mutableArray removeObjectAtIndex:23];
+    [mutableArray removeObjectsInArray:nil];
+    [mutableArray removeObjectsAtIndexes:[NSIndexSet indexSetWithIndex:34]];
+    [mutableArray removeObjectsInRange:NSMakeRange(20, 12)];
+    [mutableArray removeObject:nil inRange:NSMakeRange(12, 12)];
+    [mutableArray removeObject:@12 inRange:NSMakeRange(12, 12)];
+    
+    [mutableArray addObjectsFromArray:nil];
+    [mutableArray removeObjectIdenticalTo:nil];
+    
+    [mutableArray replaceObjectAtIndex:1 withObject:nil];
+    [mutableArray replaceObjectAtIndex:12 withObject:@12];
+    
+    [mutableArray exchangeObjectAtIndex:1 withObjectAtIndex:10];
+    [mutableArray removeObjectIdenticalTo:nil];
+    [mutableArray removeObjectIdenticalTo:@12 inRange:NSMakeRange(2, 1)];
+    [mutableArray setObject:nil atIndexedSubscript:2];
+    [mutableArray setObject:@12 atIndexedSubscript:23];
+    [mutableArray replaceObjectsInRange:NSMakeRange(0, 1) withObjectsFromArray:@[@12,@23,@12333]];
+    [mutableArray replaceObjectsInRange:NSMakeRange(0, 1) withObjectsFromArray:nil];
+    [mutableArray replaceObjectsInRange:NSMakeRange(10, 13) withObjectsFromArray:@[@12,@23,@12333]];
+//    [mutableArray setArray:nil];
+    
+    [mutableArray replaceObjectsInRange:NSMakeRange(0, 1) withObjectsFromArray:@[@"hufeng", @"kobe"] range:NSMakeRange(0, 2)];
+    [mutableArray replaceObjectsInRange:NSMakeRange(0, 1) withObjectsFromArray:@[@"hufeng", @"kobe"] range:NSMakeRange(0, 2)];
+    [mutableArray replaceObjectsInRange:NSMakeRange(0, 1) withObjectsFromArray:@[@"hufeng", @"kobe"] range:NSMakeRange(0, 2)];
+    [mutableArray replaceObjectsInRange:NSMakeRange(0, 1) withObjectsFromArray:nil range:NSMakeRange(0, 2)];
+    
+    // 数组个数跟indexset的个数要相等
+    NSMutableIndexSet *mutableSet = [NSMutableIndexSet indexSetWithIndex:1];
+    
+    [mutableArray insertObjects:@[@234534, @909] atIndexes:mutableSet];
+    [mutableArray insertObjects:nil atIndexes:[NSIndexSet indexSetWithIndex:0]];
+    [mutableArray insertObjects:@[@234,@234534] atIndexes:[NSIndexSet indexSetWithIndex:23]];
+//    [mutableArray replaceObjectsAtIndexes:mutableSet withObjects:nil];
+    
+    [mutableSet addIndex:20];
+//    [mutableArray replaceObjectsAtIndexes:nil withObjects:nil];
+    [mutableArray replaceObjectsAtIndexes:mutableSet withObjects:@[@"jordan"]];
+    mutableArray[20];
+    [mutableArray objectAtIndex:23];
+    
+    [mutableArray getObjects:cArray range:range];
+    [mutableArray arrayByAddingObject:nil];
+    [mutableArray indexOfObject:@23 inRange:NSMakeRange(10, 2)];
+    [mutableArray indexOfObjectIdenticalTo:nil inRange:NSMakeRange(20, 10)];
+    [mutableArray objectsAtIndexes:nil];
+    [mutableArray objectsAtIndexes:mutableSet];
+    [mutableArray objectAtIndexedSubscript:45];
+    
+//    [[NSMutableArray alloc] initWithObjects:temp count:40];
 }
 
 - (void)testNSStringHook
