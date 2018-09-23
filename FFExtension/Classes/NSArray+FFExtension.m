@@ -7,7 +7,7 @@
 //
 
 #import "NSArray+FFExtension.h"
-#import "NSObject+methodSwizzle.h"
+#import "NSObject+methodSwizzle.h"ß
 
 @implementation NSArray (FFExtension)
 /*
@@ -47,12 +47,19 @@
     
     Class singleClass = NSClassFromString(@"__NSSingleObjectArrayI");
     [self ff_instancenSwizzleWithClass:singleClass originSelector:@selector(objectAtIndex:) swizzleSelector:@selector(ff_objectAtIndex:)];
-    
+    [self ff_instancenSwizzleWithClass:singleClass originSelector:@selector(getObjects:range:) swizzleSelector:@selector(ff_getObjectsSingleArrayI:range:)];
     
 
+    Class mutableClass = NSClassFromString(@"NSMutableArray");
+    [self ff_instancenSwizzleWithClass:mutableClass originSelector:@selector(removeObjectsAtIndexes:) swizzleSelector:@selector(ff_removeObjectsAtIndexes:)];
+    [self ff_instancenSwizzleWithClass:mutableClass originSelector:@selector(removeObject:inRange:) swizzleSelector:@selector(ff_removeObject:inRange:)];
+    [self ff_instancenSwizzleWithClass:mutableClass originSelector:@selector(removeObjectAtIndex:) swizzleSelector:@selector(ff_removeObjectAtIndex:)];
+    [self ff_instancenSwizzleWithClass:mutableClass originSelector:@selector(removeObjectIdenticalTo:inRange:) swizzleSelector:@selector(ff_removeObjectIdenticalTo:inRange:)];
+    [self ff_instancenSwizzleWithClass:mutableClass originSelector:@selector(replaceObjectsInRange:withObjectsFromArray:) swizzleSelector:@selector(ff_replaceObjectsInRange:withObjectsFromArray:)];
+    [self ff_instancenSwizzleWithClass:mutableClass originSelector:@selector(replaceObjectsInRange:withObjectsFromArray:range:) swizzleSelector:@selector(ff_replaceObjectsInRange:withObjectsFromArray:range:)];
+    [self ff_instancenSwizzleWithClass:mutableClass originSelector:@selector(insertObjects:atIndexes:) swizzleSelector:@selector(ff_insertObjects:atIndexes:)];
+    [self ff_instancenSwizzleWithClass:mutableClass originSelector:@selector(replaceObjectsAtIndexes:withObjects:) swizzleSelector:@selector(ff_replaceObjectsAtIndexes:withObjects:)];
     
-    Class placeHolderClass = NSClassFromString(@"__NSPlaceholderArray");
-    [self ff_instancenSwizzleWithClass:placeHolderClass originSelector:@selector(initWithObjects:count:) swizzleSelector:@selector(ff_initWithObjects:count:)];
     
     
     Class classM = NSClassFromString(@"__NSArrayM");
@@ -65,15 +72,23 @@
     [self ff_instancenSwizzleWithClass:classM originSelector:@selector(objectAtIndex:) swizzleSelector:@selector(ff_objectAtIndexArrayM:)];
     [self ff_instancenSwizzleWithClass:classM originSelector:@selector(getObjects:range:) swizzleSelector:@selector(ff_getObjectsArrayM:range:)];
     
-    Class mutableClass = NSClassFromString(@"NSMutableArray");
-    [self ff_instancenSwizzleWithClass:mutableClass originSelector:@selector(removeObjectsAtIndexes:) swizzleSelector:@selector(ff_removeObjectsAtIndexes:)];
-    [self ff_instancenSwizzleWithClass:mutableClass originSelector:@selector(removeObject:inRange:) swizzleSelector:@selector(ff_removeObject:inRange:)];
-    [self ff_instancenSwizzleWithClass:mutableClass originSelector:@selector(removeObjectAtIndex:) swizzleSelector:@selector(ff_removeObjectAtIndex:)];
-    [self ff_instancenSwizzleWithClass:mutableClass originSelector:@selector(removeObjectIdenticalTo:inRange:) swizzleSelector:@selector(ff_removeObjectIdenticalTo:inRange:)];
-    [self ff_instancenSwizzleWithClass:mutableClass originSelector:@selector(replaceObjectsInRange:withObjectsFromArray:) swizzleSelector:@selector(ff_replaceObjectsInRange:withObjectsFromArray:)];
-    [self ff_instancenSwizzleWithClass:mutableClass originSelector:@selector(replaceObjectsInRange:withObjectsFromArray:range:) swizzleSelector:@selector(ff_replaceObjectsInRange:withObjectsFromArray:range:)];
-    [self ff_instancenSwizzleWithClass:mutableClass originSelector:@selector(insertObjects:atIndexes:) swizzleSelector:@selector(ff_insertObjects:atIndexes:)];
-    [self ff_instancenSwizzleWithClass:mutableClass originSelector:@selector(replaceObjectsAtIndexes:withObjects:) swizzleSelector:@selector(ff_replaceObjectsAtIndexes:withObjects:)];
+    [self ff_instancenSwizzleWithClass:classM originSelector:@selector(removeObjectAtIndex:) swizzleSelector:@selector(ff_removeObjectAtIndexArrayM:)];
+
+    
+    
+    Class placeHolderClass = NSClassFromString(@"__NSPlaceholderArray");
+    [self ff_instancenSwizzleWithClass:placeHolderClass originSelector:@selector(initWithObjects:count:) swizzleSelector:@selector(ff_initWithObjects:count:)];
+    
+    
+    
+//    Class classCFArray__ = NSClassFromString(@"__NSCFArray");
+//    [self ff_instancenSwizzleWithClass:classCFArray__ originSelector:@selector(objectAtIndex:) swizzleSelector:@selector(ff_objectAtIndexCFArray__:)];
+//    
+//    Class classCFArray = NSClassFromString(@"NSCFArray");
+//    [self ff_instancenSwizzleWithClass:classCFArray originSelector:@selector(objectAtIndex:) swizzleSelector:@selector(ff_objectAtIndexCFArray:)];
+    
+
+    
 }
 
 - (id)ff_objectAtIndexedSubscript:(NSUInteger)index
@@ -134,6 +149,24 @@
     return nil;
 }
 
+- (id)ff_objectAtIndexCFArray__:(NSUInteger)index
+{
+    if (index < self.count) {
+        return [self ff_objectAtIndexCFArray__:index];
+    }
+    
+    return nil;
+}
+
+- (id)ff_objectAtIndexCFArray:(NSUInteger)index
+{
+    if (index < self.count) {
+        return [self ff_objectAtIndexCFArray:index];
+    }
+    
+    return nil;
+}
+
 - (instancetype)ff_initWithObjects:(const id _Nonnull [_Nullable])objects count:(NSUInteger)cnt
 {
     NSUInteger realCount = 0;
@@ -188,6 +221,15 @@
     NSLog(@"self.count = %lu. range max location = %lu", self.count, range.location+range.length);
 }
 
+
+- (void)ff_getObjectsSingleArrayI:(id _Nonnull __unsafe_unretained [_Nonnull])objects range:(NSRange)range
+{
+    if (range.location + range.length <= self.count) {
+        return [self ff_getObjectsSingleArrayI:objects range:range];
+    }
+    
+    NSLog(@"self.count = %lu. range max location = %lu", self.count, range.location+range.length);
+}
 
 
 
@@ -297,6 +339,17 @@
     
     NSLog(@"index = %lu 越界", index);
 }
+
+- (void)ff_removeObjectAtIndexArrayM:(NSUInteger)index
+{
+    if (index < self.count) {
+        return [self ff_removeObjectAtIndexArrayM:index];
+    }
+    
+    NSLog(@"index = %lu 越界", index);
+}
+
+
 
 - (void)ff_replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject
 {

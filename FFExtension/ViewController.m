@@ -27,10 +27,23 @@
 
 - (void)testArrayHook
 {
-//    NSArray *tempArr = [[self class] findAllOf:[NSMutableArray class]];
-//    NSLog(@"NSMutableArray result = %@", tempArr);
+    NSArray *tempArr = [[self class] findAllOf:[NSMutableArray class]];
+    NSLog(@"NSMutableArray result = %@", tempArr);
     
-
+     unsigned int count;
+    Class classCFArray__ = NSClassFromString(@"__NSCFArray");
+        Method *methods = class_copyMethodList(classCFArray__, &count);
+    
+        for (int i = 0; i < count; i++)
+    {
+                Method method = methods[i];
+        
+                SEL selector = method_getName(method);
+        
+                NSString *name = NSStringFromSelector(selector);
+        NSLog(@"array %@ method name = %@", [classCFArray__ class], name);
+    }
+    
     
     NSArray *array = @[@"1,", @"2"];
     array[3];
@@ -79,7 +92,10 @@
     array = [NSArray arrayWithObjects:temp count:4];
     array = [NSArray arrayWithContentsOfURL:nil];
     array = [NSArray arrayWithContentsOfFile:nil];
-    array = [NSArray arrayWithContentsOfURL:nil error:nil];
+    if (@available(iOS 11.0, *)) {
+        array = [NSArray arrayWithContentsOfURL:nil error:nil];
+    }
+    
     
     array = @[@"12", @"g", @"uty",@"fwef",@"gerg"];
     [array arrayByAddingObject:nil];
