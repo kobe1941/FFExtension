@@ -80,13 +80,13 @@
     [self ff_instancenSwizzleWithClass:placeHolderClass originSelector:@selector(initWithObjects:count:) swizzleSelector:@selector(ff_initWithObjects:count:)];
     
     
-    
-//    Class classCFArray__ = NSClassFromString(@"__NSCFArray");
-//    [self ff_instancenSwizzleWithClass:classCFArray__ originSelector:@selector(objectAtIndex:) swizzleSelector:@selector(ff_objectAtIndexCFArray__:)];
-//    
-//    Class classCFArray = NSClassFromString(@"NSCFArray");
-//    [self ff_instancenSwizzleWithClass:classCFArray originSelector:@selector(objectAtIndex:) swizzleSelector:@selector(ff_objectAtIndexCFArray:)];
-    
+    /*这俩目测是系统内部用到的，不能随便hook
+    Class classCFArray__ = NSClassFromString(@"__NSCFArray");
+    [self ff_instancenSwizzleWithClass:classCFArray__ originSelector:@selector(objectAtIndex:) swizzleSelector:@selector(ff_objectAtIndexCFArray__:)];
+
+    Class classCFArray = NSClassFromString(@"NSCFArray");
+    [self ff_instancenSwizzleWithClass:classCFArray originSelector:@selector(objectAtIndex:) swizzleSelector:@selector(ff_objectAtIndexCFArray:)];
+    */
 
     
 }
@@ -149,6 +149,7 @@
     return nil;
 }
 
+/*
 - (id)ff_objectAtIndexCFArray__:(NSUInteger)index
 {
     if (index < self.count) {
@@ -166,6 +167,7 @@
     
     return nil;
 }
+*/
 
 - (instancetype)ff_initWithObjects:(const id _Nonnull [_Nullable])objects count:(NSUInteger)cnt
 {
