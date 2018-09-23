@@ -7,7 +7,7 @@
 //
 
 #import "NSArray+FFExtension.h"
-#import "NSObject+methodSwizzle.h"ß
+#import "NSObject+methodSwizzle.h"
 
 @implementation NSArray (FFExtension)
 /*
@@ -23,15 +23,19 @@
  NSCFArray
  */
 
-///< TODO: 想一下为什么这里的同一个函数，不能被两个类去交换，按理来说，会分别拷贝到不同的类去，是没有关系的，但是实际应用如果不分开实现会崩溃
-//Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: '*** -[NSArray objectAtIndex:]: method only defined for abstract class.  Define -[__NSArrayI objectAtIndex:]!'
+///< TODO: 想一下为什么这里的同一个函数，不能被两个类去交换，按理来说，会分别拷贝到不同的类去，是没有关系的，但是实际应用如果不分开实现会崩溃————因为不能动NSArray这个父类，只要不动父类，子类随便玩
+
 
 + (void)startHook
 {
+//    BOOL flag = NO; ///< 控制是否需要用多个函数去hook
+    SEL getObjectsRangeSEL = @selector(ff_getObjects:range:);
+    SEL objectsAtIndexSEL = @selector(ff_objectAtIndex:);
+    
     Class arrayClass = NSClassFromString(@"NSArray");
     [self ff_instancenSwizzleWithClass:arrayClass originSelector:@selector(arrayByAddingObject:) swizzleSelector:@selector(ff_arrayByAddingObject:)];
     [self ff_instancenSwizzleWithClass:arrayClass originSelector:@selector(indexOfObject:inRange:) swizzleSelector:@selector(ff_indexOfObject:inRange:)];
-    [self ff_instancenSwizzleWithClass:arrayClass originSelector:@selector(getObjects:range:) swizzleSelector:@selector(ff_getObjects:range:)];
+    [self ff_instancenSwizzleWithClass:arrayClass originSelector:@selector(getObjects:range:) swizzleSelector:@selector(ff_getObjectsForSuperClass:range:)]; ///< 这里要注意不能把父类的方法给替换了，否则会影响到所有子类
     [self ff_instancenSwizzleWithClass:arrayClass originSelector:@selector(indexOfObjectIdenticalTo:inRange:) swizzleSelector:@selector(ff_indexOfObjectIdenticalTo:inRange:)];
     [self ff_instancenSwizzleWithClass:arrayClass originSelector:@selector(subarrayWithRange:) swizzleSelector:@selector(ff_subarrayWithRange:)];
     [self ff_instancenSwizzleWithClass:arrayClass originSelector:@selector(objectsAtIndexes:) swizzleSelector:@selector(ff_objectsAtIndexes:)];
@@ -39,15 +43,19 @@
     
     Class originClass = NSClassFromString(@"__NSArrayI");
     [self ff_instancenSwizzleWithClass:originClass originSelector:@selector(objectAtIndexedSubscript:) swizzleSelector:@selector(ff_objectAtIndexedSubscript:)];
-    [self ff_instancenSwizzleWithClass:originClass originSelector:@selector(objectAtIndex:) swizzleSelector:@selector(ff_objectAtIndexArrayI:)];
-    [self ff_instancenSwizzleWithClass:originClass originSelector:@selector(getObjects:range:) swizzleSelector:@selector(ff_getObjectsArrayI:range:)];
+    [self ff_instancenSwizzleWithClass:originClass originSelector:@selector(objectAtIndex:) swizzleSelector:objectsAtIndexSEL];
+    [self ff_instancenSwizzleWithClass:originClass originSelector:@selector(getObjects:range:) swizzleSelector:getObjectsRangeSEL];
+    
+    
     
     Class array0Class = NSClassFromString(@"__NSArray0");
-    [self ff_instancenSwizzleWithClass:array0Class originSelector:@selector(objectAtIndex:) swizzleSelector:@selector(ff_objectAtIndexArray0:)];
+    [self ff_instancenSwizzleWithClass:array0Class originSelector:@selector(objectAtIndex:) swizzleSelector:objectsAtIndexSEL];
+    
+    
     
     Class singleClass = NSClassFromString(@"__NSSingleObjectArrayI");
-    [self ff_instancenSwizzleWithClass:singleClass originSelector:@selector(objectAtIndex:) swizzleSelector:@selector(ff_objectAtIndex:)];
-    [self ff_instancenSwizzleWithClass:singleClass originSelector:@selector(getObjects:range:) swizzleSelector:@selector(ff_getObjectsSingleArrayI:range:)];
+    [self ff_instancenSwizzleWithClass:singleClass originSelector:@selector(objectAtIndex:) swizzleSelector:objectsAtIndexSEL];
+    [self ff_instancenSwizzleWithClass:singleClass originSelector:@selector(getObjects:range:) swizzleSelector:getObjectsRangeSEL];
     
 
     Class mutableClass = NSClassFromString(@"NSMutableArray");
@@ -69,9 +77,8 @@
     [self ff_instancenSwizzleWithClass:classM originSelector:@selector(exchangeObjectAtIndex:withObjectAtIndex:) swizzleSelector:@selector(ff_exchangeObjectAtIndex:withObjectAtIndex:)];
     [self ff_instancenSwizzleWithClass:classM originSelector:@selector(setObject:atIndexedSubscript:) swizzleSelector:@selector(ff_setObject:atIndexedSubscript:)];
     [self ff_instancenSwizzleWithClass:classM originSelector:@selector(objectAtIndexedSubscript:) swizzleSelector:@selector(ff_objectAtIndexedSubscriptArrayM:)];
-    [self ff_instancenSwizzleWithClass:classM originSelector:@selector(objectAtIndex:) swizzleSelector:@selector(ff_objectAtIndexArrayM:)];
-    [self ff_instancenSwizzleWithClass:classM originSelector:@selector(getObjects:range:) swizzleSelector:@selector(ff_getObjectsArrayM:range:)];
-    
+    [self ff_instancenSwizzleWithClass:classM originSelector:@selector(objectAtIndex:) swizzleSelector:objectsAtIndexSEL];
+    [self ff_instancenSwizzleWithClass:classM originSelector:@selector(getObjects:range:) swizzleSelector:getObjectsRangeSEL];
     [self ff_instancenSwizzleWithClass:classM originSelector:@selector(removeObjectAtIndex:) swizzleSelector:@selector(ff_removeObjectAtIndexArrayM:)];
 
     
@@ -80,15 +87,12 @@
     [self ff_instancenSwizzleWithClass:placeHolderClass originSelector:@selector(initWithObjects:count:) swizzleSelector:@selector(ff_initWithObjects:count:)];
     
     
-    /*这俩目测是系统内部用到的，不能随便hook
-    Class classCFArray__ = NSClassFromString(@"__NSCFArray");
-    [self ff_instancenSwizzleWithClass:classCFArray__ originSelector:@selector(objectAtIndex:) swizzleSelector:@selector(ff_objectAtIndexCFArray__:)];
+//    这俩目测是系统内部用到的，不能随便hook
+//    Class classCFArray__ = NSClassFromString(@"__NSCFArray");
+//    [self ff_instancenSwizzleWithClass:classCFArray__ originSelector:@selector(objectAtIndex:) swizzleSelector:@selector(ff_objectAtIndex:)];
 
-    Class classCFArray = NSClassFromString(@"NSCFArray");
-    [self ff_instancenSwizzleWithClass:classCFArray originSelector:@selector(objectAtIndex:) swizzleSelector:@selector(ff_objectAtIndexCFArray:)];
-    */
-
-    
+//    Class classCFArray = NSClassFromString(@"NSCFArray");
+//    [self ff_instancenSwizzleWithClass:classCFArray originSelector:@selector(objectAtIndex:) swizzleSelector:@selector(ff_objectAtIndexCFArray:)];
 }
 
 - (id)ff_objectAtIndexedSubscript:(NSUInteger)index
@@ -122,10 +126,20 @@
     return nil;
 }
 
+/*
 - (id)ff_objectAtIndexArrayI:(NSUInteger)index
 {
     if (index < self.count) {
         return [self ff_objectAtIndexArrayI:index];
+    }
+    
+    return nil;
+}
+
+- (id)ff_objectAtIndexSingleArrayI:(NSUInteger)index
+{
+    if (index < self.count) {
+        return [self ff_objectAtIndexSingleArrayI:index];
     }
     
     return nil;
@@ -148,6 +162,7 @@
     
     return nil;
 }
+*/
 
 /*
 - (id)ff_objectAtIndexCFArray__:(NSUInteger)index
@@ -196,6 +211,7 @@
     return self;
 }
 
+///< 给除了NSArray之外的子类用
 - (void)ff_getObjects:(id _Nonnull __unsafe_unretained [_Nonnull])objects range:(NSRange)range
 {
     if (range.location + range.length <= self.count) {
@@ -205,6 +221,17 @@
     NSLog(@"self.count = %lu. range max location = %lu", self.count, range.location+range.length);
 }
 
+///< 给NSArray用
+- (void)ff_getObjectsForSuperClass:(id _Nonnull __unsafe_unretained [_Nonnull])objects range:(NSRange)range
+{
+    if (range.location + range.length <= self.count) {
+        return [self ff_getObjectsForSuperClass:objects range:range];
+    }
+    
+    NSLog(@"self.count = %lu. range max location = %lu", self.count, range.location+range.length);
+}
+
+/*
 - (void)ff_getObjectsArrayI:(id _Nonnull __unsafe_unretained [_Nonnull])objects range:(NSRange)range
 {
     if (range.location + range.length <= self.count) {
@@ -232,7 +259,7 @@
     
     NSLog(@"self.count = %lu. range max location = %lu", self.count, range.location+range.length);
 }
-
+*/
 
 
 - (NSUInteger)ff_indexOfObject:(id)anObject inRange:(NSRange)range
@@ -350,8 +377,6 @@
     
     NSLog(@"index = %lu 越界", index);
 }
-
-
 
 - (void)ff_replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject
 {

@@ -43,20 +43,36 @@
         return;
     }
     
-    class_addMethod(class,
+    BOOL success1 = class_addMethod(class,
                     originSelector,
                     method_getImplementation(originMethod),
                     method_getTypeEncoding(originMethod));
-    class_addMethod(class,
+    BOOL success2 = class_addMethod(class,
                     swizzleSelector,
                     method_getImplementation(swizzleMethod),
                     method_getTypeEncoding(swizzleMethod));
+    
+    
     
     ///< 添加完了之后要重新赋值，因为原来的两个method都是父类的。参考自见https://github.com/rentzsch/jrswizzle/blob/semver-1.x/JRSwizzle.m
     Method originMethod2 = class_getInstanceMethod(class, originSelector);
     Method swizzleMethod2 = class_getInstanceMethod(class, swizzleSelector);
     
+//    IMP originIMP = method_getImplementation(originMethod2);
+//    IMP swizzleIMP = method_getImplementation(swizzleMethod2);
+    
     method_exchangeImplementations(originMethod2, swizzleMethod2);
+    
+//    IMP originIMP2 = method_getImplementation(originMethod2);
+//    IMP swizzleIMP2 = method_getImplementation(swizzleMethod2);
+    
+//    if ([NSStringFromSelector(originSelector) isEqualToString:@"getObjects:range:"]) {
+//        NSLog(@"class = %@, originSelector = %@, swizzleSelector = %@, success1 = %d, success2 = %d", class, NSStringFromSelector(originSelector), NSStringFromSelector(swizzleSelector), success1, success2);
+//
+//        NSLog(@"originIMP = %p, swizzleIMP = %p; originIMP2 = %p, swizzleIMP2 = %p.", originIMP, swizzleIMP, originIMP2, swizzleIMP2);
+//
+//        NSLog(@"\n\n");
+//    }
     
     
     // 第二种方案也OK

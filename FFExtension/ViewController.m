@@ -23,6 +23,32 @@
 //    [self testUnrecognizedSelector];
 //    [self testNSStringHook];
     [self testArrayHook];
+    
+    
+    
+    /*测试 ff_objectAtIndex:
+    __NSArrayI
+    __NSArray0
+    __NSSingleObjectArrayI
+    __NSArrayM
+    */
+//    SEL sel = NSSelectorFromString(@"objectAtIndex:"); //
+    SEL sel = NSSelectorFromString(@"getObjects:range:");
+    Method method = class_getInstanceMethod(NSClassFromString(@"NSArray"), sel);
+    NSLog(@"NSArray Method = %p", method);
+    
+    NSArray *classes = @[@"__NSArrayI",@"__NSArray0",@"__NSSingleObjectArrayI",@"__NSArrayM"];
+    for (NSString *className in classes) {
+        Class arrClass = NSClassFromString(className);
+        
+        
+        Method originMethod = class_getInstanceMethod(arrClass, sel);
+        IMP imp = method_getImplementation(originMethod);
+        NSLog(@"className = %@, Method = %p", arrClass, originMethod);
+    }
+    
+    
+    
 }
 
 - (void)testArrayHook
@@ -109,22 +135,32 @@
     
     NSRange range = NSMakeRange(2, 20);
     
+    
+    __unsafe_unretained id cArray[1];
+    
     array = @[@"1", @"2", @"3"];//__NSArrayI
+    array[10];
+    [array objectAtIndex:12];
+    [array getObjects:cArray range:NSMakeRange(5, 10)];
     [array subarrayWithRange:NSMakeRange(20, 12)];
     [array indexOfObjectIdenticalTo:nil];
     [array indexOfObjectIdenticalTo:nil inRange:NSMakeRange(20, 10)];
     [array isEqualToArray:nil];
     
     [array indexOfObject:nil inRange:NSMakeRange(10, 2)];
-//    array = @[@"1"];//__NSSingleObjectArrayI
+    array = @[@"1"];//__NSSingleObjectArrayI
+    array[10];
+    [array objectAtIndex:12];
     [array objectAtIndexedSubscript:23];
     [array subarrayWithRange:NSMakeRange(20, 12)];
     [array indexOfObject:nil inRange:NSMakeRange(10, 2)];
-//    array = @[];//NSArray0
+    array = @[];//NSArray0
+    array[10];
+    [array objectAtIndex:12];
     [array subarrayWithRange:NSMakeRange(20, 12)];
     [array indexOfObject:nil inRange:NSMakeRange(10, 2)];
     [array indexOfObjectIdenticalTo:nil];
-    __unsafe_unretained id cArray[1];
+    
     [array getObjects:cArray range:range];
     
     [array objectAtIndexedSubscript:23];
@@ -135,12 +171,16 @@
     NSString *tempStr = [array componentsJoinedByString:nil];
     
     
-//    array = [NSMutableArray arrayWithContentsOfURL:nil];
+    array = [NSMutableArray arrayWithContentsOfURL:nil];
     NSMutableArray *mutableArray = array.mutableCopy;
+    array[10];
+    [array objectAtIndex:12];
     [mutableArray containsObject:nil];
     [array subarrayWithRange:NSMakeRange(20, 12)];
-//    mutableArray = [NSMutableArray new];
-    [mutableArray subarrayWithRange:NSMakeRange(20, 12)];
+    mutableArray = [NSMutableArray new];
+    [mutableArray subarrayWithRange:NSMakeRange(20, 12)]; // __NSArrayM
+    mutableArray[10];
+    [mutableArray objectAtIndex:12];
     [mutableArray addObject:nil];
     [mutableArray insertObject:nil atIndex:0];
     [mutableArray insertObject:@212 atIndex:12];
@@ -167,7 +207,7 @@
     [mutableArray replaceObjectsInRange:NSMakeRange(0, 1) withObjectsFromArray:@[@12,@23,@12333]];
     [mutableArray replaceObjectsInRange:NSMakeRange(0, 1) withObjectsFromArray:nil];
     [mutableArray replaceObjectsInRange:NSMakeRange(10, 13) withObjectsFromArray:@[@12,@23,@12333]];
-//    [mutableArray setArray:nil];
+    [mutableArray setArray:nil];
     
     [mutableArray replaceObjectsInRange:NSMakeRange(0, 1) withObjectsFromArray:@[@"hufeng", @"kobe"] range:NSMakeRange(0, 2)];
     [mutableArray replaceObjectsInRange:NSMakeRange(0, 1) withObjectsFromArray:@[@"hufeng", @"kobe"] range:NSMakeRange(0, 2)];
@@ -180,10 +220,10 @@
     [mutableArray insertObjects:@[@234534, @909] atIndexes:mutableSet];
     [mutableArray insertObjects:nil atIndexes:[NSIndexSet indexSetWithIndex:0]];
     [mutableArray insertObjects:@[@234,@234534] atIndexes:[NSIndexSet indexSetWithIndex:23]];
-//    [mutableArray replaceObjectsAtIndexes:mutableSet withObjects:nil];
+    [mutableArray replaceObjectsAtIndexes:mutableSet withObjects:nil];
     
     [mutableSet addIndex:20];
-//    [mutableArray replaceObjectsAtIndexes:nil withObjects:nil];
+    [mutableArray replaceObjectsAtIndexes:nil withObjects:nil];
     [mutableArray replaceObjectsAtIndexes:mutableSet withObjects:@[@"jordan"]];
     mutableArray[20];
     [mutableArray objectAtIndex:23];
@@ -196,7 +236,6 @@
     [mutableArray objectsAtIndexes:mutableSet];
     [mutableArray objectAtIndexedSubscript:45];
     
-//    [[NSMutableArray alloc] initWithObjects:temp count:40];
 }
 
 - (void)testNSStringHook
