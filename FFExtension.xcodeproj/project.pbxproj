@@ -22,6 +22,7 @@
 		4F4FA8A02154BE4D00148F47 /* NSDictionary+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA89F2154BE4D00148F47 /* NSDictionary+FFExtension.m */; };
 		4F4FA8A32154CF0A00148F47 /* NSObject+methodSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA8A22154CF0A00148F47 /* NSObject+methodSwizzle.m */; };
 		4F4FA8A62154D86500148F47 /* SSZTestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA8A52154D86500148F47 /* SSZTestObject.m */; };
+		4F7E44D42159130200170BA7 /* NSData+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F7E44D32159130200170BA7 /* NSData+FFExtension.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,8 @@
 		4F4FA8A22154CF0A00148F47 /* NSObject+methodSwizzle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+methodSwizzle.m"; sourceTree = "<group>"; };
 		4F4FA8A42154D86500148F47 /* SSZTestObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSZTestObject.h; sourceTree = "<group>"; };
 		4F4FA8A52154D86500148F47 /* SSZTestObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSZTestObject.m; sourceTree = "<group>"; };
+		4F7E44D22159130200170BA7 /* NSData+FFExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+FFExtension.h"; sourceTree = "<group>"; };
+		4F7E44D32159130200170BA7 /* NSData+FFExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+FFExtension.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +174,8 @@
 				4F4FA89C2154BE4100148F47 /* NSArray+FFExtension.m */,
 				4F4FA89E2154BE4D00148F47 /* NSDictionary+FFExtension.h */,
 				4F4FA89F2154BE4D00148F47 /* NSDictionary+FFExtension.m */,
+				4F7E44D22159130200170BA7 /* NSData+FFExtension.h */,
+				4F7E44D32159130200170BA7 /* NSData+FFExtension.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -305,6 +310,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F7E44D42159130200170BA7 /* NSData+FFExtension.m in Sources */,
 				4F4FA8A32154CF0A00148F47 /* NSObject+methodSwizzle.m in Sources */,
 				4F4FA8A02154BE4D00148F47 /* NSDictionary+FFExtension.m in Sources */,
 				4F4FA86121549FB400148F47 /* ViewController.m in Sources */,

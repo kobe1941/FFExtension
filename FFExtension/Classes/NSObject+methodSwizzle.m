@@ -30,8 +30,8 @@
                     method_getImplementation(swizzleMethod),
                     method_getTypeEncoding(swizzleMethod));
     
-    Method originMethod2 = class_getInstanceMethod(class, originSelector);
-    Method swizzleMethod2 = class_getInstanceMethod(class, swizzleSelector);
+    Method originMethod2 = class_getClassMethod(class, originSelector);
+    Method swizzleMethod2 = class_getClassMethod(class, swizzleSelector);
     method_exchangeImplementations(originMethod2, swizzleMethod2);
 }
 

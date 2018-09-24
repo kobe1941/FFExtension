@@ -11,6 +11,7 @@
 #import "NSArray+FFExtension.h"
 #import "NSDictionary+FFExtension.h"
 #import "NSObject+FFExtension.h"
+#import "NSData+FFExtension.h"
 
 @implementation FFManager
 
@@ -33,6 +34,8 @@
         if (option & FFHookOptionNSDictionary) {
             [NSDictionary startHook];
         }
+        
+        [NSData startHook];
         
         if (option & FFHookOptionUnrecognizedSelector) {
             [NSObject startHook];

@@ -28,7 +28,6 @@
 
 + (void)startHook
 {
-//    BOOL flag = NO; ///< 控制是否需要用多个函数去hook
     SEL getObjectsRangeSEL = @selector(ff_getObjects:range:);
     SEL objectsAtIndexSEL = @selector(ff_objectAtIndex:);
     
@@ -39,6 +38,8 @@
     [self ff_instancenSwizzleWithClass:arrayClass originSelector:@selector(indexOfObjectIdenticalTo:inRange:) swizzleSelector:@selector(ff_indexOfObjectIdenticalTo:inRange:)];
     [self ff_instancenSwizzleWithClass:arrayClass originSelector:@selector(subarrayWithRange:) swizzleSelector:@selector(ff_subarrayWithRange:)];
     [self ff_instancenSwizzleWithClass:arrayClass originSelector:@selector(objectsAtIndexes:) swizzleSelector:@selector(ff_objectsAtIndexes:)];
+    [self ff_instancenSwizzleWithClass:arrayClass originSelector:@selector(writeToURL:error:) swizzleSelector:@selector(ff_writeToURL:error:)]; ///< for NSData
+    
     
     
     Class originClass = NSClassFromString(@"__NSArrayI");
@@ -93,6 +94,15 @@
 
 //    Class classCFArray = NSClassFromString(@"NSCFArray");
 //    [self ff_instancenSwizzleWithClass:classCFArray originSelector:@selector(objectAtIndex:) swizzleSelector:@selector(ff_objectAtIndexCFArray:)];
+}
+
+- (BOOL)ff_writeToURL:(NSURL *)url error:(NSError * _Nullable __autoreleasing *)error
+{
+    if (!url) {
+        return NO;
+    }
+    
+    return [self ff_writeToURL:url error:error];
 }
 
 - (id)ff_objectAtIndexedSubscript:(NSUInteger)index

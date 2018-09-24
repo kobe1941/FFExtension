@@ -22,17 +22,112 @@
     
 //    [self testUnrecognizedSelector];
 //    [self testNSStringHook];
-    [self testArrayHook];
+//    [self testArrayHook];
     
     
+    
+    [self testNSDictionaryHook];
+    
+}
+
+- (void)testNSDictionaryHook
+{
+    
+//    NSArray *dicArray = [[self class] findAllOf:[NSDictionary class]];
+//    NSLog(@"NSDictionary = %@", dicArray);
+//
+//    NSArray *mutableDic = [[self class] findAllOf:[NSMutableDictionary class]];
+//    NSLog(@"NSMutalbeDictionary = %@", mutableDic);
+    
+    
+    NSString *key = @"key";
+    NSString *value = @"value";
+    key = nil;
+//    value = nil;
+    NSDictionary *dic;
+    dic = [NSDictionary dictionaryWithObject:value forKey:key];
+    dic = @{ key : value };
+    id objects[1];
+    objects[0] = @"vaevewewf";
+    
+    id keys[2];
+    keys[0] = @"wef";
+    
+    dic = [NSDictionary dictionaryWithObjects:objects forKeys:keys count:3];
+    
+    dic = [NSDictionary dictionaryWithObjects:@[@2,@2] forKeys:nil];
+    dic = [NSMutableDictionary dictionaryWithObjects:@[@2,@2] forKeys:nil];
+    [[NSDictionary alloc] initWithDictionary:nil];
+    [[NSDictionary alloc] initWithDictionary:nil copyItems:YES];
+    [[NSDictionary alloc] initWithObjects:@[@1,@2] forKeys:nil];
+    
+    [NSDictionary sharedKeySetForKeys:@[@"few", @2]];
+//    [NSDictionary sharedKeySetForKeys:nil];
+    [NSMutableDictionary sharedKeySetForKeys:nil];
+    
+    key = nil;
+    dic[key];
+    [dic objectForKey:nil];
+    
+    NSArray *array = [dic allKeysForObject:value];
+    array = [dic allKeysForObject:nil];
+    [dic isEqualToDictionary:@{@"wf":@"ewff"}];
+    [dic isEqualToDictionary:nil];
+    [dic isEqualToDictionary:NULL];
+    
+    [dic writeToFile:nil atomically:NO];
+    [dic writeToURL:nil atomically:YES];
+    [dic writeToURL:nil error:nil];
+    
+    NSMutableDictionary *mutableDic = [NSMutableDictionary new];
+    [mutableDic objectForKey:nil];
+    [NSMutableDictionary dictionaryWithSharedKeySet:nil];
+    [mutableDic removeObjectForKey:nil];
+    [mutableDic removeObjectsForKeys:nil];
+    [mutableDic removeObjectsForKeys:@[@"ewf",@322]];
+    [mutableDic setDictionary:nil];
+    
+    [mutableDic addEntriesFromDictionary:nil];
+    [mutableDic setObject:@2342 forKey:nil];
+    [mutableDic setObject:nil forKey:@"fewf"];
+    [mutableDic setObject:nil forKey:@234324];
+    [mutableDic setObject:nil forKey:nil];
+//    [mutableDic setObject:@"ewf" forKeyedSubscript:nil];
+    [mutableDic setObject:nil forKeyedSubscript:@"few"];
+    [mutableDic setObject:nil forKeyedSubscript:nil];
+    
+    NSArray *tempArray = @[@"ef"];
+    
+    NSMutableArray *mutableArray = [tempArray mutableCopy];
+    
+    if (@available(iOS 11, *)) {
+        [mutableDic writeToURL:nil error:nil];
+        [tempArray writeToURL:nil error:nil];
+        [mutableArray writeToURL:nil error:nil];
+    }
+    
+    NSMutableData *data = [[NSMutableData alloc] init];
+    [data writeToURL:nil atomically:YES];
+    [data writeToURL:nil options:NSDataWritingFileProtectionMask error:nil];
+    
+    [dic objectForKeyedSubscript:nil];
+    [mutableDic objectForKeyedSubscript:nil];
+    
+    [NSDictionary dictionaryWithDictionary:nil];
+    
+    
+}
+
+- (void)testArrayHook
+{
     
     /*测试 ff_objectAtIndex:
-    __NSArrayI
-    __NSArray0
-    __NSSingleObjectArrayI
-    __NSArrayM
-    */
-//    SEL sel = NSSelectorFromString(@"objectAtIndex:"); //
+     __NSArrayI
+     __NSArray0
+     __NSSingleObjectArrayI
+     __NSArrayM
+     */
+    //    SEL sel = NSSelectorFromString(@"objectAtIndex:"); //
     SEL sel = NSSelectorFromString(@"getObjects:range:");
     Method method = class_getInstanceMethod(NSClassFromString(@"NSArray"), sel);
     NSLog(@"NSArray Method = %p", method);
@@ -48,11 +143,6 @@
     }
     
     
-    
-}
-
-- (void)testArrayHook
-{
     NSArray *tempArr = [[self class] findAllOf:[NSMutableArray class]];
     NSLog(@"NSMutableArray result = %@", tempArr);
     
