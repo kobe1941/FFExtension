@@ -14,6 +14,20 @@
 
 + (void)startHook
 {
+    Class strClass = NSClassFromString(@"NSString");
+    [self ff_classSwizzleWithClass:strClass originSelector:@selector(stringWithUTF8String:) swizzleSelector:@selector(ff_stringWithUTF8String:)];
+    [self ff_classSwizzleWithClass:strClass originSelector:@selector(stringWithCString:encoding:) swizzleSelector:@selector(ff_stringWithCString:encoding:)];
+
+    Class placeClass = NSClassFromString(@"NSPlaceholderString");
+    [self ff_instancenSwizzleWithClass:placeClass originSelector:@selector(initWithUTF8String:) swizzleSelector:@selector(ff_initWithUTF8String:)];
+    [self ff_instancenSwizzleWithClass:placeClass originSelector:@selector(initWithCString:encoding:) swizzleSelector:@selector(ff_initWithCString:encoding:)];
+    [self ff_instancenSwizzleWithClass:placeClass originSelector:@selector(initWithString:) swizzleSelector:@selector(ff_initWithString:)];
+    
+    Class placeMutableClass = NSClassFromString(@"NSPlaceholderMutableString");
+    [self ff_instancenSwizzleWithClass:placeMutableClass originSelector:@selector(initWithCString:encoding:) swizzleSelector:@selector(ff_initWithCString:encoding:)];
+    [self ff_instancenSwizzleWithClass:placeMutableClass originSelector:@selector(initWithUTF8String:) swizzleSelector:@selector(ff_initWithUTF8String:)];
+    [self ff_instancenSwizzleWithClass:placeMutableClass originSelector:@selector(initWithString:) swizzleSelector:@selector(ff_initWithString:)];
+    
     Class originClass = NSClassFromString(@"__NSCFConstantString");
     [self ff_instancenSwizzleWithClass:originClass originSelector:@selector(characterAtIndex:) swizzleSelector:@selector(ff_characterAtIndex:)];
     [self ff_instancenSwizzleWithClass:originClass originSelector:@selector(substringFromIndex:) swizzleSelector:@selector(ff_substringFromIndex:)];
@@ -38,6 +52,51 @@
     [self ff_instancenSwizzleWithClass:mutableClass originSelector:@selector(appendString:) swizzleSelector:@selector(ff_appendString:)];
     
     
+}
+
++ (instancetype)ff_stringWithUTF8String:(const char *)nullTerminatedCString
+{
+    if (nullTerminatedCString) {
+        return [self ff_stringWithUTF8String:nullTerminatedCString];
+    }
+    
+    return nil;
+}
+
+- (instancetype)ff_initWithUTF8String:(const char *)nullTerminatedCString
+{
+    if (nullTerminatedCString) {
+        return [self ff_initWithUTF8String:nullTerminatedCString];
+    }
+    
+    return nil;
+}
+
++ (instancetype)ff_stringWithCString:(const char *)cString encoding:(NSStringEncoding)enc
+{
+    if (cString) {
+        return [self ff_stringWithCString:cString encoding:enc];
+    }
+    
+    return nil;
+}
+
+- (instancetype)ff_initWithCString:(const char *)nullTerminatedCString encoding:(NSStringEncoding)encoding
+{
+    if (nullTerminatedCString) {
+        return [self ff_initWithCString:nullTerminatedCString encoding:encoding];
+    }
+    
+    return nil;
+}
+
+- (instancetype)ff_initWithString:(NSString *)aString
+{
+    if (aString) {
+        return [self ff_initWithString:aString];
+    }
+    
+    return nil;
 }
 
 - (unichar)ff_characterAtIndex:(NSUInteger)index

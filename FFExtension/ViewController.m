@@ -10,6 +10,8 @@
 #import "SSZTestObject.h"
 #import <objc/runtime.h>
 
+
+///< NSSet/NSMutableSet, NSOrderedSet/NSMutableOrderedSet, NSUserDefault
 @interface ViewController ()
 
 @end
@@ -24,12 +26,30 @@
 //    [self testNSStringHook];
 //    [self testArrayHook];
     
-    NSNull *null = [NSNull null];
-    [null performSelector:@selector(length)];
+//    NSNull *null = [NSNull null];
+//    [null performSelector:@selector(length)];
     
     
-    [self testNSDictionaryHook];
+//    [self testNSDictionaryHook];
     
+    NSAttributedString
+    [self testStringMore];
+}
+
+- (void)testStringMore
+{
+    [NSString  stringWithUTF8String:nil];
+    [NSString  stringWithUTF8String:NULL];
+    [NSString stringWithCString:nil encoding:NSUTF8StringEncoding];
+    [[NSString alloc] initWithUTF8String:nil];
+    [[NSString alloc] initWithCString:nil encoding:NSUTF8StringEncoding];
+    [[NSString alloc] initWithString:nil];
+    
+    [NSMutableString stringWithCString:nil encoding:NSUTF8StringEncoding];
+    [NSMutableString stringWithUTF8String:nil];
+    [[NSMutableString alloc] initWithCString:nil encoding:NSUTF8StringEncoding];
+    [[NSMutableString alloc] initWithUTF8String:nil];
+    [[NSMutableString alloc] initWithString:nil];
 }
 
 - (void)testNSDictionaryHook
@@ -162,6 +182,7 @@
         NSLog(@"array %@ method name = %@", [classCFArray__ class], name);
     }
     
+    @[][0];
     
     NSArray *array = @[@"1,", @"2"];
     array[3];
