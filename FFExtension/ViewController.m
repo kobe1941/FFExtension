@@ -24,6 +24,8 @@
 //    [self testNSStringHook];
 //    [self testArrayHook];
     
+    NSNull *null = [NSNull null];
+    [null performSelector:@selector(length)];
     
     
     [self testNSDictionaryHook];

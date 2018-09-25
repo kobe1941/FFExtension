@@ -47,6 +47,7 @@ void testAddMethod(id self, SEL _cmd) {}
     dispatch_once(&onceToken, ^{
         // 默认的太多了，选取一部分眼熟的类就好，有需要可以手动添加。
         NSArray *defaultArr = @[
+                                @"NSNull",
                                 @"NSString",
                                 @"NSLocalizableString",
                                 @"NSConstantString",
