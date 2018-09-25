@@ -24,7 +24,7 @@
     
 //    [self testUnrecognizedSelector];
 //    [self testNSStringHook];
-//    [self testArrayHook];
+    [self testArrayHook];
     
 //    NSNull *null = [NSNull null];
 //    [null performSelector:@selector(length)];
@@ -32,8 +32,9 @@
     
 //    [self testNSDictionaryHook];
     
-    NSAttributedString
-    [self testStringMore];
+//    [self testStringMore];
+    
+    [[NSArray new] indexOfObjectIdenticalTo:nil];
 }
 
 - (void)testStringMore
@@ -151,8 +152,8 @@
      */
     //    SEL sel = NSSelectorFromString(@"objectAtIndex:"); //
     SEL sel = NSSelectorFromString(@"getObjects:range:");
-    Method method = class_getInstanceMethod(NSClassFromString(@"NSArray"), sel);
-    NSLog(@"NSArray Method = %p", method);
+//    Method method = class_getInstanceMethod(NSClassFromString(@"__NSArrayI_Transfer"), sel);
+//    NSLog(@"__NSArrayI_Transfer Method = %p", method);
     
     NSArray *classes = @[@"__NSArrayI",@"__NSArray0",@"__NSSingleObjectArrayI",@"__NSArrayM"];
     for (NSString *className in classes) {
@@ -165,20 +166,20 @@
     }
     
     
-    NSArray *tempArr = [[self class] findAllOf:[NSMutableArray class]];
-    NSLog(@"NSMutableArray result = %@", tempArr);
+    NSArray *tempArr = [[self class] findAllOf:[NSArray class]];
+    NSLog(@"NSArray result = %@", tempArr);
     
      unsigned int count;
-    Class classCFArray__ = NSClassFromString(@"__NSCFArray");
-        Method *methods = class_copyMethodList(classCFArray__, &count);
+    Class classCFArray__ = NSClassFromString(@"__NSArrayI_Transfer");
+    Method *methods = class_copyMethodList(classCFArray__, &count);
     
-        for (int i = 0; i < count; i++)
+    for (int i = 0; i < count; i++)
     {
-                Method method = methods[i];
-        
-                SEL selector = method_getName(method);
-        
-                NSString *name = NSStringFromSelector(selector);
+        Method method = methods[i];
+
+        SEL selector = method_getName(method);
+
+        NSString *name = NSStringFromSelector(selector);
         NSLog(@"array %@ method name = %@", [classCFArray__ class], name);
     }
     

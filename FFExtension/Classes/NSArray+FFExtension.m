@@ -88,10 +88,29 @@
     [self ff_instancenSwizzleWithClass:placeHolderClass originSelector:@selector(initWithObjects:count:) swizzleSelector:@selector(ff_initWithObjects:count:)];
     
     
-//    这俩目测是系统内部用到的，不能随便hook
+     
+    Class transferClass = NSClassFromString(@"__NSArrayI_Transfer");
+    [self ff_instancenSwizzleWithClass:transferClass originSelector:@selector(objectAtIndex:) swizzleSelector:@selector(ff_objectAtIndex:)];
+    [self ff_instancenSwizzleWithClass:transferClass originSelector:@selector(getObjects:range:) swizzleSelector:@selector(ff_getObjects:range:)];
+    [self ff_instancenSwizzleWithClass:transferClass originSelector:@selector(objectAtIndexedSubscript:) swizzleSelector:@selector(ff_objectAtIndexedSubscript:)];
+
+
+    Class frozenClass = NSClassFromString(@"__NSFrozenArrayM");
+    [self ff_instancenSwizzleWithClass:frozenClass originSelector:@selector(objectAtIndex:) swizzleSelector:@selector(ff_objectAtIndex:)];
+    [self ff_instancenSwizzleWithClass:frozenClass originSelector:@selector(getObjects:range:) swizzleSelector:@selector(ff_getObjects:range:)];
+    [self ff_instancenSwizzleWithClass:frozenClass originSelector:@selector(objectAtIndexedSubscript:) swizzleSelector:@selector(ff_objectAtIndexedSubscript:)];
+
+    
+    Class reverseClass = NSClassFromString(@"__NSArrayReversed");
+    [self ff_instancenSwizzleWithClass:reverseClass originSelector:@selector(objectAtIndex:) swizzleSelector:@selector(ff_objectAtIndex:)];
+    [self ff_instancenSwizzleWithClass:reverseClass originSelector:@selector(subarrayWithRange:) swizzleSelector:@selector(ff_subarrayWithRange:)];
+    [self ff_instancenSwizzleWithClass:reverseClass originSelector:@selector(objectAtIndexedSubscript:) swizzleSelector:@selector(ff_objectAtIndexedSubscript:)];
+    
+//    这个是系统内部用到的，hook后会崩溃
 //    Class classCFArray__ = NSClassFromString(@"__NSCFArray");
 //    [self ff_instancenSwizzleWithClass:classCFArray__ originSelector:@selector(objectAtIndex:) swizzleSelector:@selector(ff_objectAtIndex:)];
 
+    // 这个没看到有用到
 //    Class classCFArray = NSClassFromString(@"NSCFArray");
 //    [self ff_instancenSwizzleWithClass:classCFArray originSelector:@selector(objectAtIndex:) swizzleSelector:@selector(ff_objectAtIndexCFArray:)];
 }
@@ -491,5 +510,10 @@
     return [self ff_replaceObjectsAtIndexes:indexes withObjects:objects];
 }
 
+- (NSUInteger)ff_indexOfObjectIdenticalTo:(id)anObject
+{
+    
+    return 0;
+}
 
 @end
