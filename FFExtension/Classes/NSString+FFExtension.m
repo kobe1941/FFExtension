@@ -10,6 +10,10 @@
 #import "NSObject+methodSwizzle.h"
 #import <objc/runtime.h>
 
+///< TODO:研究一下NSPlaceholderString，NSTaggedPointerString等其他类是否需要hook
+ 
+
+
 @implementation NSString (FFExtension)
 
 + (void)startHook
