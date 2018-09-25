@@ -9,6 +9,8 @@
 #import "NSData+FFExtension.h"
 #import "NSObject+methodSwizzle.h"
 
+
+
 @implementation NSData (FFExtension)
 
 + (void)startHook
@@ -38,5 +40,21 @@
     
     return [self mutable_writeToURL:url options:writeOptionsMask error:errorPtr];
 }
+
+/*
+ 
+ - (NSData *)subdataWithRange:(NSRange)range;
+ - (NSRange)rangeOfData:(NSData *)dataToFind options:(NSDataSearchOptions)mask range:(NSRange)searchRange API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
+ - (nullable instancetype)initWithBase64EncodedString:(NSString *)base64String options:(NSDataBase64DecodingOptions)options API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
+ - (nullable instancetype)initWithBase64EncodedData:(NSData *)base64Data options:(NSDataBase64DecodingOptions)options API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
+ - (void)appendData:(NSData *)other;
+ - (void)increaseLengthBy:(NSUInteger)extraLength;
+ - (void)replaceBytesInRange:(NSRange)range withBytes:(const void *)bytes;
+ - (void)resetBytesInRange:(NSRange)range;
+ - (void)setData:(NSData *)data;
+ - (void)replaceBytesInRange:(NSRange)range withBytes:(nullable const void *)replacementBytes length:(NSUInteger)replacementLength;
+ 
+*/
+ 
 
 @end

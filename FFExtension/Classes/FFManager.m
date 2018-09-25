@@ -12,6 +12,9 @@
 #import "NSDictionary+FFExtension.h"
 #import "NSObject+FFExtension.h"
 #import "NSData+FFExtension.h"
+#import "NSSet+FFExtension.h"
+#import "NSUserDefaults+FFExtension.h"
+#import "NSCache+FFExtension.h"
 
 @implementation FFManager
 
@@ -23,6 +26,10 @@
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+        if (option & FFHookOptionUnrecognizedSelector) {
+            [NSObject startHook];
+        }
+        
         if (option & FFHookOptionNSString) {
             [NSString startHook];
         }
@@ -35,10 +42,20 @@
             [NSDictionary startHook];
         }
         
-        [NSData startHook];
+        if (option & FFHookOptionNSData) {
+            [NSData startHook];
+        }
         
-        if (option & FFHookOptionUnrecognizedSelector) {
-            [NSObject startHook];
+        if (option & FFHookOptionNSSet) {
+            [NSSet startHook];
+        }
+        
+        if (option & FFHookOptionNSUserDefaults) {
+            [NSUserDefaults startHook];
+        }
+        
+        if (option & FFHookOptionNSCache) {
+            [NSCache startHook];
         }
     });
 }

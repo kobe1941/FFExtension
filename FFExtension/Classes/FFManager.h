@@ -10,10 +10,14 @@
 
 typedef NS_OPTIONS(NSUInteger, FFHookOption){
     FFHookOptionNone = 0,
-    FFHookOptionNSString = 1 << 0,
-    FFHookOptionNSArray = 1 << 1,
-    FFHookOptionNSDictionary = 1 << 2,
-    FFHookOptionUnrecognizedSelector = 1 << 3,
+    FFHookOptionUnrecognizedSelector = 1 << 0,
+    FFHookOptionNSString = 1 << 1,
+    FFHookOptionNSArray = 1 << 2,
+    FFHookOptionNSDictionary = 1 << 3,
+    FFHookOptionNSData = 1 << 4,
+    FFHookOptionNSSet = 1 << 5,
+    FFHookOptionNSUserDefaults = 1 << 6,
+    FFHookOptionNSCache = 1 << 7,
     FFHookOptionAll = 0xFF,
 };
 

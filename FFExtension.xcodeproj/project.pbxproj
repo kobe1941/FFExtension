@@ -22,6 +22,9 @@
 		4F4FA8A02154BE4D00148F47 /* NSDictionary+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA89F2154BE4D00148F47 /* NSDictionary+FFExtension.m */; };
 		4F4FA8A32154CF0A00148F47 /* NSObject+methodSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA8A22154CF0A00148F47 /* NSObject+methodSwizzle.m */; };
 		4F4FA8A62154D86500148F47 /* SSZTestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA8A52154D86500148F47 /* SSZTestObject.m */; };
+		4F6E878A215A37EF00117AA5 /* NSSet+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F6E8789215A37EF00117AA5 /* NSSet+FFExtension.m */; };
+		4F6E878D215A3AC700117AA5 /* NSUserDefaults+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F6E878C215A3AC700117AA5 /* NSUserDefaults+FFExtension.m */; };
+		4F6E8790215A43AB00117AA5 /* NSCache+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F6E878F215A43AB00117AA5 /* NSCache+FFExtension.m */; };
 		4F7E44D42159130200170BA7 /* NSData+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F7E44D32159130200170BA7 /* NSData+FFExtension.m */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +76,12 @@
 		4F4FA8A22154CF0A00148F47 /* NSObject+methodSwizzle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+methodSwizzle.m"; sourceTree = "<group>"; };
 		4F4FA8A42154D86500148F47 /* SSZTestObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSZTestObject.h; sourceTree = "<group>"; };
 		4F4FA8A52154D86500148F47 /* SSZTestObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSZTestObject.m; sourceTree = "<group>"; };
+		4F6E8788215A37EF00117AA5 /* NSSet+FFExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSSet+FFExtension.h"; sourceTree = "<group>"; };
+		4F6E8789215A37EF00117AA5 /* NSSet+FFExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSSet+FFExtension.m"; sourceTree = "<group>"; };
+		4F6E878B215A3AC700117AA5 /* NSUserDefaults+FFExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+FFExtension.h"; sourceTree = "<group>"; };
+		4F6E878C215A3AC700117AA5 /* NSUserDefaults+FFExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+FFExtension.m"; sourceTree = "<group>"; };
+		4F6E878E215A43AB00117AA5 /* NSCache+FFExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSCache+FFExtension.h"; sourceTree = "<group>"; };
+		4F6E878F215A43AB00117AA5 /* NSCache+FFExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSCache+FFExtension.m"; sourceTree = "<group>"; };
 		4F7E44D22159130200170BA7 /* NSData+FFExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+FFExtension.h"; sourceTree = "<group>"; };
 		4F7E44D32159130200170BA7 /* NSData+FFExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+FFExtension.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -176,6 +185,12 @@
 				4F4FA89F2154BE4D00148F47 /* NSDictionary+FFExtension.m */,
 				4F7E44D22159130200170BA7 /* NSData+FFExtension.h */,
 				4F7E44D32159130200170BA7 /* NSData+FFExtension.m */,
+				4F6E8788215A37EF00117AA5 /* NSSet+FFExtension.h */,
+				4F6E8789215A37EF00117AA5 /* NSSet+FFExtension.m */,
+				4F6E878B215A3AC700117AA5 /* NSUserDefaults+FFExtension.h */,
+				4F6E878C215A3AC700117AA5 /* NSUserDefaults+FFExtension.m */,
+				4F6E878E215A43AB00117AA5 /* NSCache+FFExtension.h */,
+				4F6E878F215A43AB00117AA5 /* NSCache+FFExtension.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -321,6 +336,9 @@
 				4F4FA8972154BDF800148F47 /* NSObject+FFExtension.m in Sources */,
 				4F4FA89D2154BE4100148F47 /* NSArray+FFExtension.m in Sources */,
 				4F4FA89A2154BE3200148F47 /* NSString+FFExtension.m in Sources */,
+				4F6E878A215A37EF00117AA5 /* NSSet+FFExtension.m in Sources */,
+				4F6E878D215A3AC700117AA5 /* NSUserDefaults+FFExtension.m in Sources */,
+				4F6E8790215A43AB00117AA5 /* NSCache+FFExtension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

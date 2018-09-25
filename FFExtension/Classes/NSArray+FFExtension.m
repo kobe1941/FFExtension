@@ -20,7 +20,7 @@
  __NSArrayM
  __NSPlaceholderArray
  __NSCFArray
- NSCFArray
+ NSCFArray 函数列表为空
  */
 
 ///< TODO: 想一下为什么这里的同一个函数，不能被两个类去交换，按理来说，会分别拷贝到不同的类去，是没有关系的，但是实际应用如果不分开实现会崩溃————因为不能动NSArray这个父类，只要不动父类，子类随便玩
@@ -106,13 +106,21 @@
     [self ff_instancenSwizzleWithClass:reverseClass originSelector:@selector(subarrayWithRange:) swizzleSelector:@selector(ff_subarrayWithRange:)];
     [self ff_instancenSwizzleWithClass:reverseClass originSelector:@selector(objectAtIndexedSubscript:) swizzleSelector:@selector(ff_objectAtIndexedSubscript:)];
     
-//    这个是系统内部用到的，hook后会崩溃
-//    Class classCFArray__ = NSClassFromString(@"__NSCFArray");
-//    [self ff_instancenSwizzleWithClass:classCFArray__ originSelector:@selector(objectAtIndex:) swizzleSelector:@selector(ff_objectAtIndex:)];
+    
+    /*
+     addObject:
+     objectAtIndex:
+     getObjects:range:
+     insertObject:atIndex:
+     removeObjectAtIndex:
+     countByEnumeratingWithState:objects:count:
+     replaceObjectAtIndex:withObject:
+     objectAtIndexedSubscript:
+     //    这个是系统内部用到的，hook后会崩溃on ios11
+    Class classCFArray__ = NSClassFromString(@"__NSCFArray");
+    [self ff_instancenSwizzleWithClass:classCFArray__ originSelector:@selector(objectAtIndex:) swizzleSelector:@selector(ff_objectAtIndex:)];
+     */
 
-    // 这个没看到有用到
-//    Class classCFArray = NSClassFromString(@"NSCFArray");
-//    [self ff_instancenSwizzleWithClass:classCFArray originSelector:@selector(objectAtIndex:) swizzleSelector:@selector(ff_objectAtIndexCFArray:)];
 }
 
 - (BOOL)ff_writeToURL:(NSURL *)url error:(NSError * _Nullable __autoreleasing *)error

@@ -33,8 +33,69 @@
 //    [self testNSDictionaryHook];
     
 //    [self testStringMore];
+    [self testForNSCacheHook];
+    [self testForNSUserDefaultsHook];
     
-    [[NSArray new] indexOfObjectIdenticalTo:nil];
+    
+//    [self testForNSSetHook];
+    
+    
+}
+
+- (void)testForNSCacheHook
+{
+    NSCache *cache = [NSCache new];
+    
+    [cache removeObjectForKey:nil];
+    [cache objectForKey:nil];
+    [cache setObject:@4234 forKey:nil];
+    [cache setObject:nil forKey:@"ewr"];
+    [cache setObject:nil forKey:nil];
+    [cache setObject:@"fgf" forKey:nil cost:0];
+    
+    
+}
+
+- (void)testForNSUserDefaultsHook
+{
+    NSUserDefaults *useDefaults = [NSUserDefaults standardUserDefaults];
+    [useDefaults setObject:@"fewf" forKey:nil];
+    [useDefaults objectForKey:nil];
+    [useDefaults removeObjectForKey:nil];
+    
+    [useDefaults stringForKey:nil];
+    [useDefaults arrayForKey:nil];
+    [useDefaults dictionaryForKey:nil];
+    [useDefaults dataForKey:nil];
+    [useDefaults stringArrayForKey:nil];
+    
+    
+    [useDefaults integerForKey:nil];
+    [useDefaults floatForKey:nil];
+    [useDefaults doubleForKey:nil];
+    [useDefaults boolForKey:nil];
+    [useDefaults URLForKey:nil];
+    
+    [useDefaults setInteger:nil forKey:nil];
+    [useDefaults setFloat:0 forKey:nil];
+    [useDefaults setBool:0 forKey:nil];
+    [useDefaults setURL:nil forKey:nil];
+    [useDefaults registerDefaults:nil];
+    [useDefaults addSuiteNamed:nil];
+    [useDefaults removeSuiteNamed:nil];
+    
+    [useDefaults volatileDomainForName:nil];
+    [useDefaults setVolatileDomain:@{} forName:nil];
+    [useDefaults setVolatileDomain:nil forName:@"efe"];
+    [useDefaults removeVolatileDomainForName:nil];
+    
+    [useDefaults objectIsForcedForKey:nil];
+    [useDefaults objectIsForcedForKey:nil inDomain:@"ewf"];
+}
+
+- (void)testForNSSetHook
+{
+    [NSSet setWithObject:nil];
 }
 
 - (void)testStringMore
@@ -51,6 +112,20 @@
     [[NSMutableString alloc] initWithCString:nil encoding:NSUTF8StringEncoding];
     [[NSMutableString alloc] initWithUTF8String:nil];
     [[NSMutableString alloc] initWithString:nil];
+    
+    NSString *str = @"feawfwefwef";
+    
+    [self logAllMethods:NSClassFromString(@"NSTaggedPointerString")];
+    
+    
+    [[str copy] substringToIndex:90];
+    NSMutableString *mutableStr = [str mutableCopy];
+    [mutableStr substringToIndex:90];
+    
+    mutableStr = [NSMutableString stringWithString:@"fewf"];
+    [mutableStr substringToIndex:243];
+//    [[mutableStr copy] substringToIndex:3434];
+    [[mutableStr mutableCopy] substringToIndex:133];
 }
 
 - (void)testNSDictionaryHook
@@ -65,11 +140,17 @@
     
     NSString *key = @"key";
     NSString *value = @"value";
-    key = nil;
+//    key = nil;
 //    value = nil;
     NSDictionary *dic;
     dic = [NSDictionary dictionaryWithObject:value forKey:key];
     dic = @{ key : value };
+    
+    [[dic copy] objectForKey:nil];
+//    [[dic copy] setObject:nil forKey:nil];
+    [[dic mutableCopy] objectForKey:nil];
+    [[dic mutableCopy] setObject:nil forKey:nil];
+    
     id objects[1];
     objects[0] = @"vaevewewf";
     
@@ -170,7 +251,7 @@
     NSLog(@"NSArray result = %@", tempArr);
     
      unsigned int count;
-    Class classCFArray__ = NSClassFromString(@"__NSArrayI_Transfer");
+    Class classCFArray__ = NSClassFromString(@"__NSCFArray");
     Method *methods = class_copyMethodList(classCFArray__, &count);
     
     for (int i = 0; i < count; i++)
@@ -184,7 +265,7 @@
     }
     
     @[][0];
-    
+    [[NSArray new] indexOfObjectIdenticalTo:nil];
     NSArray *array = @[@"1,", @"2"];
     array[3];
     [array objectAtIndex:4];
@@ -440,6 +521,22 @@
     free(classes);
     
     return output.copy;
+}
+
+- (void)logAllMethods:(Class)tempClass
+{
+    NSUInteger count = 0;
+    Method *methods = class_copyMethodList(tempClass, &count);
+    
+    for (int i = 0; i < count; i++)
+    {
+        Method method = methods[i];
+
+        SEL selector = method_getName(method);
+
+        NSString *name = NSStringFromSelector(selector);
+        NSLog(@"array %@ method name = %@", [tempClass class], name);
+    }
 }
 
 @end
