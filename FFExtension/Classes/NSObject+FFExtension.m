@@ -9,6 +9,7 @@
 #import "NSObject+FFExtension.h"
 #import "NSObject+methodSwizzle.h"
 #import <objc/runtime.h>
+#import "FFExceptionProxy.h"
 
 static NSMutableArray *prefixs;
 
@@ -81,8 +82,9 @@ void testAddMethod(id self, SEL _cmd) {}
     
     for (NSString *prefix in prefixs) {
         if ([className hasPrefix:prefix]) {
-            ///< TODO:堆栈回溯和错误日志待处理
-            NSLog(@"capture unrecognized selector sent to instance, selector = %@, class = %@", NSStringFromSelector(aSelector), NSStringFromClass([self class]));
+            NSString *msg = [NSString stringWithFormat:@"capture unrecognized selector sent to instance, -[%@ %@]", NSStringFromClass([self class]), NSStringFromSelector(aSelector)];
+            NSLog(@"%@", msg);
+            [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
             return [ff_target new];
         }
     }

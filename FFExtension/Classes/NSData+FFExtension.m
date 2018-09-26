@@ -8,7 +8,7 @@
 
 #import "NSData+FFExtension.h"
 #import "NSObject+methodSwizzle.h"
-
+#import "FFExceptionProxy.h"
 
 @implementation NSData (FFExtension)
 
@@ -53,6 +53,9 @@
 - (BOOL)ff_writeToURL:(NSURL *)url options:(NSDataWritingOptions)writeOptionsMask error:(NSError * _Nullable __autoreleasing *)errorPtr
 {
     if (!url) {
+        NSString *msg = [NSString stringWithFormat:@"+[%@ %@], url can not be nil", NSStringFromClass([self class]), NSStringFromSelector(_cmd)];
+        NSLog(@"%@", msg);
+        [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
         return NO;
     }
     
@@ -62,6 +65,9 @@
 - (BOOL)mutable_writeToURL:(NSURL *)url options:(NSDataWritingOptions)writeOptionsMask error:(NSError * _Nullable __autoreleasing *)errorPtr
 {
     if (!url) {
+        NSString *msg = [NSString stringWithFormat:@"+[%@ %@], url can not be nil", NSStringFromClass([self class]), NSStringFromSelector(_cmd)];
+        NSLog(@"%@", msg);
+        [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
         return NO;
     }
     
@@ -74,6 +80,10 @@
         return [self super_subdataWithRange:range];
     }
     
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], range %@ is out of bounds 0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), NSStringFromRange(range), (long)self.length];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
+    
     return nil;
 }
 
@@ -82,6 +92,10 @@
     if (range.location + range.length <= self.length) {
         return [self ff_subdataWithRange:range];
     }
+    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], range %@ is out of bounds 0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), NSStringFromRange(range), (long)self.length];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     
     return nil;
 }
@@ -92,35 +106,55 @@
         return [self ff_rangeOfData:dataToFind options:mask range:searchRange];
     }
     
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], range %@ is out of bounds 0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), NSStringFromRange(searchRange), (long)self.length];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
+    
     return NSMakeRange(0, 0);
 }
 
 - (void)super_getBytes:(void *)buffer length:(NSUInteger)length
 {
     if (buffer && length <= self.length) {
-        [self ff_getBytes:buffer length:length];
+        return [self ff_getBytes:buffer length:length];
     }
+    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], buffer is %p, length %lu is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), buffer, (long)length, (long)self.length];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 - (void)super_getBytes:(void *)buffer range:(NSRange)range
 {
     if (buffer && range.location + range.length <= self.length) {
-        [self ff_getBytes:buffer range:range];
+        return [self ff_getBytes:buffer range:range];
     }
+    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], buffer is %p, range %@ is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), buffer, NSStringFromRange(range), (long)self.length];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 - (void)ff_getBytes:(void *)buffer length:(NSUInteger)length
 {
     if (buffer && length <= self.length) {
-        [self ff_getBytes:buffer length:length];
+        return [self ff_getBytes:buffer length:length];
     }
+    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], buffer is %p, length %lu is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), buffer, (long)length, (long)self.length];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 - (void)ff_getBytes:(void *)buffer range:(NSRange)range
 {
     if (buffer && range.location + range.length <= self.length) {
-        [self ff_getBytes:buffer range:range];
+        return [self ff_getBytes:buffer range:range];
     }
+    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], buffer is %p, range %@ is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), buffer, NSStringFromRange(range), (long)self.length];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 - (nullable instancetype)ff_initWithBase64EncodedString:(NSString *)base64String options:(NSDataBase64DecodingOptions)options
@@ -129,6 +163,9 @@
         return [self ff_initWithBase64EncodedString:base64String options:options];
     }
     
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], base64String can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return nil;
 }
 
@@ -138,28 +175,43 @@
         return [self ff_initWithBase64EncodedData:base64Data options:options];
     }
     
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], base64Data can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return nil;
 }
 
 - (void)ff_appendBytes:(const void *)bytes length:(NSUInteger)length
 {
     if (bytes) {
-        [self ff_appendBytes:bytes length:length];
+        return [self ff_appendBytes:bytes length:length];
     }
+    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], bytes can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 - (void)ff_replaceBytesInRange:(NSRange)range withBytes:(const void *)bytes
 {
     if (bytes && range.location + range.length <= self.length) {
-        [self ff_replaceBytesInRange:range withBytes:bytes];
+        return [self ff_replaceBytesInRange:range withBytes:bytes];
     }
+    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], bytes is %p, range %@ is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), bytes, NSStringFromRange(range), (long)self.length];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 - (void)ff_replaceBytesInRange:(NSRange)range withBytes:(nullable const void *)replacementBytes length:(NSUInteger)replacementLength
 {
     if (range.location + range.length <= self.length) {
-        [self ff_replaceBytesInRange:range withBytes:replacementBytes length:replacementLength];
+        return [self ff_replaceBytesInRange:range withBytes:replacementBytes length:replacementLength];
     }
+    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], bytes is %p, range %@ is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), replacementBytes, NSStringFromRange(range), (long)self.length];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 @end

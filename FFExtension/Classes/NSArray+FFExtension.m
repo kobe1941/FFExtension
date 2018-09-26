@@ -8,6 +8,7 @@
 
 #import "NSArray+FFExtension.h"
 #import "NSObject+methodSwizzle.h"
+#import "FFExceptionProxy.h"
 
 @implementation NSArray (FFExtension)
 
@@ -112,6 +113,9 @@
 - (BOOL)ff_writeToURL:(NSURL *)url error:(NSError * _Nullable __autoreleasing *)error
 {
     if (!url) {
+        NSString *msg = [NSString stringWithFormat:@"+[%@ %@], url can not be nil", NSStringFromClass([self class]), NSStringFromSelector(_cmd)];
+        NSLog(@"%@", msg);
+        [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
         return NO;
     }
     
@@ -124,8 +128,9 @@
         return [self ff_objectAtIndexedSubscript:index];
     }
     
-    NSLog(@"数组越界，index = %lu, count = %lu", index, self.count);
-    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], index %ld is out of bounds 0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), (long)index, (long)self.count];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return nil;
 }
 
@@ -135,8 +140,9 @@
         return [self ff_objectAtIndexedSubscriptArrayM:index];
     }
     
-    NSLog(@"数组越界，index = %u, count = %lu", index, self.count);
-    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], index %ld is out of bounds 0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), (long)index, (long)self.count];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return nil;
 }
 
@@ -146,6 +152,9 @@
         return [self ff_objectAtIndex:index];
     }
     
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], index %ld is out of bounds 0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), (long)index, (long)self.count];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return nil;
 }
 
@@ -155,12 +164,19 @@
     id  _Nonnull __unsafe_unretained realObjects[cnt];
     
     // cnt比数组长度大，objects[i]会读取到其他内存对象比如控制器啊什么的，所以cnt要慎重不能乱写
+    BOOL capture = NO;
     for (NSUInteger i = 0; i < cnt; i++) {
         if (objects && objects[i]) {
             realObjects[realCount] = objects[i];
             realCount++;
         } else {
-            NSLog(@"出错啦，第 %u 个值为空", i);
+            if (!capture) {
+                capture = YES;
+                
+                NSString *msg = [NSString stringWithFormat:@"+[%@ %@], the %lu object is nil in   0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), (long)i, (long)cnt];
+                NSLog(@"%@", msg);
+                [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
+            }
         }
     }
     
@@ -173,6 +189,9 @@
         return [self ff_arrayByAddingObject:anObject];
     }
     
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], object can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return self;
 }
 
@@ -183,7 +202,9 @@
         return [self ff_getObjects:objects range:range];
     }
     
-    NSLog(@"self.count = %u. range max location = %u", self.count, range.location+range.length);
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], range %@ is out of bounds 0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), NSStringFromRange(range), (long)self.count];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 ///< 给NSArray用
@@ -193,7 +214,9 @@
         return [self ff_getObjectsForSuperClass:objects range:range];
     }
     
-    NSLog(@"self.count = %u. range max location = %u", self.count, range.location+range.length);
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], range %@ is out of bounds 0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), NSStringFromRange(range), (long)self.count];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 - (NSUInteger)ff_indexOfObject:(id)anObject inRange:(NSRange)range
@@ -202,6 +225,9 @@
         return [self ff_indexOfObject:anObject inRange:range];
     }
     
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], range %@ is out of bounds 0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), NSStringFromRange(range), (long)self.count];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return 0;
 }
 
@@ -211,6 +237,9 @@
         return [self ff_indexOfObjectIdenticalTo:anObject inRange:range];
     }
     
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], range %@ is out of bounds 0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), NSStringFromRange(range), (long)self.count];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return 0;
 }
 
@@ -220,13 +249,18 @@
         return [self ff_subarrayWithRange:range];
     }
     
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], range %@ is out of bounds 0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), NSStringFromRange(range), (long)self.count];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return nil;
 }
 
 - (NSArray *)ff_objectsAtIndexes:(NSIndexSet *)indexes
 {
     if (!indexes) {
-        NSLog(@"有问题呀");
+        NSString *msg = [NSString stringWithFormat:@"+[%@ %@], NSIndexset can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
+        NSLog(@"%@", msg);
+        [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
         return nil;
     }
     
@@ -252,7 +286,9 @@
         return [self ff_insertObject:anObject atIndex:index];
     }
     
-    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], object is %@, index is %lu, array bounds is 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), anObject, (long)index, (long)self.count];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 - (void)ff_removeObjectsInRange:(NSRange)range
@@ -261,13 +297,18 @@
         return [self ff_removeObjectsInRange:range];
     }
     
-    NSLog(@"扑街啦");
+    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], range %@ is out of bounds 0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), NSStringFromRange(range), (long)self.count];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 - (void)ff_removeObjectsAtIndexes:(NSIndexSet *)indexes
 {
     if (!indexes) {
-        NSLog(@"有问题呀");
+        NSString *msg = [NSString stringWithFormat:@"+[%@ %@], NSIndexset can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
+        NSLog(@"%@", msg);
+        [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
         return;
     }
     
@@ -292,6 +333,10 @@
     if (anObject && range.location + range.length <= self.count) {
         return [self ff_removeObject:anObject inRange:range];
     }
+    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], object is %@, range is %@, array bounds is 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), anObject, NSStringFromRange(range), (long)self.count];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 - (void)ff_removeObjectAtIndex:(NSUInteger)index
@@ -300,7 +345,9 @@
         return [self ff_removeObjectAtIndex:index];
     }
     
-    NSLog(@"index = %lu 越界", index);
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], index %lu is out of bounds 0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), (long)index, (long)self.count];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 - (void)ff_removeObjectAtIndexArrayM:(NSUInteger)index
@@ -309,7 +356,9 @@
         return [self ff_removeObjectAtIndexArrayM:index];
     }
     
-    NSLog(@"index = %lu 越界", index);
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], index %lu is out of bounds 0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), (long)index, (long)self.count];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 - (void)ff_replaceObjectAtIndex:(NSUInteger)index withObject:(id)anObject
@@ -317,6 +366,10 @@
     if (anObject && index < self.count) {
         return [self ff_replaceObjectAtIndex:index withObject:anObject];
     }
+    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], object is %@, index is %lu, array bounds is 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), anObject, (long)index, (long)self.count];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 - (void)ff_exchangeObjectAtIndex:(NSUInteger)idx1 withObjectAtIndex:(NSUInteger)idx2
@@ -325,6 +378,9 @@
         return [self ff_exchangeObjectAtIndex:idx1 withObjectAtIndex:idx2];
     }
     
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], index1 is %lu, index2 is %lu, array bounds is 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), (long)idx1, (long)idx2, (long)self.count];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 - (void)ff_removeObjectIdenticalTo:(id)anObject inRange:(NSRange)range
@@ -332,6 +388,10 @@
     if (anObject && range.location + range.length <= self.count) {
         return [self ff_removeObjectIdenticalTo:anObject inRange:range];
     }
+    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], object is %@, range is %@, array bounds is 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), anObject, NSStringFromRange(range), (long)self.count];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 - (void)ff_setObject:(id)obj atIndexedSubscript:(NSUInteger)idx
@@ -340,6 +400,9 @@
         return [self ff_setObject:obj atIndexedSubscript:idx];
     }
     
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], object is %@, index is %lu, array bounds is 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), obj, (long)idx, (long)self.count];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 - (void)ff_replaceObjectsInRange:(NSRange)range withObjectsFromArray:(NSArray *)otherArray
@@ -347,11 +410,18 @@
     if (range.location + range.length <= self.count) {
         return [self ff_replaceObjectsInRange:range withObjectsFromArray:otherArray];
     }
+    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], range %@ is out of bounds 0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), NSStringFromRange(range), (long)self.count];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 - (void)ff_replaceObjectsInRange:(NSRange)range withObjectsFromArray:(NSArray *)otherArray range:(NSRange)otherRange
 {
     if (!otherArray) {
+        NSString *msg = [NSString stringWithFormat:@"+[%@ %@], otherArray can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
+        NSLog(@"%@", msg);
+        [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
         return;
     }
     
@@ -360,15 +430,25 @@
             return [self ff_replaceObjectsInRange:range withObjectsFromArray:otherArray range:otherRange];
         }
     }
+    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], range %@ or othreRange %@ is out of bounds 0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), NSStringFromRange(range), NSStringFromRange(otherRange), (long)self.count];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 - (void)ff_insertObjects:(NSArray *)objects atIndexes:(NSIndexSet *)indexes
 {
     if (!objects || !indexes) {
+        NSString *msg = [NSString stringWithFormat:@"+[%@ %@], objects %@ or indexes %@ can not be nil", NSStringFromClass([self class]), NSStringFromSelector(_cmd), objects, indexes];
+        NSLog(@"%@", msg);
+        [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
         return;
     }
     
     if (objects.count != indexes.count) {
+        NSString *msg = [NSString stringWithFormat:@"+[%@ %@], objects count %lu must equal indexes count %lu", NSStringFromClass([self class]), NSStringFromSelector(_cmd), (long)objects.count, (long)indexes.count];
+        NSLog(@"%@", msg);
+        [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
         return;
     }
     
@@ -392,10 +472,16 @@
 - (void)ff_replaceObjectsAtIndexes:(NSIndexSet *)indexes withObjects:(NSArray *)objects
 {
     if (!objects || !indexes) {
+        NSString *msg = [NSString stringWithFormat:@"+[%@ %@], objects %@ or indexes %@ can not be nil", NSStringFromClass([self class]), NSStringFromSelector(_cmd), objects, indexes];
+        NSLog(@"%@", msg);
+        [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
         return;
     }
     
     if (objects.count != indexes.count) {
+        NSString *msg = [NSString stringWithFormat:@"+[%@ %@], objects count %lu must equal indexes count %lu", NSStringFromClass([self class]), NSStringFromSelector(_cmd), (long)objects.count, (long)indexes.count];
+        NSLog(@"%@", msg);
+        [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
         return;
     }
     
@@ -414,11 +500,5 @@
     
     return [self ff_replaceObjectsAtIndexes:indexes withObjects:objects];
 }
-
-//- (NSUInteger)ff_indexOfObjectIdenticalTo:(id)anObject
-//{
-//
-//    return 0;
-//}
 
 @end

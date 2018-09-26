@@ -8,6 +8,7 @@
 
 #import "NSSet+FFExtension.h"
 #import "NSObject+methodSwizzle.h"
+#import "FFExceptionProxy.h"
 
 @implementation NSSet (FFExtension)
 
@@ -25,11 +26,20 @@
     NSUInteger realCount = 0;
     id  _Nonnull __unsafe_unretained realObjects[cnt];
     
+    BOOL capture = NO;
     for (NSUInteger i = 0; i < cnt; i++) {
         if (objects && objects[i]) {
             realObjects[realCount] = objects[i];
             realCount++;
         } else {
+            
+            if (!capture) {
+                capture = YES;
+                
+                NSString *msg = [NSString stringWithFormat:@"+[%@ %@], the %lu object or objects %p is nil in  0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), (long)i, objects, (long)cnt];
+                NSLog(@"%@", msg);
+                [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
+            }
             NSLog(@"出错啦，第 %lu 个值为空", i);
         }
     }
@@ -42,6 +52,10 @@
     if (anObject) {
         return [self ff_setByAddingObject:anObject];
     }
+    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], object can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     
     return nil;
 }

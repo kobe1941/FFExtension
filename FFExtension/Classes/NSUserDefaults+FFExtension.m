@@ -8,6 +8,7 @@
 
 #import "NSUserDefaults+FFExtension.h"
 #import "NSObject+methodSwizzle.h"
+#import "FFExceptionProxy.h"
 
 @implementation NSUserDefaults (FFExtension)
 
@@ -43,21 +44,33 @@
         return [self ff_objectForKey:defaultName];
     }
     
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], key can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
+    
     return nil;
 }
  
 - (void)ff_setObject:(nullable id)value forKey:(NSString *)defaultName
 {
     if (defaultName && value) {
-        [self ff_setObject:value forKey:defaultName];
+        return [self ff_setObject:value forKey:defaultName];
     }
+    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], key %@ or object %@ can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd), defaultName, value];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 - (void)ff_removeObjectForKey:(NSString *)defaultName
 {
     if (defaultName) {
-        [self ff_removeObjectForKey:defaultName];
+        return [self ff_removeObjectForKey:defaultName];
     }
+    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], key can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 - (NSInteger)ff_integerForKey:(NSString *)defaultName
@@ -65,6 +78,10 @@
     if (defaultName) {
         return [self ff_integerForKey:defaultName];
     }
+    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], key can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     
     return 0;
 }
@@ -75,21 +92,33 @@
         return [self ff_boolForKey:defaultName];
     }
     
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], key can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
+    
     return NO;
 }
 
 - (void)ff_addSuiteNamed:(NSString *)suiteName
 {
     if (suiteName) {
-        [self ff_addSuiteNamed:suiteName];
+        return [self ff_addSuiteNamed:suiteName];
     }
+    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], suiteName can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 - (void)ff_removeSuiteNamed:(NSString *)suiteName;
 {
     if (suiteName) {
-        [self ff_removeSuiteNamed:suiteName];
+        return [self ff_removeSuiteNamed:suiteName];
     }
+    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], suiteName can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 - (NSDictionary<NSString *, id> *)ff_volatileDomainForName:(NSString *)domainName
@@ -98,21 +127,33 @@
         return [self ff_volatileDomainForName:domainName];
     }
     
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], domainName can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
+    
     return nil;
 }
 
 - (void)ff_setVolatileDomain:(NSDictionary<NSString *, id> *)domain forName:(NSString *)domainName
 {
     if (domain && domainName) {
-        [self ff_setVolatileDomain:domain forName:domainName];
+        return [self ff_setVolatileDomain:domain forName:domainName];
     }
+    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], domain %@ or domainName %@ can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd), domain, domainName];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 - (void)ff_removeVolatileDomainForName:(NSString *)domainName
 {
     if (domainName) {
-        [self ff_removeVolatileDomainForName:domainName];
+        return [self ff_removeVolatileDomainForName:domainName];
     }
+    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], domainName can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 - (BOOL)ff_objectIsForcedForKey:(NSString *)key inDomain:(NSString *)domain
@@ -120,6 +161,10 @@
     if (domain) {
         return [self ff_objectIsForcedForKey:key inDomain:domain];
     }
+    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], domain can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     
     return NO;
 }

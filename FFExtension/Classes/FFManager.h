@@ -40,8 +40,8 @@ typedef NS_OPTIONS(NSUInteger, FFHookOption){
 /**
  
  @param option - type of hook
- @param classPrefixs - for your own class, add unrecognized selector sent to instance exception hook.
- @param need - set Yes to use defaults classes.
+ @param classPrefixs - for your own class, add unrecognized selector sent to instance exception hook, default is nil.
+ @param need - set Yes to use defaults classes, default is YES.
  */
 + (void)startWorkWithOption:(FFHookOption)option unrecogziedSelectorClassPrefixs:(NSArray<NSString *> *)classPrefixs needDefault:(BOOL)need;
 

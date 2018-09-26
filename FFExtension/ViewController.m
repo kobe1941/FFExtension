@@ -103,7 +103,7 @@
 - (void)testForNSDataHook
 {
     NSArray *dataClasses = [[self class] findAllOf:[NSData class]];
-    NSLog(@"dataClasses = %@", dataClasses);
+//    NSLog(@"dataClasses = %@", dataClasses);
     
 //    [self logAllMethods:NSClassFromString(@"NSData")];
     
@@ -246,7 +246,7 @@
     
     NSString *str = @"feawfwefwef";
     
-    [self logAllMethods:NSClassFromString(@"NSTaggedPointerString")];
+//    [self logAllMethods:NSClassFromString(@"NSTaggedPointerString")];
     
     
     [[str copy] substringToIndex:90];
@@ -379,21 +379,8 @@
     
     
     NSArray *tempArr = [[self class] findAllOf:[NSArray class]];
-    NSLog(@"NSArray result = %@", tempArr);
-    
-     unsigned int count;
-    Class classCFArray__ = NSClassFromString(@"__NSCFArray");
-    Method *methods = class_copyMethodList(classCFArray__, &count);
-    
-    for (int i = 0; i < count; i++)
-    {
-        Method method = methods[i];
+//    NSLog(@"NSArray result = %@", tempArr);
 
-        SEL selector = method_getName(method);
-
-        NSString *name = NSStringFromSelector(selector);
-        NSLog(@"array %@ method name = %@", [classCFArray__ class], name);
-    }
     
     @[][0];
     [[NSArray new] indexOfObjectIdenticalTo:nil];

@@ -8,7 +8,7 @@
 
 #import "NSDictionary+FFExtension.h"
 #import "NSObject+methodSwizzle.h"
-
+#import "FFExceptionProxy.h"
 
 @implementation NSDictionary (FFExtension)
 
@@ -39,13 +39,20 @@
     id realObjects[cnt];
     id realKeys[cnt];
     
+    BOOL capture = NO;
     for (NSUInteger i = 0; i < cnt; i++) {
         if (keys && objects && keys[i] && objects[i]) {
             realObjects[realCount] = objects[i];
             realKeys[realCount] = keys[i];
             realCount++;
         } else {
-            NSLog(@"出错啦，第 %lu 个key 或 value 的值为空", i);
+            if (!capture) {
+                capture = YES;
+                
+                NSString *msg = [NSString stringWithFormat:@"+[%@ %@], the %lu keys %p or objects %p is nil in  0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), (long)i, keys, objects, (long)cnt];
+                NSLog(@"%@", msg);
+                [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
+            }
         }
     }
     
@@ -58,30 +65,45 @@
         return [self ff_initWithObjects:objects forKeys:keys];
     }
     
+    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], objects count %lu must equal keys count %lu", NSStringFromClass([self class]), NSStringFromSelector(_cmd), (long)objects.count, (long)keys.count];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return nil;
 }
 
 - (BOOL)ff_writeToURL:(NSURL *)url error:(NSError * _Nullable __autoreleasing *)error
 {
-    if (!url) {
-        return NO;
+    if (url) {
+        return [self ff_writeToURL:url error:error];
     }
     
-    return [self ff_writeToURL:url error:error];
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], url can not be nil", NSStringFromClass([self class]), NSStringFromSelector(_cmd)];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
+    
+    return NO;
 }
 
 + (id)ff_sharedKeySetForKeys:(NSArray<id<NSCopying>> *)keys
 {
-    if (!keys) {
-        return nil;
+    if (keys) {
+        return [self ff_sharedKeySetForKeys:keys];
     }
     
-    return [self ff_sharedKeySetForKeys:keys];
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], keys can not be nil", NSStringFromClass([self class]), NSStringFromSelector(_cmd)];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
+    
+    return nil;
 }
 
 + (id)mutable_sharedKeySetForKeys:(NSArray<id<NSCopying>> *)keys
 {
     if (!keys) {
+        NSString *msg = [NSString stringWithFormat:@"+[%@ %@], keys can not be nil", NSStringFromClass([self class]), NSStringFromSelector(_cmd)];
+        NSLog(@"%@", msg);
+        [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
         return nil;
     }
     
@@ -93,6 +115,10 @@
     if (aKey) {
         return [self ff_removeObjectForKey:aKey];
     }
+    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], key can not be nil", NSStringFromClass([self class]), NSStringFromSelector(_cmd)];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 - (void)ff_setObject:(id)anObject forKey:(id)aKey
@@ -100,6 +126,10 @@
     if (anObject && aKey) {
         return [self ff_setObject:anObject forKey:aKey];
     }
+    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], key %@ or object %@ can not be nil", NSStringFromClass([self class]), NSStringFromSelector(_cmd), aKey, anObject];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 - (void)ff_setObject:(nullable id)obj forKeyedSubscript:(id <NSCopying>)key
@@ -107,6 +137,10 @@
     if (obj && key) {
         return [self ff_setObject:obj forKeyedSubscript:key];
     }
+    
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], key %@ or object %@ can not be nil", NSStringFromClass([self class]), NSStringFromSelector(_cmd), key, obj];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 + (NSMutableDictionary *)ff_dictionaryWithSharedKeySet:(id)keyset
@@ -115,6 +149,9 @@
         return [self ff_dictionaryWithSharedKeySet:keyset];
     }
     
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], keySet can not be nil", NSStringFromClass([self class]), NSStringFromSelector(_cmd)];
+    NSLog(@"%@", msg);
+    [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return nil;
 }
 
