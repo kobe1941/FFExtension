@@ -24,7 +24,7 @@
     
 //    [self testUnrecognizedSelector];
 //    [self testNSStringHook];
-    [self testArrayHook];
+//    [self testArrayHook];
     
 //    NSNull *null = [NSNull null];
 //    [null performSelector:@selector(length)];
@@ -33,13 +33,90 @@
 //    [self testNSDictionaryHook];
     
 //    [self testStringMore];
-    [self testForNSCacheHook];
-    [self testForNSUserDefaultsHook];
+//    [self testForNSCacheHook];
+//    [self testForNSUserDefaultsHook];
     
+    [self testForNSDataHook];
     
 //    [self testForNSSetHook];
     
     
+}
+
+- (void)testForNSDataHook
+{
+    NSArray *dataClasses = [[self class] findAllOf:[NSData class]];
+    NSLog(@"dataClasses = %@", dataClasses);
+    
+//    [self logAllMethods:NSClassFromString(@"NSData")];
+    
+    NSData *data = [@"hufeng" dataUsingEncoding:NSUTF8StringEncoding];
+    NSMutableData *mutableData = [[NSMutableData alloc] initWithData:data];
+    NSData *subData = [data subdataWithRange:NSMakeRange(2, 2)];
+    const void * str = "fewfewgfewfew";
+    
+    
+    [mutableData subdataWithRange:NSMakeRange(9, 40)];
+    [data rangeOfData:subData options:NSDataSearchAnchored range:NSMakeRange(90, 12)];
+    [mutableData rangeOfData:subData options:NSDataSearchAnchored range:NSMakeRange(90, 12)];
+    [data rangeOfData:subData options:NSDataSearchAnchored range:NSMakeRange(90, 12)];
+    [mutableData rangeOfData:subData options:NSDataSearchAnchored range:NSMakeRange(90, 12)];
+    [data getBytes:NULL length:40];
+    [data subdataWithRange:NSMakeRange(0, 30)];
+    [subData subdataWithRange:NSMakeRange(9, 12)];
+    [data getBytes:str range:NSMakeRange(3, 90)];
+    [data getBytes:str length:40];
+    [mutableData getBytes:str range:NSMakeRange(3, 90)];
+    [mutableData getBytes:str length:40];
+    [mutableData getBytes:nil length:90];
+    
+    
+    data = [NSData data];
+    [data subdataWithRange:NSMakeRange(10, 200)];
+    [data rangeOfData:subData options:NSDataSearchAnchored range:NSMakeRange(90, 12)];
+    [mutableData rangeOfData:subData options:NSDataSearchAnchored range:NSMakeRange(90, 12)];
+    [data rangeOfData:subData options:NSDataSearchAnchored range:NSMakeRange(90, 12)];
+    [mutableData rangeOfData:subData options:NSDataSearchAnchored range:NSMakeRange(90, 12)];
+    [data getBytes:str range:NSMakeRange(3, 90)];
+    [data getBytes:str length:40];
+    [mutableData getBytes:str range:NSMakeRange(3, 90)];
+    [mutableData getBytes:str length:40];
+    [data getBytes:NULL length:40];
+    [mutableData getBytes:nil length:90];
+    
+    
+    
+    data = [NSData dataWithBytes:str length:10];
+    [data subdataWithRange:NSMakeRange(5, 40)];
+    [data rangeOfData:subData options:NSDataSearchAnchored range:NSMakeRange(90, 12)];
+    [mutableData rangeOfData:subData options:NSDataSearchAnchored range:NSMakeRange(90, 12)];
+    [data rangeOfData:subData options:NSDataSearchAnchored range:NSMakeRange(90, 12)];
+    [mutableData rangeOfData:subData options:NSDataSearchAnchored range:NSMakeRange(90, 12)];
+    [data getBytes:str range:NSMakeRange(3, 90)];
+    [data getBytes:str length:40];
+    [mutableData getBytes:str range:NSMakeRange(3, 90)];
+    [mutableData getBytes:str length:40];
+    [data getBytes:NULL length:40];
+    [mutableData getBytes:nil length:90];
+    
+    data = [[NSData alloc] initWithBase64EncodedString:nil options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    data = [[NSData alloc] initWithBase64EncodedData:nil options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    
+    
+    [mutableData appendData:nil];
+    [mutableData appendBytes:nil length:100];
+    [mutableData appendBytes:str length:100];
+    
+    [mutableData replaceBytesInRange:NSMakeRange(10, 10) withBytes:nil];
+    [mutableData replaceBytesInRange:NSMakeRange(120, 10) withBytes:str];
+    [mutableData replaceBytesInRange:NSMakeRange(0, 10) withBytes:str length:60];
+    [mutableData replaceBytesInRange:NSMakeRange(0, 1000) withBytes:nil length:6];
+    [mutableData replaceBytesInRange:NSMakeRange(0, 1000) withBytes:str length:600];
+    [mutableData resetBytesInRange:NSMakeRange(21, 900)];
+    
+//    [data increaseLengthBy:2034];
+    [mutableData increaseLengthBy:353];
+    [mutableData setData:nil];
 }
 
 - (void)testForNSCacheHook
