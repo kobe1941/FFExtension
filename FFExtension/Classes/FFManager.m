@@ -47,7 +47,6 @@
             [NSData startHook];
         }
 
-        ///< TODO:NSData（NSMutableData）可以做的更全面一些，然后还有NSCache，NSSet，NSUserDefaults，NSAttributedString也可以做，可以参考这里https://github.com/lsmakethebest/LSSafeProtector
         
         if (option & FFHookOptionNSSet) {
             [NSSet startHook];

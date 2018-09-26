@@ -24,7 +24,7 @@
     
 //    [self testUnrecognizedSelector];
 //    [self testNSStringHook];
-//    [self testArrayHook];
+    [self testArrayHook];
     
 //    NSNull *null = [NSNull null];
 //    [null performSelector:@selector(length)];
@@ -36,11 +36,68 @@
 //    [self testForNSCacheHook];
 //    [self testForNSUserDefaultsHook];
     
-    [self testForNSDataHook];
+//    [self testForNSDataHook];
     
-//    [self testForNSSetHook];
+    [self testForNSSetHook];
+    
+    [self logAllMethods:NSClassFromString(@"__NSArrayM")];
+}
+
+- (void)testForNSSetHook
+{
+    NSSet *set = [NSSet setWithObject:nil];
+    set = [NSSet setWithObject:@123];
+    NSMutableSet *mutableSet = [NSMutableSet setWithObject:@3435435];
+    [set containsObject:nil];
+    [mutableSet containsObject:nil];
+    [set intersectsSet:nil];
+    [set isEqualToSet:nil];
+    [set isSubsetOfSet:nil];
+    [mutableSet intersectsSet:nil];
+    [mutableSet isEqualToSet:nil];
+    [mutableSet isSubsetOfSet:nil];
+    set = [set setByAddingObject:nil];
+    set = [set setByAddingObjectsFromSet:set];
+    set = [set setByAddingObjectsFromSet:nil];
+    set = [set setByAddingObjectsFromArray:@[]];
+    set = [set setByAddingObjectsFromArray:nil];
+    
+    mutableSet = [mutableSet setByAddingObject:nil];
+    mutableSet = [mutableSet setByAddingObjectsFromSet:set];
+    mutableSet = [mutableSet setByAddingObjectsFromSet:nil];
+    mutableSet = [mutableSet setByAddingObjectsFromArray:@[]];
+    mutableSet = [mutableSet setByAddingObjectsFromArray:nil];
+    
+    [[NSSet alloc] initWithObjects:nil, nil];
+    [[NSSet alloc] initWithSet:nil];
+    [[NSSet alloc] initWithSet:nil copyItems:YES];
+    [[NSSet alloc] initWithArray:nil];
+    
+    [NSSet setWithObject:nil];
+    [NSSet setWithObjects:nil, nil];
+    [NSSet setWithArray:nil];
+    [NSSet setWithSet:nil];
+    [NSSet setWithObjects:nil count:0];
     
     
+    [[NSMutableSet alloc] initWithObjects:nil, nil];
+    [[NSMutableSet alloc] initWithSet:nil];
+    [[NSMutableSet alloc] initWithSet:nil copyItems:YES];
+    [[NSMutableSet alloc] initWithArray:nil];
+    
+    [NSMutableSet setWithObject:nil];
+    [NSMutableSet setWithObjects:nil, nil];
+    [NSMutableSet setWithArray:nil];
+    [NSMutableSet setWithSet:nil];
+    [NSMutableSet setWithObjects:nil count:2];
+    
+    [mutableSet addObject:nil];
+    [mutableSet removeObject:nil];
+    [mutableSet addObjectsFromArray:nil];
+    [mutableSet intersectSet:nil];
+    [mutableSet minusSet:nil];
+    [mutableSet unionSet:nil];
+    [mutableSet setSet:nil];
 }
 
 - (void)testForNSDataHook
@@ -170,10 +227,7 @@
     [useDefaults objectIsForcedForKey:nil inDomain:@"ewf"];
 }
 
-- (void)testForNSSetHook
-{
-    [NSSet setWithObject:nil];
-}
+
 
 - (void)testStringMore
 {
@@ -368,6 +422,7 @@
     NSString *temp[5];
     temp[1] = @"111";
     array = [[NSArray alloc] initWithObjects:temp count:4];
+    array = [[NSArray alloc] initWithObjects:nil count:4];
     array = [NSArray arrayWithObjects:temp count:4];
     
     array = [[NSArray alloc] initWithArray:nil copyItems:YES];

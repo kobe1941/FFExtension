@@ -83,10 +83,8 @@
     [self ff_instancenSwizzleWithClass:classM originSelector:@selector(removeObjectAtIndex:) swizzleSelector:@selector(ff_removeObjectAtIndexArrayM:)];
 
     
-    
     Class placeHolderClass = NSClassFromString(@"__NSPlaceholderArray");
     [self ff_instancenSwizzleWithClass:placeHolderClass originSelector:@selector(initWithObjects:count:) swizzleSelector:@selector(ff_initWithObjects:count:)];
-    
     
      
     Class transferClass = NSClassFromString(@"__NSArrayI_Transfer");
@@ -120,7 +118,6 @@
     Class classCFArray__ = NSClassFromString(@"__NSCFArray");
     [self ff_instancenSwizzleWithClass:classCFArray__ originSelector:@selector(objectAtIndex:) swizzleSelector:@selector(ff_objectAtIndex:)];
      */
-
 }
 
 - (BOOL)ff_writeToURL:(NSURL *)url error:(NSError * _Nullable __autoreleasing *)error
@@ -163,64 +160,6 @@
     return nil;
 }
 
-/*
-- (id)ff_objectAtIndexArrayI:(NSUInteger)index
-{
-    if (index < self.count) {
-        return [self ff_objectAtIndexArrayI:index];
-    }
-    
-    return nil;
-}
-
-- (id)ff_objectAtIndexSingleArrayI:(NSUInteger)index
-{
-    if (index < self.count) {
-        return [self ff_objectAtIndexSingleArrayI:index];
-    }
-    
-    return nil;
-}
-
-- (id)ff_objectAtIndexArray0:(NSUInteger)index
-{
-    if (index < self.count) {
-        return [self ff_objectAtIndexArray0:index];
-    }
-    
-    return nil;
-}
-
-- (id)ff_objectAtIndexArrayM:(NSUInteger)index
-{
-    if (index < self.count) {
-        return [self ff_objectAtIndexArrayM:index];
-    }
-    
-    return nil;
-}
-*/
-
-/*
-- (id)ff_objectAtIndexCFArray__:(NSUInteger)index
-{
-    if (index < self.count) {
-        return [self ff_objectAtIndexCFArray__:index];
-    }
-    
-    return nil;
-}
-
-- (id)ff_objectAtIndexCFArray:(NSUInteger)index
-{
-    if (index < self.count) {
-        return [self ff_objectAtIndexCFArray:index];
-    }
-    
-    return nil;
-}
-*/
-
 - (instancetype)ff_initWithObjects:(const id _Nonnull [_Nullable])objects count:(NSUInteger)cnt
 {
     NSUInteger realCount = 0;
@@ -228,7 +167,7 @@
     
     // cnt比数组长度大，objects[i]会读取到其他内存对象比如控制器啊什么的，所以cnt要慎重不能乱写
     for (NSUInteger i = 0; i < cnt; i++) {
-        if (objects[i]) {
+        if (objects && objects[i]) {
             realObjects[realCount] = objects[i];
             realCount++;
         } else {

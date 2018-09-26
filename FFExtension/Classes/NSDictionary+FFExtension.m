@@ -53,7 +53,7 @@
     id realKeys[cnt];
     
     for (NSUInteger i = 0; i < cnt; i++) {
-        if (keys[i] && objects[i]) {
+        if (keys && objects && keys[i] && objects[i]) {
             realObjects[realCount] = objects[i];
             realKeys[realCount] = keys[i];
             realCount++;
@@ -62,12 +62,7 @@
         }
     }
     
-    if (realCount) {
-        return [self ff_initWithObjects:realObjects forKeys:realKeys count:realCount];
-    }
-    
-    
-    return nil;
+    return [self ff_initWithObjects:realObjects forKeys:realKeys count:realCount];
 }
 
 - (instancetype)ff_initWithObjects:(NSArray *)objects forKeys:(NSArray<id<NSCopying>> *)keys
