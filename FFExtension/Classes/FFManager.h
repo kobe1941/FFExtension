@@ -26,19 +26,24 @@ typedef NS_OPTIONS(NSUInteger, FFHookOption){
 
 
 /**
- 外部统一入口，调用后生效
+ you must call one of the method below to start work.
 
  @param option hook的类型
  */
 + (void)startWorkWithOption:(FFHookOption)option;
 
-
+/**
+ call method below by set the last variable need to YES
+ */
++ (void)startWorkWithOption:(FFHookOption)option unrecogziedSelectorClassPrefixs:(NSArray<NSString *> *)classPrefixs;
 
 /**
- 对自定义的类增加unrecognized selector sent to instance拦截
- 默认仅针对@[NSNumber，NSString，NSArray，NSDictionary]做拦截
- @param classPrefixs 类名前缀的集合，大小写敏感
+ 
+ @param option - type of hook
+ @param classPrefixs - for your own class, add unrecognized selector sent to instance exception hook.
+ @param need - set Yes to use defaults classes.
  */
-+ (void)addUnrecognizedSelectorWithClassPrefixs:(NSArray <NSString *>*)classPrefixs;
++ (void)startWorkWithOption:(FFHookOption)option unrecogziedSelectorClassPrefixs:(NSArray<NSString *> *)classPrefixs needDefault:(BOOL)need;
+
 
 @end

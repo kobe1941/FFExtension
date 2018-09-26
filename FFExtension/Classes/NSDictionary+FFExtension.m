@@ -9,19 +9,6 @@
 #import "NSDictionary+FFExtension.h"
 #import "NSObject+methodSwizzle.h"
 
-/*
- NSDictionary
- NSMutableDictionary
- "__NSDictionaryM",
- "__NSPlaceholderDictionary",
- 
- _NSConstantDictionary
- "__NSDictionaryI",
- "__NSDictionary0",
- "__NSCFDictionary",
- NSCFDictionary
- */
-
 
 @implementation NSDictionary (FFExtension)
 

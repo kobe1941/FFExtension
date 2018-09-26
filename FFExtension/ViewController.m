@@ -22,25 +22,25 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-//    [self testUnrecognizedSelector];
-//    [self testNSStringHook];
+    [self testUnrecognizedSelector];
+    [self testNSStringHook];
     [self testArrayHook];
     
-//    NSNull *null = [NSNull null];
-//    [null performSelector:@selector(length)];
+    NSNull *null = [NSNull null];
+    [null performSelector:@selector(length)];
     
     
-//    [self testNSDictionaryHook];
+    [self testNSDictionaryHook];
     
-//    [self testStringMore];
-//    [self testForNSCacheHook];
-//    [self testForNSUserDefaultsHook];
+    [self testStringMore];
+    [self testForNSCacheHook];
+    [self testForNSUserDefaultsHook];
     
-//    [self testForNSDataHook];
+    [self testForNSDataHook];
     
     [self testForNSSetHook];
     
-    [self logAllMethods:NSClassFromString(@"__NSArrayM")];
+//    [self logAllMethods:NSClassFromString(@"__NSArrayM")];
 }
 
 - (void)testForNSSetHook
@@ -577,19 +577,54 @@
     [str rangeOfString:nil];
     [str rangeOfString:nil options:0];
     [str rangeOfComposedCharacterSequenceAtIndex:30];
+    [str rangeOfComposedCharacterSequencesForRange:NSMakeRange(90, 90)];
     [str stringByAppendingString:nil];
     [str stringByReplacingOccurrencesOfString:@"s" withString:nil];
     [str stringByReplacingCharactersInRange:NSMakeRange(5, 2) withString:nil];
+    
+    [str substringFromIndex:14];
+    [str substringToIndex:80];
+    [str substringWithRange:NSMakeRange(90, 90)];
+    
+    
     NSArray *arr = [str componentsSeparatedByString:nil];
     
     
     NSMutableString *mutableStr = [NSMutableString stringWithString:@"mutableString"];
+    
+    [str isEqualToString:nil];
+    [mutableStr isEqualToString:nil];
+    
+    [mutableStr hasPrefix:nil];
+    [mutableStr hasSuffix:nil];
+    [mutableStr containsString:nil];
+    [mutableStr rangeOfString:nil];
+    [mutableStr rangeOfString:nil options:0];
+    [mutableStr rangeOfComposedCharacterSequenceAtIndex:30];
+    [mutableStr rangeOfComposedCharacterSequencesForRange:NSMakeRange(90, 90)];
+    [mutableStr stringByAppendingString:nil];
+    [mutableStr stringByReplacingCharactersInRange:NSMakeRange(50, 2) withString:@"uu"];
+    [mutableStr stringByReplacingOccurrencesOfString:@"s" withString:nil];
+    [mutableStr stringByReplacingCharactersInRange:NSMakeRange(50, 2) withString:nil];
+    
+    [mutableStr substringFromIndex:14];
+    [mutableStr substringToIndex:80];
+    [mutableStr substringWithRange:NSMakeRange(90, 90)];
+    
     [mutableStr characterAtIndex:90];
     [mutableStr replaceCharactersInRange:NSMakeRange(0, 30) withString:nil];
     [mutableStr insertString:nil atIndex:57];
     [mutableStr deleteCharactersInRange:NSMakeRange(5, 20)];
     [mutableStr appendString:nil];
-
+//    [mutableStr appendFormat:nil];
+    
+    NSString *copyStr = [mutableStr copy];
+    copyStr = [str copy];
+    copyStr = [str mutableCopy];
+    copyStr = [mutableStr mutableCopy];
+    [copyStr isEqualToString:nil];
+    [copyStr substringWithRange:NSMakeRange(90, 90)];
+    [copyStr characterAtIndex:90];
     mutableStr.string = nil;
     
 }

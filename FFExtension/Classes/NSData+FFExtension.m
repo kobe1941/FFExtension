@@ -9,24 +9,6 @@
 #import "NSData+FFExtension.h"
 #import "NSObject+methodSwizzle.h"
 
-/*
- NSPageData,
- NSSubrangeData,
- "_NSZeroData",
- "_NSConstantData",
- "_NSPlaceholderData",
- "_NSDispatchData",
- "_NSInlineData",
- NSConcreteData,
- NSMutableData,
- PBMutableData,
- NSDOStreamData,
- NSPurgeableData,
- NSCFData, // 基本无用
- NSConcreteMutableData,
- "__NSCFData" // 基本无用
-
- */
 
 @implementation NSData (FFExtension)
 

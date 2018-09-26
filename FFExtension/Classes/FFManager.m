@@ -20,12 +20,25 @@
 
 + (void)startWorkWithOption:(FFHookOption)option
 {
+    [self startWorkWithOption:option unrecogziedSelectorClassPrefixs:nil needDefault:YES];
+}
+
++ (void)startWorkWithOption:(FFHookOption)option unrecogziedSelectorClassPrefixs:(NSArray<NSString *> *)classPrefixs
+{
+    [self startWorkWithOption:option unrecogziedSelectorClassPrefixs:classPrefixs needDefault:YES];
+}
+
++ (void)startWorkWithOption:(FFHookOption)option unrecogziedSelectorClassPrefixs:(NSArray<NSString *> *)classPrefixs needDefault:(BOOL)need
+{
     if (option == FFHookOptionNone) {
         return;
     }
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+        
+        [NSObject addUnrecognizedSelectorWithClassPrefixs:classPrefixs needDefault:need];
+        
         if (option & FFHookOptionUnrecognizedSelector) {
             [NSObject startHook];
         }
@@ -42,11 +55,11 @@
             [NSDictionary startHook];
         }
         
-
+        
         if (option & FFHookOptionNSData) {
             [NSData startHook];
         }
-
+        
         
         if (option & FFHookOptionNSSet) {
             [NSSet startHook];
@@ -61,12 +74,6 @@
         }
     });
 }
-
-+ (void)addUnrecognizedSelectorWithClassPrefixs:(NSArray<NSString *> *)classPrefixs
-{
-    [NSObject addUnrecognizedSelectorWithClassPrefixs:classPrefixs];
-}
-
 
 
 @end

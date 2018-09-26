@@ -10,18 +10,6 @@
 #import "NSObject+methodSwizzle.h"
 
 @implementation NSArray (FFExtension)
-/*
- NSArray
- __NSArrayI
- __NSArray0
- __NSSingleObjectArrayI
- 
- NSMutableArray
- __NSArrayM
- __NSPlaceholderArray
- __NSCFArray
- NSCFArray 函数列表为空
- */
 
 ///< TODO: 想一下为什么这里的同一个函数，不能被两个类去交换，按理来说，会分别拷贝到不同的类去，是没有关系的，但是实际应用如果不分开实现会崩溃————因为不能动NSArray这个父类，只要不动父类，子类随便玩
 
@@ -78,6 +66,7 @@
     [self ff_instancenSwizzleWithClass:classM originSelector:@selector(exchangeObjectAtIndex:withObjectAtIndex:) swizzleSelector:@selector(ff_exchangeObjectAtIndex:withObjectAtIndex:)];
     [self ff_instancenSwizzleWithClass:classM originSelector:@selector(setObject:atIndexedSubscript:) swizzleSelector:@selector(ff_setObject:atIndexedSubscript:)];
     [self ff_instancenSwizzleWithClass:classM originSelector:@selector(objectAtIndexedSubscript:) swizzleSelector:@selector(ff_objectAtIndexedSubscriptArrayM:)];
+    ///< 据说低于11.0交换此方法会导致有键盘显示的地方，此时退到后台会crash? [UIKeyboardLayoutStar release]: message sent to deallocated instance
     [self ff_instancenSwizzleWithClass:classM originSelector:@selector(objectAtIndex:) swizzleSelector:objectsAtIndexSEL];
     [self ff_instancenSwizzleWithClass:classM originSelector:@selector(getObjects:range:) swizzleSelector:getObjectsRangeSEL];
     [self ff_instancenSwizzleWithClass:classM originSelector:@selector(removeObjectAtIndex:) swizzleSelector:@selector(ff_removeObjectAtIndexArrayM:)];
@@ -146,7 +135,7 @@
         return [self ff_objectAtIndexedSubscriptArrayM:index];
     }
     
-    NSLog(@"数组越界，index = %lu, count = %lu", index, self.count);
+    NSLog(@"数组越界，index = %u, count = %lu", index, self.count);
     
     return nil;
 }
@@ -171,7 +160,7 @@
             realObjects[realCount] = objects[i];
             realCount++;
         } else {
-            NSLog(@"出错啦，第 %lu 个值为空", i);
+            NSLog(@"出错啦，第 %u 个值为空", i);
         }
     }
     
@@ -194,7 +183,7 @@
         return [self ff_getObjects:objects range:range];
     }
     
-    NSLog(@"self.count = %lu. range max location = %lu", self.count, range.location+range.length);
+    NSLog(@"self.count = %u. range max location = %u", self.count, range.location+range.length);
 }
 
 ///< 给NSArray用
@@ -204,39 +193,8 @@
         return [self ff_getObjectsForSuperClass:objects range:range];
     }
     
-    NSLog(@"self.count = %lu. range max location = %lu", self.count, range.location+range.length);
+    NSLog(@"self.count = %u. range max location = %u", self.count, range.location+range.length);
 }
-
-/*
-- (void)ff_getObjectsArrayI:(id _Nonnull __unsafe_unretained [_Nonnull])objects range:(NSRange)range
-{
-    if (range.location + range.length <= self.count) {
-        return [self ff_getObjectsArrayI:objects range:range];
-    }
-    
-    NSLog(@"self.count = %lu. range max location = %lu", self.count, range.location+range.length);
-}
-
-- (void)ff_getObjectsArrayM:(id _Nonnull __unsafe_unretained [_Nonnull])objects range:(NSRange)range
-{
-    if (range.location + range.length <= self.count) {
-        return [self ff_getObjectsArrayM:objects range:range];
-    }
-    
-    NSLog(@"self.count = %lu. range max location = %lu", self.count, range.location+range.length);
-}
-
-
-- (void)ff_getObjectsSingleArrayI:(id _Nonnull __unsafe_unretained [_Nonnull])objects range:(NSRange)range
-{
-    if (range.location + range.length <= self.count) {
-        return [self ff_getObjectsSingleArrayI:objects range:range];
-    }
-    
-    NSLog(@"self.count = %lu. range max location = %lu", self.count, range.location+range.length);
-}
-*/
-
 
 - (NSUInteger)ff_indexOfObject:(id)anObject inRange:(NSRange)range
 {
@@ -457,10 +415,10 @@
     return [self ff_replaceObjectsAtIndexes:indexes withObjects:objects];
 }
 
-- (NSUInteger)ff_indexOfObjectIdenticalTo:(id)anObject
-{
-    
-    return 0;
-}
+//- (NSUInteger)ff_indexOfObjectIdenticalTo:(id)anObject
+//{
+//
+//    return 0;
+//}
 
 @end

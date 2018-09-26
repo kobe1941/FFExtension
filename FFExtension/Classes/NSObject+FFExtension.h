@@ -12,6 +12,6 @@
 
 + (void)startHook;
 
-+ (void)addUnrecognizedSelectorWithClassPrefixs:(NSArray <NSString *>*)classPrefixs;
++ (void)addUnrecognizedSelectorWithClassPrefixs:(NSArray <NSString *>*)classPrefixs needDefault:(BOOL)need;
 
 @end

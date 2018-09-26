@@ -13,7 +13,6 @@
 static NSMutableArray *prefixs;
 
 
-
 @interface ff_target : NSObject
 @end
 
@@ -41,7 +40,7 @@ void testAddMethod(id self, SEL _cmd) {}
                            swizzleSelector:@selector(ff_forwardingTargetForSelector:)];
 }
 
-+ (void)addUnrecognizedSelectorWithClassPrefixs:(NSArray <NSString *>*)classPrefixs
++ (void)addUnrecognizedSelectorWithClassPrefixs:(NSArray <NSString *>*)classPrefixs needDefault:(BOOL)need
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -65,8 +64,12 @@ void testAddMethod(id self, SEL _cmd) {}
                                 @"_NSConstantNumber",
                                 @"NSPlaceholderNumber",
                                 ];
-        prefixs = [NSMutableArray arrayWithArray:defaultArr];
-        if ([classPrefixs isKindOfClass:NSArray.class]) {
+        prefixs = [NSMutableArray array];
+        if (need) {
+            [prefixs addObjectsFromArray:defaultArr];
+        }
+        
+        if (classPrefixs && [classPrefixs isKindOfClass:NSArray.class]) {
            [prefixs addObjectsFromArray:classPrefixs];
         }
     });
