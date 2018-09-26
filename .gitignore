@@ -1,0 +1,9 @@
+.DS_Store
+*.xcuserstate
+*.xccheckout
+*.xcuserdatad
+*.xcscmblueprint
+Breakpoints_v2.xcbkptlist
+Pods/
+node_modules/
+node_modules
