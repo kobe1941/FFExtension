@@ -208,7 +208,7 @@
 
 - (NSRange)ff_rangeOfString:(NSString *)searchString options:(NSStringCompareOptions)mask range:(NSRange)rangeOfReceiverToSearch locale:(nullable NSLocale *)locale
 {
-    if (searchString && rangeOfReceiverToSearch.location + rangeOfReceiverToSearch.length < self.length) {
+    if (searchString && rangeOfReceiverToSearch.location + rangeOfReceiverToSearch.length <= self.length) {
         return [self ff_rangeOfString:searchString options:mask range:rangeOfReceiverToSearch locale:locale];
     }
     

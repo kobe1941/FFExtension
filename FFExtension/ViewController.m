@@ -288,7 +288,7 @@
     id keys[2];
     keys[0] = @"wef";
     
-    dic = [NSDictionary dictionaryWithObjects:objects forKeys:keys count:3];
+    dic = [NSDictionary dictionaryWithObjects:objects forKeys:keys count:2];
     
     dic = [NSDictionary dictionaryWithObjects:@[@2,@2] forKeys:nil];
     dic = [NSMutableDictionary dictionaryWithObjects:@[@2,@2] forKeys:nil];
