@@ -9,9 +9,9 @@ Pod::Spec.new do |s|
     s.author = { 'hufeng' => 'fenng.hu@qq.com' }
     s.source = { :git => 'https://github.com/kobe1941/FFExtension.git', :tag => s.version }
     s.summary = 'To reduce the crash in ios app'
-    s.description = 'Have a nice day(#^.^#).'
+    s.description = 'if you have any problem or crash with use FFExtension, please issue me and paste detail crash logs,  Have a nice day(#^.^#).'
     s.requires_arc = true
-    
+
     s.source_files = 'FFExtension/Classes/*.{h,m}'
 
 end
