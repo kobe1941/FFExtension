@@ -193,6 +193,8 @@
 - (void)testForNSUserDefaultsHook
 {
     NSUserDefaults *useDefaults = [NSUserDefaults standardUserDefaults];
+    [useDefaults setObject:@"fewf" forKey:@"key"];
+    [useDefaults setObject:nil forKey:@"key"];
     [useDefaults setObject:@"fewf" forKey:nil];
     [useDefaults objectForKey:nil];
     [useDefaults removeObjectForKey:nil];
@@ -280,7 +282,9 @@
     [[dic copy] objectForKey:nil];
 //    [[dic copy] setObject:nil forKey:nil];
     [[dic mutableCopy] objectForKey:nil];
-    [[dic mutableCopy] setObject:nil forKey:nil];
+    [[dic mutableCopy] setObject:@123 forKey:@"key"];
+    [[dic mutableCopy] setObject:nil forKey:@"key"];
+    [[dic mutableCopy] setObject:@12 forKey:nil];
     
     id objects[1];
     objects[0] = @"vaevewewf";
@@ -315,6 +319,14 @@
     [dic writeToURL:nil error:nil];
     
     NSMutableDictionary *mutableDic = [NSMutableDictionary new];
+    [mutableDic setObject:@1312 forKey:@"key"];
+    [mutableDic setObject:@"ewfefeg" forKeyedSubscript:@"hufeng"];
+    
+    [mutableDic setObject:@123 forKeyedSubscript:nil];
+    [mutableDic setObject:nil forKey:@"key"];
+    [mutableDic removeObjectForKey:@"hufeng"];
+    [mutableDic setObject:nil forKeyedSubscript:@"hufeng"];
+    
     [mutableDic objectForKey:nil];
     [NSMutableDictionary dictionaryWithSharedKeySet:nil];
     [mutableDic removeObjectForKey:nil];
@@ -327,6 +339,7 @@
     [mutableDic setObject:nil forKey:@"fewf"];
     [mutableDic setObject:nil forKey:@234324];
     [mutableDic setObject:nil forKey:nil];
+    
 //    [mutableDic setObject:@"ewf" forKeyedSubscript:nil];
     [mutableDic setObject:nil forKeyedSubscript:@"few"];
     [mutableDic setObject:nil forKeyedSubscript:nil];

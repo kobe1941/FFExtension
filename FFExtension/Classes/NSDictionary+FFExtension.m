@@ -134,7 +134,7 @@
 
 - (void)ff_setObject:(nullable id)obj forKeyedSubscript:(id <NSCopying>)key
 {
-    if (obj && key) {
+    if (key) { // if obj be nil, it will call removeObjectForKey:
         return [self ff_setObject:obj forKeyedSubscript:key];
     }
     

@@ -53,7 +53,7 @@
  
 - (void)ff_setObject:(nullable id)value forKey:(NSString *)defaultName
 {
-    if (defaultName && value) {
+    if (defaultName) { // if value be nil, it will call removeObjectForKey:
         return [self ff_setObject:value forKey:defaultName];
     }
     
