@@ -40,7 +40,6 @@
                 NSLog(@"%@", msg);
                 [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
             }
-            NSLog(@"出错啦，第 %lu 个值为空", i);
         }
     }
     

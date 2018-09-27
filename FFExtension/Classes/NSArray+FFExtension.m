@@ -273,7 +273,6 @@
     }];
     
     if (flag) {
-        NSLog(@"有问题呀");
         return nil;
     }
     
@@ -321,7 +320,6 @@
     }];
     
     if (flag) {
-        NSLog(@"有问题呀");
         return;
     }
     
@@ -462,7 +460,6 @@
     }];
     
     if (flag) {
-        NSLog(@"有问题呀");
         return;
     }
     
@@ -494,7 +491,6 @@
     }];
     
     if (flag) {
-        NSLog(@"有问题呀");
         return;
     }
     
