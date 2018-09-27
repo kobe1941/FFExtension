@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
     s.name = 'FFExtension'
-    s.version = '1.0.3'
+    s.version = '1.0.4'
     s.platform = :ios, '8.0'
     s.ios.deployment_target = '8.0'
     s.license = 'MIT'
