@@ -2,6 +2,7 @@
 *.xcuserstate
 *.xccheckout
 *.xcuserdatad
+*.xcuserdata
 *.xcscmblueprint
 Breakpoints_v2.xcbkptlist
 Pods/
