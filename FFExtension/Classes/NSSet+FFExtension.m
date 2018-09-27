@@ -36,7 +36,7 @@
             if (!capture) {
                 capture = YES;
                 
-                NSString *msg = [NSString stringWithFormat:@"+[%@ %@], the %lu object or objects %p is nil in  0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), (long)i, objects, (long)cnt];
+                NSString *msg = [NSString stringWithFormat:@"+[%@ %@], the %lu object or objects %p is nil in  0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), (long)i, objects, (long)cnt-1];
                 NSLog(@"%@", msg);
                 [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
             }
