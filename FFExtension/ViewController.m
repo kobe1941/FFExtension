@@ -487,6 +487,8 @@
     
     array = [NSMutableArray arrayWithContentsOfURL:nil];
     NSMutableArray *mutableArray = array.mutableCopy;
+    mutableArray = [NSMutableArray new];
+    [mutableArray setObject:@"hufeng" atIndexedSubscript:0];
     array[10];
     [array objectAtIndex:12];
     [mutableArray containsObject:nil];
@@ -516,6 +518,8 @@
     [mutableArray exchangeObjectAtIndex:1 withObjectAtIndex:10];
     [mutableArray removeObjectIdenticalTo:nil];
     [mutableArray removeObjectIdenticalTo:@12 inRange:NSMakeRange(2, 1)];
+    [mutableArray addObjectsFromArray:@[@12,@234]];
+    [mutableArray setObject:@124354 atIndexedSubscript:2];
     [mutableArray setObject:nil atIndexedSubscript:2];
     [mutableArray setObject:@12 atIndexedSubscript:23];
     [mutableArray replaceObjectsInRange:NSMakeRange(0, 1) withObjectsFromArray:@[@12,@23,@12333]];

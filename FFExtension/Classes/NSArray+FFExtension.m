@@ -394,7 +394,8 @@
 
 - (void)ff_setObject:(id)obj atIndexedSubscript:(NSUInteger)idx
 {
-    if (obj && idx < self.count) {
+     ///< idx can equal self.count here, it will add to the last of array when equal.
+    if (obj && idx <= self.count) {
         return [self ff_setObject:obj atIndexedSubscript:idx];
     }
     

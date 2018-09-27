@@ -161,7 +161,7 @@
 - (NSString *)ff_substringToIndex:(NSUInteger)to
 {
     if (to < self.length) {
-        return [self ff_substringFromIndex:to];
+        return [self ff_substringToIndex:to];
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], index %lu is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), (long)to, (long)self.length];
