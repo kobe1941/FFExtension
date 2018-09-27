@@ -31,8 +31,8 @@
                               @"callStackSymbols" : allThreads?:@"",
                               };
 
-    if ([self.delegate respondsToSelector:@selector(captureExceptionWithErrorDic:)]) {
-        [self.delegate captureExceptionWithErrorDic:errorDic];
+    if ([self.delegate respondsToSelector:@selector(ff_captureExceptionWithErrorDic:)]) {
+        [self.delegate ff_captureExceptionWithErrorDic:errorDic];
     }
 }
 

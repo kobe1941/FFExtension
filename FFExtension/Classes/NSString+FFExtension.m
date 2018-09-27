@@ -336,7 +336,7 @@
 - (NSString *)ff_stringByReplacingOccurrencesOfString:(NSString *)target withString:(NSString *)replacement options:(NSStringCompareOptions)options range:(NSRange)searchRange
 {
     if (target && replacement) {
-        return [self ff_stringByReplacingOccurrencesOfString:target withString:replacement];
+        return [self ff_stringByReplacingOccurrencesOfString:target withString:replacement options:options range:searchRange];
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], target str %@ and replace str %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), target, replacement];

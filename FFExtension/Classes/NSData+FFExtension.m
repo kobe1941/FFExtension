@@ -116,7 +116,7 @@
 - (void)super_getBytes:(void *)buffer length:(NSUInteger)length
 {
     if (buffer && length <= self.length) {
-        return [self ff_getBytes:buffer length:length];
+        return [self super_getBytes:buffer length:length];
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], buffer is %p, length %lu is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), buffer, (long)length, (long)self.length];
@@ -127,7 +127,7 @@
 - (void)super_getBytes:(void *)buffer range:(NSRange)range
 {
     if (buffer && range.location + range.length <= self.length) {
-        return [self ff_getBytes:buffer range:range];
+        return [self super_getBytes:buffer range:range];
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], buffer is %p, range %@ is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), buffer, NSStringFromRange(range), (long)self.length];

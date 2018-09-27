@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol FFExceptionDelegate <NSObject>
-- (void)captureExceptionWithErrorDic:(NSDictionary *)errorDic;
+- (void)ff_captureExceptionWithErrorDic:(NSDictionary *)errorDic;
 @end
 
 @interface FFExceptionProxy : NSObject
