@@ -183,11 +183,11 @@
 
 - (void)ff_appendBytes:(const void *)bytes length:(NSUInteger)length
 {
-    if (bytes) {
+    if (bytes || length == 0) {
         return [self ff_appendBytes:bytes length:length];
     }
     
-    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], bytes can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], bytes can not be nil, length = %lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), (long)length];
     NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }

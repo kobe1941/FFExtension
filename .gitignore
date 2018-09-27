@@ -4,6 +4,8 @@
 *.xcuserdatad
 *.xcuserdata
 xcuserdata/
+*xcuserdata/
+.*xcuserdata/
 *.xcscmblueprint
 Breakpoints_v2.xcbkptlist
 Pods/
