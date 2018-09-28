@@ -19,7 +19,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     NSArray *arr = @[@"SSZ"];
-    [FFManager startWorkWithOption:FFHookOptionAll unrecogziedSelectorClassPrefixs:arr];
+    [[FFManager sharedInstance] startWorkWithOption:FFHookOptionAll unrecogziedSelectorClassPrefixs:arr callBackBlock:^(NSDictionary *exceptionDic) {
+//        NSLog(@"exceptionDic = %@", exceptionDic);
+    }];
+//    [FFManager startWorkWithOption:FFHookOptionAll unrecogziedSelectorClassPrefixs:arr];
     
     return YES;
 }

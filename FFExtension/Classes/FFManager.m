@@ -15,20 +15,48 @@
 #import "NSSet+FFExtension.h"
 #import "NSUserDefaults+FFExtension.h"
 #import "NSCache+FFExtension.h"
+#import "FFExceptionProxy.h"
+
+@interface FFManager ()<FFExceptionDelegate>
+
+@property (nonatomic, copy) FFExceptionBlock callBackBlock;
+
+@end
 
 @implementation FFManager
 
-+ (void)startWorkWithOption:(FFHookOption)option
++ (instancetype)sharedInstance
 {
-    [self startWorkWithOption:option unrecogziedSelectorClassPrefixs:nil needDefault:YES];
+    static FFManager *g_instance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        g_instance = [[self alloc] init];
+    });
+    
+    return g_instance;
 }
 
-+ (void)startWorkWithOption:(FFHookOption)option unrecogziedSelectorClassPrefixs:(NSArray<NSString *> *)classPrefixs
+- (instancetype)init
 {
-    [self startWorkWithOption:option unrecogziedSelectorClassPrefixs:classPrefixs needDefault:YES];
+    self = [super init];
+    if (self) {
+        [FFExceptionProxy sharedInstance].delegate = self;
+    }
+    
+    return self;
 }
 
-+ (void)startWorkWithOption:(FFHookOption)option unrecogziedSelectorClassPrefixs:(NSArray<NSString *> *)classPrefixs needDefault:(BOOL)need
+- (void)startWorkWithOption:(FFHookOption)option callBackBlock:(FFExceptionBlock)block
+{
+    [self startWorkWithOption:option unrecogziedSelectorClassPrefixs:nil callBackBlock:block];
+}
+
+- (void)startWorkWithOption:(FFHookOption)option unrecogziedSelectorClassPrefixs:(NSArray<NSString *> *)classPrefixs callBackBlock:(FFExceptionBlock)block
+{
+    [self startWorkWithOption:option unrecogziedSelectorClassPrefixs:classPrefixs needDefault:YES callBackBlock:block];
+}
+
+- (void)startWorkWithOption:(FFHookOption)option unrecogziedSelectorClassPrefixs:(NSArray<NSString *> *)classPrefixs needDefault:(BOOL)need callBackBlock:(FFExceptionBlock)block
 {
     if (option == FFHookOptionNone) {
         return;
@@ -36,6 +64,10 @@
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+        
+        if (block) {
+            self.callBackBlock = block;
+        }
         
         [NSObject addUnrecognizedSelectorWithClassPrefixs:classPrefixs needDefault:need];
         
@@ -73,6 +105,14 @@
             [NSCache startHook];
         }
     });
+}
+
+#pragma mark - FFExceptionDelegate
+- (void)ff_captureExceptionWithErrorDic:(NSDictionary *)errorDic
+{
+    if (self.callBackBlock) {
+        self.callBackBlock(errorDic);
+    }
 }
 
 

@@ -21,29 +21,26 @@ typedef NS_OPTIONS(NSUInteger, FFHookOption){
     FFHookOptionAll = 0xFF,
 };
 
+typedef void(^FFExceptionBlock)(NSDictionary *exceptionDic);
+
 @interface FFManager : NSObject
 
++ (instancetype)sharedInstance;
 
 
-/**
- you must call one of the method below to start work.
+- (void)startWorkWithOption:(FFHookOption)option callBackBlock:(FFExceptionBlock)block;
 
- @param option hook的类型
- */
-+ (void)startWorkWithOption:(FFHookOption)option;
+- (void)startWorkWithOption:(FFHookOption)option unrecogziedSelectorClassPrefixs:(NSArray<NSString *> *)classPrefixs callBackBlock:(FFExceptionBlock)block;
 
 /**
- call method below by set the last variable need to YES
- */
-+ (void)startWorkWithOption:(FFHookOption)option unrecogziedSelectorClassPrefixs:(NSArray<NSString *> *)classPrefixs;
+ you must call one of the method to start work.
 
-/**
- 
  @param option - type of hook
  @param classPrefixs - for your own class(Case Sensitive), add unrecognized selector sent to instance exception hook, default is nil.
- @param need - set Yes to use defaults classes, default is YES.
+ @param need - set Yes to add default classPrefixs class array, default is YES.
+ @param block - callBack to upload exception logs to server
  */
-+ (void)startWorkWithOption:(FFHookOption)option unrecogziedSelectorClassPrefixs:(NSArray<NSString *> *)classPrefixs needDefault:(BOOL)need;
+- (void)startWorkWithOption:(FFHookOption)option unrecogziedSelectorClassPrefixs:(NSArray<NSString *> *)classPrefixs needDefault:(BOOL)need callBackBlock:(FFExceptionBlock)block;
 
 
 @end
