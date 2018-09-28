@@ -26,9 +26,10 @@
     NSArray<NSString *> *allThreads = [NSThread callStackSymbols];
     
     NSDictionary *errorDic = @{
-                              @"reason" : message?:@"",
-                              @"extraDic" : extraDic?:@{},
-                              @"callStackSymbols" : allThreads?:@"",
+                              FF_Name : @"FFExtension capture's Exception",
+                              FF_Reason : message?:@"",
+                              FF_ExtraDic : extraDic?:@{},
+                              FF_CallStackSymbols : allThreads?:@[],
                               };
 
     if ([self.delegate respondsToSelector:@selector(ff_captureExceptionWithErrorDic:)]) {
