@@ -22,25 +22,104 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    [self testUnrecognizedSelector];
-    [self testNSStringHook];
-    [self testArrayHook];
+//    [self testUnrecognizedSelector];
+//    [self testNSStringHook];
+//    [self testArrayHook];
     
     NSNull *null = [NSNull null];
     [null performSelector:@selector(length)];
     
     
-    [self testNSDictionaryHook];
-    
-    [self testStringMore];
-    [self testForNSCacheHook];
-    [self testForNSUserDefaultsHook];
-    
-    [self testForNSDataHook];
-    
-    [self testForNSSetHook];
+//    [self testNSDictionaryHook];
+//    [self testStringMore];
+//    [self testForNSCacheHook];
+//    [self testForNSUserDefaultsHook];
+//    [self testForNSDataHook];
+//    [self testForNSSetHook];
     
 //    [self logAllMethods:NSClassFromString(@"__NSArrayM")];
+    
+    [self testExtraTestForString];
+    
+    [self testExtraForNSArrayHook];
+}
+
+- (void)testExtraForNSArrayHook
+{
+    NSArray *array = @[@1,@2,@3];
+    NSMutableArray *mutable = [NSMutableArray arrayWithArray:array];
+    
+    [array objectAtIndex:2];
+    [array objectAtIndex:3];
+    [array objectAtIndexedSubscript:2];
+    [array objectAtIndexedSubscript:3];
+    [array objectAtIndexedSubscript:4];
+    
+    [mutable objectAtIndex:2];
+    [mutable objectAtIndex:3];
+    [mutable objectAtIndexedSubscript:2];
+    [mutable objectAtIndexedSubscript:3];
+    [mutable objectAtIndexedSubscript:4];
+    
+    [mutable removeObjectAtIndex:3];
+    [mutable removeObjectAtIndex:4];
+    [mutable removeObjectAtIndex:2];
+    
+    [mutable replaceObjectAtIndex:2 withObject:@"huuu"];
+    [mutable replaceObjectAtIndex:3 withObject:@"huuu"];
+    [mutable replaceObjectAtIndex:4 withObject:@"huuu"];
+    
+    [mutable exchangeObjectAtIndex:1 withObjectAtIndex:2];
+    [mutable exchangeObjectAtIndex:0 withObjectAtIndex:1];
+}
+
+- (void)testExtraTestForString
+{
+    NSString *timeStr = @"2018-02-24T11:00:00.000Z";
+    
+    NSDate *date = [[self class] dateFromUTC:timeStr];
+    NSLog(@"date = %@", date);
+    
+    NSString *str = @"hufeng";
+    NSMutableString *mutableStr = [NSMutableString stringWithString:str];
+    [str substringFromIndex:5];
+    [str substringFromIndex:6];
+    [str substringToIndex:5];
+    [str substringToIndex:6];
+    [str substringWithRange:NSMakeRange(0, 5)];
+    [str substringWithRange:NSMakeRange(0, 6)];
+    [str characterAtIndex:5];
+    [str characterAtIndex:6];
+    [str rangeOfComposedCharacterSequenceAtIndex:5];
+    [str rangeOfComposedCharacterSequenceAtIndex:6];
+    
+    
+    
+    [mutableStr substringFromIndex:5];
+    [mutableStr substringFromIndex:6];
+    [mutableStr substringToIndex:5];
+    [mutableStr substringToIndex:6];
+    [mutableStr substringWithRange:NSMakeRange(0, 5)];
+    [mutableStr substringWithRange:NSMakeRange(0, 6)];
+    [mutableStr characterAtIndex:5];
+    [mutableStr characterAtIndex:6];
+    [mutableStr rangeOfComposedCharacterSequenceAtIndex:5];
+    [mutableStr rangeOfComposedCharacterSequenceAtIndex:6];
+    
+    [mutableStr insertString:@"000" atIndex:6];
+    [mutableStr insertString:@"111" atIndex:6];
+}
+
++ (NSDate*)dateFromUTC:(NSString*)utcStr
+{
+    static NSDateFormatter* _utcDateFormatter;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _utcDateFormatter = [[NSDateFormatter alloc] init];
+        [_utcDateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
+    });
+    
+    return [_utcDateFormatter dateFromString:utcStr];
 }
 
 - (void)testForNSSetHook

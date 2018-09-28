@@ -148,26 +148,26 @@
 
 - (NSString *)ff_substringFromIndex:(NSUInteger)from
 {
-    if (from < self.length) {
+    if (from <= self.length) {
         return [self ff_substringFromIndex:from];
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], index %lu is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), (long)from, (long)self.length-1];
     NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
-    return nil;
+    return [self ff_substringFromIndex:self.length];
 }
 
 - (NSString *)ff_substringToIndex:(NSUInteger)to
 {
-    if (to < self.length) {
+    if (to <= self.length) {
         return [self ff_substringToIndex:to];
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], index %lu is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), (long)to, (long)self.length-1];
     NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
-    return nil;
+    return [self ff_substringToIndex:self.length];
 }
 
 - (NSString *)ff_substringWithRange:(NSRange)range
@@ -291,7 +291,7 @@
 
 - (void)ff_insertString:(NSString *)aString atIndex:(NSUInteger)loc
 {
-    if (aString && loc < self.length) {
+    if (aString && loc <= self.length) {
         return [self ff_insertString:aString atIndex:loc];
     }
     
@@ -342,7 +342,7 @@
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], target str %@ and replace str %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), target, replacement];
     NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
-    return nil;
+    return self;
 }
 
 @end
