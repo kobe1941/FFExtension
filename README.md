@@ -12,7 +12,9 @@ $ pod 'FFExtension'
 
 
 
-Then,  put the code below in your project,  maybe in `application:didFinishLaunchingWithOptions:`    method,  make sure the calss will not dealloc in all app life.
+You need import one head file just like  `import <FFManager.h>`  .
+
+Then put the code below in your project,  maybe in `application:didFinishLaunchingWithOptions:`    method,  make sure the calss will not dealloc in all app life.
 
 ```objective-c
 __weak typeof(self) weakSelf = self;
