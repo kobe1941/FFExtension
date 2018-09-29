@@ -1,6 +1,6 @@
 # FFExtension   
 
-![pod](https://img.shields.io/badge/pod-1.0.7-orange.svg)![](https://img.shields.io/badge/license-MIT-green.svg)[![weibo status](https://img.shields.io/badge/weibo-%40Zombie%E7%AC%AC%E4%B8%83%E7%AB%A0-brightgreen.svg)](https://weibo.com/1247589445)
+![pod](https://img.shields.io/badge/pod-1.0.7-orange.svg)  ![](https://img.shields.io/badge/license-MIT-green.svg)  [![weibo status](https://img.shields.io/badge/weibo-%40Zombie%E7%AC%AC%E4%B8%83%E7%AB%A0-brightgreen.svg)](https://weibo.com/1247589445)
 
 
 
@@ -12,7 +12,7 @@ $ pod 'FFExtension'
 
 
 
-Then, put the code below in your project,bmaybe in `application:didFinishLaunchingWithOptions:`    method, make sure the calss will not dealloc in all app life.
+Then,  put the code below in your project,  maybe in `application:didFinishLaunchingWithOptions:`    method,  make sure the calss will not dealloc in all app life.
 
 ```objective-c
 __weak typeof(self) weakSelf = self;
@@ -23,7 +23,7 @@ __weak typeof(self) weakSelf = self;
 
 
 
-just like this.
+just like this:
 
 ```objective-c
 #pragma mark - Report Exception To Bugly
@@ -37,13 +37,12 @@ just like this.
         
         [Bugly reportExceptionWithCategory:3 name:name reason:reason callStack:callStack 			extraInfo:extraDic terminateApp:NO];
     }
-    
 }
 ```
 
 
 
-`Tips`: classPrefixs is your own calsses that you want to avoid `unrecogzied selector sent to instance   ` crash. There is already a default array :
+`Tips`:  classPrefixs is your own calsses that you want to avoid  `unrecogzied selector sent to instance   ` crash.  There is already a default array :
 
 ```objective-c
 NSArray *defaultArr = @[
@@ -67,7 +66,7 @@ NSArray *defaultArr = @[
                                 ];
 ```
 
-your own custom array will add to this default array . If you don't want the default array, start with this method and set `need` to NO:
+your own custom array will add to this default array .  If you don't want the default array ,  start with this method and set  `need ` to NO :
 
 ```objective-c
 - (void)startWorkWithOption:(FFHookOption)option unrecogziedSelectorClassPrefixs:(NSArray<NSString *> *)classPrefixs needDefault:(BOOL)need callBackBlock:(FFExceptionBlock)block;
@@ -81,10 +80,9 @@ your own custom array will add to this default array . If you don't want the def
 
 Safe method for example
 
-###**NSArray**
+###NSArray
 
 ```objective-c
-
 - (BOOL)writeToURL:(NSURL *)url error:(NSError * _Nullable __autoreleasing *)error;
 - (id)objectAtIndexedSubscript:(NSUInteger)index;
 - (id)objectAtIndexedSubscriptArrayM:(NSUInteger)index;
@@ -120,4 +118,8 @@ and so on ...
 
 
 
-###By use  `method swizzle`  to do this , no  ` try-catch` 
+By use `method swizzle`  to do this , no  *` try-catch`* .
+
+
+
+Have a nice day !
