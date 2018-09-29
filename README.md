@@ -80,7 +80,7 @@ your own custom array will add to this default array .  If you don't want the de
 
 Safe method for example
 
-###NSArray
+**NSArray**
 
 ```objective-c
 - (BOOL)writeToURL:(NSURL *)url error:(NSError * _Nullable __autoreleasing *)error;
