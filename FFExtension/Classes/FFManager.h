@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FFExceptionProxy.h"
+#import "FFCommonMacro.h"
 
 typedef NS_OPTIONS(NSUInteger, FFHookOption){
     FFHookOptionNone = 0,

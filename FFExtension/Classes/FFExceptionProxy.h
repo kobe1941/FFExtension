@@ -8,11 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-#define FF_Reason @"reason"
-#define FF_Name @"name"
-#define FF_ExtraDic @"extraDic"
-#define FF_CallStackSymbols @"callStackSymbols"
-
 @protocol FFExceptionDelegate <NSObject>
 - (void)ff_captureExceptionWithErrorDic:(NSDictionary *)errorDic;
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "FFExceptionProxy.h"
+#import "FFCommonMacro.h"
 
 @implementation FFExceptionProxy
 

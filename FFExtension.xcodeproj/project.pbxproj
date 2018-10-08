@@ -87,6 +87,7 @@
 		4F6E878F215A43AB00117AA5 /* NSCache+FFExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSCache+FFExtension.m"; sourceTree = "<group>"; };
 		4F7E44D22159130200170BA7 /* NSData+FFExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+FFExtension.h"; sourceTree = "<group>"; };
 		4F7E44D32159130200170BA7 /* NSData+FFExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+FFExtension.m"; sourceTree = "<group>"; };
+		4F9405B7216B0C0800A06625 /* FFCommonMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFCommonMacro.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +197,7 @@
 				4F6E878F215A43AB00117AA5 /* NSCache+FFExtension.m */,
 				4F58AF4B215B862B00DEA3B2 /* FFExceptionProxy.h */,
 				4F58AF4C215B862B00DEA3B2 /* FFExceptionProxy.m */,
+				4F9405B7216B0C0800A06625 /* FFCommonMacro.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
