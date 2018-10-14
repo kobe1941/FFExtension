@@ -15,6 +15,7 @@
 #import "NSSet+FFExtension.h"
 #import "NSUserDefaults+FFExtension.h"
 #import "NSCache+FFExtension.h"
+#import "NSAttributedString+FFExtension.h"
 #import "FFExceptionProxy.h"
 
 @interface FFManager ()<FFExceptionDelegate>
@@ -103,6 +104,10 @@
         
         if (option & FFHookOptionNSCache) {
             [NSCache startHook];
+        }
+        
+        if (option & FFHookOptionNSAttributedString) {
+            [NSAttributedString startHook]; ///< TODO:这里有bug
         }
     });
 }

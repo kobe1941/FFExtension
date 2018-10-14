@@ -19,6 +19,7 @@ typedef NS_OPTIONS(NSUInteger, FFHookOption){
     FFHookOptionNSSet = 1 << 5,
     FFHookOptionNSUserDefaults = 1 << 6,
     FFHookOptionNSCache = 1 << 7,
+    FFHookOptionNSAttributedString = 1 << 8,
     FFHookOptionAll = 0xFF,
 };
 

@@ -26,8 +26,8 @@
 //    [self testNSStringHook];
 //    [self testArrayHook];
     
-    NSNull *null = [NSNull null];
-    [null performSelector:@selector(length)];
+//    NSNull *null = [NSNull null];
+//    [null performSelector:@selector(length)];
     
     
 //    [self testNSDictionaryHook];
@@ -39,9 +39,36 @@
     
 //    [self logAllMethods:NSClassFromString(@"__NSArrayM")];
     
-    [self testExtraTestForString];
+//    [self testExtraTestForString];
     
-    [self testExtraForNSArrayHook];
+//    [self testExtraForNSArrayHook];
+    
+    
+    
+    [self testForNSAttributedStringHook];
+}
+
+- (void)testForNSAttributedStringHook
+{
+//    NSArray *tempArray = [[self class] findAllOf:NSAttributedString.class];
+//    NSLog(@"tempArray = %@", tempArray);
+    
+    NSAttributedString *attributed = [[NSAttributedString alloc] initWithString:nil];
+    
+    attributed = [NSAttributedString attributedStringWithAttachment:nil];
+    attributed = [[NSAttributedString alloc] initWithAttributedString:nil];
+    NSString *str = @"hufeng";
+    NSDictionary *dic = @{NSFontAttributeName : [UIFont systemFontOfSize:12]};
+    attributed = [[NSAttributedString alloc] initWithString:nil attributes:nil];
+    attributed = [[NSAttributedString alloc] initWithString:nil attributes:@{}];
+    attributed = [[NSAttributedString alloc] initWithString:str attributes:nil];
+    attributed = [[NSAttributedString alloc] initWithString:str attributes:@{}];
+    attributed = [[NSAttributedString alloc] initWithString:str attributes:dic];
+    attributed = [[NSAttributedString alloc] initWithURL:nil options:nil documentAttributes:nil error:nil];
+    attributed = [[NSAttributedString alloc] initWithFileURL:nil options:nil documentAttributes:nil error:nil];
+    attributed = [[NSAttributedString alloc] initWithData:nil options:nil documentAttributes:nil error:nil];
+    
+    
 }
 
 - (void)testExtraForNSArrayHook

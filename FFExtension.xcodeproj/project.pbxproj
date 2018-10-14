@@ -27,6 +27,7 @@
 		4F6E878D215A3AC700117AA5 /* NSUserDefaults+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F6E878C215A3AC700117AA5 /* NSUserDefaults+FFExtension.m */; };
 		4F6E8790215A43AB00117AA5 /* NSCache+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F6E878F215A43AB00117AA5 /* NSCache+FFExtension.m */; };
 		4F7E44D42159130200170BA7 /* NSData+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F7E44D32159130200170BA7 /* NSData+FFExtension.m */; };
+		4FA323D021719CDE00C4C1AD /* NSAttributedString+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FA323CF21719CDE00C4C1AD /* NSAttributedString+FFExtension.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,8 @@
 		4F7E44D22159130200170BA7 /* NSData+FFExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+FFExtension.h"; sourceTree = "<group>"; };
 		4F7E44D32159130200170BA7 /* NSData+FFExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+FFExtension.m"; sourceTree = "<group>"; };
 		4F9405B7216B0C0800A06625 /* FFCommonMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFCommonMacro.h; sourceTree = "<group>"; };
+		4FA323CE21719CDE00C4C1AD /* NSAttributedString+FFExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+FFExtension.h"; sourceTree = "<group>"; };
+		4FA323CF21719CDE00C4C1AD /* NSAttributedString+FFExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+FFExtension.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +198,8 @@
 				4F6E878C215A3AC700117AA5 /* NSUserDefaults+FFExtension.m */,
 				4F6E878E215A43AB00117AA5 /* NSCache+FFExtension.h */,
 				4F6E878F215A43AB00117AA5 /* NSCache+FFExtension.m */,
+				4FA323CE21719CDE00C4C1AD /* NSAttributedString+FFExtension.h */,
+				4FA323CF21719CDE00C4C1AD /* NSAttributedString+FFExtension.m */,
 				4F58AF4B215B862B00DEA3B2 /* FFExceptionProxy.h */,
 				4F58AF4C215B862B00DEA3B2 /* FFExceptionProxy.m */,
 				4F9405B7216B0C0800A06625 /* FFCommonMacro.h */,
@@ -346,6 +351,7 @@
 				4F58AF4D215B862B00DEA3B2 /* FFExceptionProxy.m in Sources */,
 				4F6E878A215A37EF00117AA5 /* NSSet+FFExtension.m in Sources */,
 				4F6E878D215A3AC700117AA5 /* NSUserDefaults+FFExtension.m in Sources */,
+				4FA323D021719CDE00C4C1AD /* NSAttributedString+FFExtension.m in Sources */,
 				4F6E8790215A43AB00117AA5 /* NSCache+FFExtension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
