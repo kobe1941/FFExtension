@@ -20,7 +20,7 @@ typedef NS_OPTIONS(NSUInteger, FFHookOption){
     FFHookOptionNSUserDefaults = 1 << 6,
     FFHookOptionNSCache = 1 << 7,
     FFHookOptionNSAttributedString = 1 << 8,
-    FFHookOptionAll = 0xFF,
+    FFHookOptionAll = 0xFFFF,
 };
 
 typedef void(^FFExceptionBlock)(NSDictionary *exceptionDic);

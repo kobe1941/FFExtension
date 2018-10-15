@@ -63,11 +63,73 @@
     attributed = [[NSAttributedString alloc] initWithString:nil attributes:@{}];
     attributed = [[NSAttributedString alloc] initWithString:str attributes:nil];
     attributed = [[NSAttributedString alloc] initWithString:str attributes:@{}];
-    attributed = [[NSAttributedString alloc] initWithString:str attributes:dic];
     attributed = [[NSAttributedString alloc] initWithURL:nil options:nil documentAttributes:nil error:nil];
     attributed = [[NSAttributedString alloc] initWithFileURL:nil options:nil documentAttributes:nil error:nil];
     attributed = [[NSAttributedString alloc] initWithData:nil options:nil documentAttributes:nil error:nil];
+    attributed = [[NSAttributedString alloc] initWithString:str attributes:dic];
     
+    
+    NSRange range = NSMakeRange(8, 90);
+    [attributed attributesAtIndex:20 effectiveRange:&range];
+    [attributed attribute:NSFontAttributeName atIndex:20 effectiveRange:&range];
+    [attributed attribute:nil atIndex:20 effectiveRange:&range];
+    NSRange tempRamge = NSMakeRange(2, 1);
+    [attributed attribute:nil atIndex:2 effectiveRange:&tempRamge];
+    
+    [attributed attributedSubstringFromRange:NSMakeRange(90, 90)];
+    [attributed isEqualToAttributedString:nil];
+    
+    
+    NSLog(@"000000000");
+    
+    [NSMutableAttributedString attributedStringWithAttachment:nil];
+    [[NSMutableAttributedString alloc] initWithAttributedString:nil];
+    
+    NSMutableAttributedString *mutable = [[NSMutableAttributedString alloc] initWithString:@"hufeng"];
+    [mutable replaceCharactersInRange:NSMakeRange(1, 2) withString:nil];
+    [mutable replaceCharactersInRange:NSMakeRange(10, 2) withString:@"fwef"];
+    [mutable replaceCharactersInRange:NSMakeRange(1, 2) withString:@"wfewf"];
+    [mutable replaceCharactersInRange:NSMakeRange(10, 2) withString:nil];
+    [mutable replaceCharactersInRange:NSMakeRange(10, 80) withString:@"fwefew"];
+    
+    
+    [mutable setAttributes:nil range:NSMakeRange(0, 2)];
+    [mutable setAttributes:dic range:range];
+    [mutable addAttribute:nil value:[UIFont systemFontOfSize:20] range:NSMakeRange(1, 2)];
+    [mutable addAttribute:NSFontAttributeName value:nil range:NSMakeRange(1, 2)];
+    [mutable addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20] range:NSMakeRange(1, 20)];
+    [mutable addAttribute:nil value:nil range:NSMakeRange(1, 20)];
+    [mutable addAttributes:nil range:NSMakeRange(0, 1)];
+    [mutable addAttributes:nil range:NSMakeRange(10, 10)];
+    [mutable addAttributes:@124 range:NSMakeRange(10, 10)];
+    [mutable addAttributes:@"fewfwe" range:NSMakeRange(10, 10)];
+    [mutable addAttributes:dic range:NSMakeRange(10, 10)];
+    [mutable removeAttribute:nil range:NSMakeRange(1, 1)];
+    [mutable removeAttribute:NSFontAttributeName range:NSMakeRange(10, 10)];
+    [mutable removeAttribute:nil range:NSMakeRange(10, 10)];
+    [mutable replaceCharactersInRange:NSMakeRange(0, 1) withString:nil];
+    [mutable replaceCharactersInRange:NSMakeRange(10, 10) withString:nil];
+    [mutable replaceCharactersInRange:NSMakeRange(10, 10) withString:@"111"];
+    [mutable deleteCharactersInRange:NSMakeRange(10, 12)];
+    [mutable appendAttributedString:nil];
+    [mutable appendAttributedString:@"r2r23"];
+    [mutable insertAttributedString:nil atIndex:0];
+    [mutable insertAttributedString:@"fewfwef" atIndex:0];
+    [mutable insertAttributedString:attributed atIndex:90];
+    
+    
+    [mutable setAttributedString:nil];
+    [mutable setAttributedString:@123];
+    
+
+    [attributed attributesAtIndex:20 longestEffectiveRange:&range inRange:NSMakeRange(90, 30)];
+    
+    range = NSMakeRange(20, 20);
+    [attributed attributesAtIndex:29 longestEffectiveRange:&range inRange:NSMakeRange(10, 21)];
+    range = NSMakeRange(2, 20);
+    [attributed attribute:NSFontAttributeName atIndex:12 longestEffectiveRange:&range inRange:NSMakeRange(100, 20)];
+    [attributed attribute:NSFontAttributeName atIndex:15 longestEffectiveRange:&range inRange:NSMakeRange(16, 90)];
+    NSLog(@"11111");
     
 }
 
