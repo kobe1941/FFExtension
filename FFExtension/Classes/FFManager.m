@@ -54,11 +54,6 @@
 
 - (void)startWorkWithOption:(FFHookOption)option unrecogziedSelectorClassPrefixs:(NSArray<NSString *> *)classPrefixs callBackBlock:(FFExceptionBlock)block
 {
-    [self startWorkWithOption:option unrecogziedSelectorClassPrefixs:classPrefixs needDefault:YES callBackBlock:block];
-}
-
-- (void)startWorkWithOption:(FFHookOption)option unrecogziedSelectorClassPrefixs:(NSArray<NSString *> *)classPrefixs needDefault:(BOOL)need callBackBlock:(FFExceptionBlock)block
-{
     if (option == FFHookOptionNone) {
         return;
     }
@@ -70,7 +65,7 @@
             self.callBackBlock = block;
         }
         
-        [NSObject addUnrecognizedSelectorWithClassPrefixs:classPrefixs needDefault:need];
+        [NSObject addUnrecognizedSelectorWithClassPrefixs:classPrefixs];
         
         if (option & FFHookOptionUnrecognizedSelector) {
             [NSObject startHook];

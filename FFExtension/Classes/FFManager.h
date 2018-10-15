@@ -39,10 +39,9 @@ typedef void(^FFExceptionBlock)(NSDictionary *exceptionDic);
 
  @param option - type of hook
  @param classPrefixs - for your own class(Case Sensitive), add unrecognized selector sent to instance exception hook, default is nil.
- @param need - set Yes to add default classPrefixs class array, default is YES.
  @param block - callBack to upload exception logs to server
  */
-- (void)startWorkWithOption:(FFHookOption)option unrecogziedSelectorClassPrefixs:(NSArray<NSString *> *)classPrefixs needDefault:(BOOL)need callBackBlock:(FFExceptionBlock)block;
+- (void)startWorkWithOption:(FFHookOption)option unrecogziedSelectorClassPrefixs:(NSArray<NSString *> *)classPrefixs callBackBlock:(FFExceptionBlock)block;
 
 
 @end
