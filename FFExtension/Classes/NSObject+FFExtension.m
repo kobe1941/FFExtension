@@ -41,34 +41,11 @@ void testAddMethod(id self, SEL _cmd) {}
                            swizzleSelector:@selector(ff_forwardingTargetForSelector:)];
 }
 
-+ (void)addUnrecognizedSelectorWithClassPrefixs:(NSArray <NSString *>*)classPrefixs needDefault:(BOOL)need
++ (void)addUnrecognizedSelectorWithClassPrefixs:(NSArray <NSString *>*)classPrefixs
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        // 默认的太多了，选取一部分眼熟的类就好，有需要可以手动添加。
-        NSArray *defaultArr = @[
-                                @"NSNull",
-                                @"NSString",
-                                @"NSLocalizableString",
-                                @"NSConstantString",
-                                @"NSTaggedPointerString",
-                                @"NSPlaceholderString",
-                                @"NSMutableString",
-                                @"NSPlaceholderMutableString",
-                                @"__NSLocalizedString",
-                                @"__NSCFString",
-                                @"__NSCFConstantString",
-                                @"NSNumber",
-                                @"__NSCFNumber",
-                                @"__NSCFBoolean",
-                                @"NSDecimalNumber",
-                                @"_NSConstantNumber",
-                                @"NSPlaceholderNumber",
-                                ];
         prefixs = [NSMutableArray array];
-        if (need) {
-            [prefixs addObjectsFromArray:defaultArr];
-        }
         
         if (classPrefixs && [classPrefixs isKindOfClass:NSArray.class]) {
            [prefixs addObjectsFromArray:classPrefixs];
