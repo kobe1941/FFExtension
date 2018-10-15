@@ -28,13 +28,13 @@
     Class originClass = [NSAttributedString class];
     [self ff_classSwizzleWithClass:originClass originSelector:@selector(attributedStringWithAttachment:) swizzleSelector:@selector(ff_attributedStringWithAttachment:)];
     [self ff_instancenSwizzleWithClass:originClass originSelector:@selector(initWithString:) swizzleSelector:@selector(super_initWithString:)];
-    [self ff_instancenSwizzleWithClass:originClass originSelector:@selector(attribute:atIndex:longestEffectiveRange:inRange:) swizzleSelector:@selector(ff_attribute:atIndex:longestEffectiveRange:inRange:)];
+//    [self ff_instancenSwizzleWithClass:originClass originSelector:@selector(attribute:atIndex:longestEffectiveRange:inRange:) swizzleSelector:@selector(ff_attribute:atIndex:longestEffectiveRange:inRange:)];
     
     
     Class concreteClass = NSClassFromString(@"NSConcreteAttributedString");
     [self ff_instancenSwizzleWithClass:concreteClass originSelector:@selector(initWithString:) swizzleSelector:@selector(ff_initWithString:)];
-    [self ff_instancenSwizzleWithClass:concreteClass originSelector:@selector(attributesAtIndex:effectiveRange:) swizzleSelector:@selector(ff_attributesAtIndex:effectiveRange:)];
-    [self ff_instancenSwizzleWithClass:concreteClass originSelector:@selector(attribute:atIndex:effectiveRange:) swizzleSelector:@selector(ff_attribute:atIndex:effectiveRange:)];
+//    [self ff_instancenSwizzleWithClass:concreteClass originSelector:@selector(attributesAtIndex:effectiveRange:) swizzleSelector:@selector(ff_attributesAtIndex:effectiveRange:)];
+//    [self ff_instancenSwizzleWithClass:concreteClass originSelector:@selector(attribute:atIndex:effectiveRange:) swizzleSelector:@selector(ff_attribute:atIndex:effectiveRange:)];
     [self ff_instancenSwizzleWithClass:concreteClass originSelector:@selector(attributedSubstringFromRange:) swizzleSelector:@selector(ff_attributedSubstringFromRange:)];
     
     
@@ -85,6 +85,7 @@
     return nil;
 }
 
+/*
 - (NSDictionary<NSAttributedStringKey, id> *)ff_attributesAtIndex:(NSUInteger)location effectiveRange:(nullable NSRangePointer)range
 {
     if (location < self.length && range && (*range).location + (*range).length <= self.length) {
@@ -121,6 +122,8 @@
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return nil;
 }
+
+*/
 
 - (NSAttributedString *)ff_attributedSubstringFromRange:(NSRange)range
 {

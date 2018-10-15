@@ -53,6 +53,12 @@
 //    NSArray *tempArray = [[self class] findAllOf:NSAttributedString.class];
 //    NSLog(@"tempArray = %@", tempArray);
     
+    UILabel *label = [[UILabel alloc] init];
+    label.text = @"wefewf";
+    label.font = [UIFont systemFontOfSize:18];
+    
+    [self.view addSubview:label];
+    
     NSAttributedString *attributed = [[NSAttributedString alloc] initWithString:nil];
     
     attributed = [NSAttributedString attributedStringWithAttachment:nil];
@@ -70,11 +76,11 @@
     
     
     NSRange range = NSMakeRange(8, 90);
-    [attributed attributesAtIndex:20 effectiveRange:&range];
-    [attributed attribute:NSFontAttributeName atIndex:20 effectiveRange:&range];
-    [attributed attribute:nil atIndex:20 effectiveRange:&range];
+//    [attributed attributesAtIndex:20 effectiveRange:&range];
+//    [attributed attribute:NSFontAttributeName atIndex:20 effectiveRange:&range];
+//    [attributed attribute:nil atIndex:20 effectiveRange:&range];
     NSRange tempRamge = NSMakeRange(2, 1);
-    [attributed attribute:nil atIndex:2 effectiveRange:&tempRamge];
+//    [attributed attribute:nil atIndex:2 effectiveRange:&tempRamge];
     
     [attributed attributedSubstringFromRange:NSMakeRange(90, 90)];
     [attributed isEqualToAttributedString:nil];
@@ -122,13 +128,13 @@
     [mutable setAttributedString:@123];
     
 
-    [attributed attributesAtIndex:20 longestEffectiveRange:&range inRange:NSMakeRange(90, 30)];
+//    [attributed attributesAtIndex:20 longestEffectiveRange:&range inRange:NSMakeRange(90, 30)];
     
     range = NSMakeRange(20, 20);
-    [attributed attributesAtIndex:29 longestEffectiveRange:&range inRange:NSMakeRange(10, 21)];
+//    [attributed attributesAtIndex:29 longestEffectiveRange:&range inRange:NSMakeRange(10, 21)];
     range = NSMakeRange(2, 20);
-    [attributed attribute:NSFontAttributeName atIndex:12 longestEffectiveRange:&range inRange:NSMakeRange(100, 20)];
-    [attributed attribute:NSFontAttributeName atIndex:15 longestEffectiveRange:&range inRange:NSMakeRange(16, 90)];
+//    [attributed attribute:NSFontAttributeName atIndex:12 longestEffectiveRange:&range inRange:NSMakeRange(100, 20)];
+//    [attributed attribute:NSFontAttributeName atIndex:15 longestEffectiveRange:&range inRange:NSMakeRange(16, 90)];
     NSLog(@"11111");
     
 }
