@@ -91,7 +91,7 @@
         return [self ff_attributesAtIndex:location effectiveRange:range];
     }
     
-    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], location %ld, range %@, self.length %ld", NSStringFromClass([self class]), NSStringFromSelector(_cmd), (long)location, NSStringFromRange(*range), self.length];
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], location %ld, range %@, self.length %ld", NSStringFromClass([self class]), NSStringFromSelector(_cmd), (long)location, NSStringFromRange(*range), (long)self.length];
     NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return nil;
@@ -103,7 +103,7 @@
         return [self ff_attribute:attrName atIndex:location effectiveRange:range];
     }
     
-    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], attrName = %@, index %ld, range %@, self.length %ld", NSStringFromClass([self class]), NSStringFromSelector(_cmd), attrName, (long)location, NSStringFromRange(*range), self.length];
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], attrName = %@, index %ld, range %@, self.length %ld", NSStringFromClass([self class]), NSStringFromSelector(_cmd), attrName, (long)location, NSStringFromRange(*range), (long)self.length];
     NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return nil;
@@ -116,7 +116,7 @@
         return [self ff_attribute:attrName atIndex:location longestEffectiveRange:range inRange:rangeLimit];
     }
     
-    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], attrName = %@, index %ld, range %@, self.length %ld", NSStringFromClass([self class]), NSStringFromSelector(_cmd), attrName, (long)location, NSStringFromRange(*range), self.length];
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], attrName = %@, index %ld, range %@, self.length %ld", NSStringFromClass([self class]), NSStringFromSelector(_cmd), attrName, (long)location, NSStringFromRange(*range), (long)self.length];
     NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return nil;
@@ -128,7 +128,7 @@
         return [self ff_attributedSubstringFromRange:range];
     }
     
-    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], range %@, self.length %ld", NSStringFromClass([self class]), NSStringFromSelector(_cmd), NSStringFromRange(range), self.length];
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], range %@, self.length %ld", NSStringFromClass([self class]), NSStringFromSelector(_cmd), NSStringFromRange(range), (long)self.length];
     NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return nil;
