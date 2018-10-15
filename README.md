@@ -48,34 +48,10 @@ just like this:
 
 
 
-`Tips`:  classPrefixs is your own calsses that you want to avoid  `unrecogzied selector sent to instance   ` crash.  There is already a default array :
+`Tips`:  classPrefixs is your own calsses that you want to avoid  `unrecogzied selector sent to instance   ` crash.  
 
 ```objective-c
-NSArray *defaultArr = @[
-                                @"NSNull",
-                                @"NSString",
-                                @"NSLocalizableString",
-                                @"NSConstantString",
-                                @"NSTaggedPointerString",
-                                @"NSPlaceholderString",
-                                @"NSMutableString",
-                                @"NSPlaceholderMutableString",
-                                @"__NSLocalizedString",
-                                @"__NSCFString",
-                                @"__NSCFConstantString",
-                                @"NSNumber",
-                                @"__NSCFNumber",
-                                @"__NSCFBoolean",
-                                @"NSDecimalNumber",
-                                @"_NSConstantNumber",
-                                @"NSPlaceholderNumber",
-                                ];
-```
-
-your own custom array will add to this default array .  If you don't want the default array ,  start with this method and set  `need ` to NO :
-
-```objective-c
-- (void)startWorkWithOption:(FFHookOption)option unrecogziedSelectorClassPrefixs:(NSArray<NSString *> *)classPrefixs needDefault:(BOOL)need callBackBlock:(FFExceptionBlock)block;
+- (void)startWorkWithOption:(FFHookOption)option unrecogziedSelectorClassPrefixs:(NSArray<NSString *> *)classPrefixs callBackBlock:(FFExceptionBlock)block;
 ```
 
 
