@@ -57,17 +57,14 @@ void testAddMethod(id self, SEL _cmd) {}
 {
     NSString *className = NSStringFromClass([self class]);
     
-    NSString *selStr = NSStringFromSelector(aSelector).lowercaseString;
-    if (![selStr containsString:@"copy"]){
-        for (NSString *prefix in prefixs) {
-            if ([className hasPrefix:prefix]) {
-                NSString *msg = [NSString stringWithFormat:@"capture unrecognized selector sent to instance, -[%@ %@]", NSStringFromClass([self class]), NSStringFromSelector(aSelector)];
-                NSLog(@"%@", msg);
-                [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
-                return [ff_target new];
-            }
+    for (NSString *prefix in prefixs) {
+        if ([className hasPrefix:prefix]) {
+            NSString *msg = [NSString stringWithFormat:@"capture unrecognized selector sent to instance, -[%@ %@]", NSStringFromClass([self class]), NSStringFromSelector(aSelector)];
+            [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
+            return [ff_target new];
         }
     }
+
     
     return [self ff_forwardingTargetForSelector:aSelector];
 }

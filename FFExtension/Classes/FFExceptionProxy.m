@@ -24,15 +24,16 @@
 
 - (void)reportExceptionWithMessage:(NSString *)message extraDic:(NSDictionary *)extraDic
 {
+    NSString *msg = [FF_Prefix stringByAppendingString:message];
+    NSLog(@"%@", msg);
     NSArray<NSString *> *allThreads = [NSThread callStackSymbols];
     
     NSDictionary *errorDic = @{
                               FF_Name : @"FFExtension capture's Exception",
-                              FF_Reason : message?:@"",
+                              FF_Reason : msg?:@"",
                               FF_ExtraDic : extraDic?:@{},
                               FF_CallStackSymbols : allThreads?:@[],
                               };
-
     if ([self.delegate respondsToSelector:@selector(ff_captureExceptionWithErrorDic:)]) {
         [self.delegate ff_captureExceptionWithErrorDic:errorDic];
     }

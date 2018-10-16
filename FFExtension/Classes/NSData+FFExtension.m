@@ -54,7 +54,6 @@
 {
     if (!url) {
         NSString *msg = [NSString stringWithFormat:@"+[%@ %@], url can not be nil", NSStringFromClass([self class]), NSStringFromSelector(_cmd)];
-        NSLog(@"%@", msg);
         [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
         return NO;
     }
@@ -66,7 +65,6 @@
 {
     if (!url) {
         NSString *msg = [NSString stringWithFormat:@"+[%@ %@], url can not be nil", NSStringFromClass([self class]), NSStringFromSelector(_cmd)];
-        NSLog(@"%@", msg);
         [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
         return NO;
     }
@@ -81,7 +79,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], range %@ is out of bounds 0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), NSStringFromRange(range), (long)self.length-1];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     
     return nil;
@@ -94,7 +91,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], range %@ is out of bounds 0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), NSStringFromRange(range), (long)self.length-1];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     
     return nil;
@@ -107,7 +103,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], range %@ is out of bounds 0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), NSStringFromRange(searchRange), (long)self.length-1];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     
     return NSMakeRange(0, 0);
@@ -120,7 +115,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], buffer is %p, length %lu is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), buffer, (long)length, (long)self.length-1];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
@@ -131,7 +125,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], buffer is %p, range %@ is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), buffer, NSStringFromRange(range), (long)self.length-1];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
@@ -142,7 +135,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], buffer is %p, length %lu is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), buffer, (long)length, (long)self.length-1];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
@@ -153,7 +145,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], buffer is %p, range %@ is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), buffer, NSStringFromRange(range), (long)self.length-1];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
@@ -164,7 +155,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], base64String can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return nil;
 }
@@ -176,7 +166,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], base64Data can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return nil;
 }
@@ -188,7 +177,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], bytes can not be nil, length = %lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), (long)length];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
@@ -199,7 +187,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], bytes is %p, range %@ is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), bytes, NSStringFromRange(range), (long)self.length-1];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
@@ -210,7 +197,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], bytes is %p, range %@ is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), replacementBytes, NSStringFromRange(range), (long)self.length-1];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 

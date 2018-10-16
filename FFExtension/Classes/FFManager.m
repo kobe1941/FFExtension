@@ -83,11 +83,9 @@
             [NSDictionary startHook];
         }
         
-        
         if (option & FFHookOptionNSData) {
             [NSData startHook];
         }
-        
         
         if (option & FFHookOptionNSSet) {
             [NSSet startHook];
@@ -102,7 +100,7 @@
         }
         
         if (option & FFHookOptionNSAttributedString) {
-            [NSAttributedString startHook]; ///< TODO:这里有bug
+            [NSAttributedString startHook];
         }
     });
 }

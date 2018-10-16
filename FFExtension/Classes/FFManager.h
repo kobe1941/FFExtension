@@ -32,8 +32,6 @@ typedef void(^FFExceptionBlock)(NSDictionary *exceptionDic);
 
 - (void)startWorkWithOption:(FFHookOption)option callBackBlock:(FFExceptionBlock)block;
 
-- (void)startWorkWithOption:(FFHookOption)option unrecogziedSelectorClassPrefixs:(NSArray<NSString *> *)classPrefixs callBackBlock:(FFExceptionBlock)block;
-
 /**
  you must call one of the method to start work.
 

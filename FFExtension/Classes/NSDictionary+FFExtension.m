@@ -50,7 +50,6 @@
                 capture = YES;
                 
                 NSString *msg = [NSString stringWithFormat:@"+[%@ %@], the %lu keys %p or objects %p is nil in  0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), (long)i, keys, objects, (long)cnt-1];
-                NSLog(@"%@", msg);
                 [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
             }
         }
@@ -67,7 +66,6 @@
     
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], objects count %lu must equal keys count %lu", NSStringFromClass([self class]), NSStringFromSelector(_cmd), (long)objects.count, (long)keys.count];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return nil;
 }
@@ -79,7 +77,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], url can not be nil", NSStringFromClass([self class]), NSStringFromSelector(_cmd)];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     
     return NO;
@@ -92,7 +89,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], keys can not be nil", NSStringFromClass([self class]), NSStringFromSelector(_cmd)];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     
     return nil;
@@ -102,7 +98,6 @@
 {
     if (!keys) {
         NSString *msg = [NSString stringWithFormat:@"+[%@ %@], keys can not be nil", NSStringFromClass([self class]), NSStringFromSelector(_cmd)];
-        NSLog(@"%@", msg);
         [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
         return nil;
     }
@@ -117,7 +112,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], key can not be nil", NSStringFromClass([self class]), NSStringFromSelector(_cmd)];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
@@ -128,7 +122,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], key %@ or object %@ can not be nil", NSStringFromClass([self class]), NSStringFromSelector(_cmd), aKey, anObject];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
@@ -139,7 +132,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], key %@ or object %@ can not be nil", NSStringFromClass([self class]), NSStringFromSelector(_cmd), key, obj];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
@@ -150,7 +142,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], keySet can not be nil", NSStringFromClass([self class]), NSStringFromSelector(_cmd)];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return nil;
 }

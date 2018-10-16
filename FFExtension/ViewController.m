@@ -22,12 +22,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-//    [self testUnrecognizedSelector];
+    [self testUnrecognizedSelector];
 //    [self testNSStringHook];
 //    [self testArrayHook];
     
-//    NSNull *null = [NSNull null];
-//    [null performSelector:@selector(length)];
+    
     
     
 //    [self testNSDictionaryHook];
@@ -814,17 +813,20 @@
     
     [test performSelector:@selector(efgaegggre:) withObject:@"fwe"];
     
+//    NSNull *null = [NSNull null];
+//    [null performSelector:@selector(length)];
+    
 //    NSArray *tempArr = [[self class] findAllOf:[NSString class]];
 //    NSLog(@"NSString result = %@", tempArr);
 //
 //    tempArr = [[self class] findAllOf:[NSNumber class]];
 //    NSLog(@"NSNumber result = %@", tempArr);
     
-    [@"aewgaw" performSelector:@selector(ioghgohepgegwe)];
-    NSMutableString *str = [NSMutableString stringWithString:@"ewfwef"];
-    [str performSelector:@selector(dsknseghggpg)];
-    
-    [str performSelector:@selector(efawf:) withObject:@"fewf"];
+//    [@"aewgaw" performSelector:@selector(ioghgohepgegwe)];
+//    NSMutableString *str = [NSMutableString stringWithString:@"ewfwef"];
+//    [str performSelector:@selector(dsknseghggpg)];
+//
+//    [str performSelector:@selector(efawf:) withObject:@"fewf"];
     
 //    [self performSelector:@selector(gaegsegreg)];
 }

@@ -25,7 +25,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], key %@ or object %@ can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd), key, obj];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
@@ -36,7 +35,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], key %@ or object %@ can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd), key, obj];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 

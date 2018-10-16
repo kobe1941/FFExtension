@@ -79,7 +79,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], object can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return nil;
 }
@@ -91,7 +90,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], object can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return nil;
 }
@@ -103,7 +101,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], object can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return nil;
 }
@@ -115,7 +112,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], object can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return nil;
 }
@@ -127,7 +123,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], object can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return nil;
 }
@@ -140,7 +135,6 @@
     
     long length = self.length > 0 ? self.length - 1 : self.length;
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], index %lu is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), (long)index, length];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     
     return 0;
@@ -154,7 +148,6 @@
     
     long length = self.length > 0 ? self.length - 1 : self.length;
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], index %lu is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), (long)from, length];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return [self ff_substringFromIndex:self.length];
 }
@@ -167,7 +160,6 @@
     
     long length = self.length > 0 ? self.length - 1 : self.length;
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], index %lu is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), (long)to, length];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return [self ff_substringToIndex:self.length];
 }
@@ -180,7 +172,6 @@
     
     long length = self.length > 0 ? self.length - 1 : self.length;
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], range %@ is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), NSStringFromRange(range), length];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return nil;
 }
@@ -192,7 +183,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], str can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return NO;
 }
@@ -204,7 +194,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], str can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return NO;
 }
@@ -216,7 +205,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], str = %@, range = %@, self.length = %lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), searchString, NSStringFromRange(rangeOfReceiverToSearch), (long)self.length-1];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return NSMakeRange(0, 0);
 }
@@ -229,7 +217,6 @@
     
     long length = self.length > 0 ? self.length - 1 : self.length;
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], index %lu is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), (long)index, length];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return NSMakeRange(0, 0);
 }
@@ -242,7 +229,6 @@
     
     long length = self.length > 0 ? self.length - 1 : self.length;
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], range %@ is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), NSStringFromRange(range), length];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return NSMakeRange(0, 0);
 }
@@ -254,7 +240,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], str can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return self;
 }
@@ -266,7 +251,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], both target str %@ and replace str %@ can not be nil", NSStringFromClass([self class]), NSStringFromSelector(_cmd), target, replacement];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return self;
 }
@@ -278,7 +262,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], range %@ and total length %lu, replace str is %@ ", NSStringFromClass([self class]), NSStringFromSelector(_cmd),NSStringFromRange(range), (long)self.length, replacement];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return self;
 }
@@ -290,7 +273,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], range %@ and total length %lu, str is %@ ", NSStringFromClass([self class]), NSStringFromSelector(_cmd),NSStringFromRange(range), (long)self.length, aString];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
@@ -301,7 +283,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], index %lu and total length %lu, str is %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), (long)loc, (long)self.length, aString];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
@@ -313,7 +294,6 @@
     
     long length = self.length > 0 ? self.length - 1 : self.length;
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], range %@ is out of bounds 0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), NSStringFromRange(range), length];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
@@ -324,7 +304,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], str can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
@@ -335,7 +314,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], str can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
@@ -346,7 +324,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], target str %@ and replace str %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), target, replacement];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return self;
 }

@@ -37,7 +37,6 @@
                 capture = YES;
                 
                 NSString *msg = [NSString stringWithFormat:@"+[%@ %@], the %lu object or objects %p is nil in  0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), (long)i, objects, (long)cnt-1];
-                NSLog(@"%@", msg);
                 [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
             }
         }
@@ -53,7 +52,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], object can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     
     return nil;

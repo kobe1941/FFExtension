@@ -13,5 +13,6 @@
 #define FF_Name @"name"
 #define FF_ExtraDic @"extraDic"
 #define FF_CallStackSymbols @"callStackSymbols"
+#define FF_Prefix @"FFExtension "
 
 #endif /* FFCommonMacro_h */

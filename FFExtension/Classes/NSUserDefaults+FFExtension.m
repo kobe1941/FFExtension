@@ -45,7 +45,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], key can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     
     return nil;
@@ -58,7 +57,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], key %@ or object %@ can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd), defaultName, value];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
@@ -69,7 +67,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], key can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
@@ -80,7 +77,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], key can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     
     return 0;
@@ -93,7 +89,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], key can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     
     return NO;
@@ -106,7 +101,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], suiteName can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
@@ -117,7 +111,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], suiteName can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
@@ -128,7 +121,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], domainName can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     
     return nil;
@@ -141,7 +133,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], domain %@ or domainName %@ can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd), domain, domainName];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
@@ -152,7 +143,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], domainName can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
@@ -163,7 +153,6 @@
     }
     
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], domain can not be nil", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
-    NSLog(@"%@", msg);
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     
     return NO;
