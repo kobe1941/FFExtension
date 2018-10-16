@@ -6,11 +6,13 @@
 
 `ARC`  `iOS8.0+`
 
+###[中文介绍](http://www.zoomfeng.com/blog/ffextension.html)
 
+zho'g
 
 ### Start
 
-```
+```objective-c
 $ pod 'FFExtension'
 ```
 
