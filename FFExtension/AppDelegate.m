@@ -22,7 +22,12 @@
     
     [[FFManager sharedInstance] startWorkWithOption:FFHookOptionAll unrecogziedSelectorClassPrefixs:arr callBackBlock:^(NSDictionary *exceptionDic) {
 //        [exceptionDic objectForKey:FF_Name]
-//        NSLog(@"exceptionDic = %@", exceptionDic);
+        NSLog(@"exceptionDic = %@", exceptionDic);
+        NSArray *callBacks = [exceptionDic objectForKey:FF_CallStackSymbols];
+        NSArray *serialCallBacks = [self sortStackArray:callBacks];
+        NSLog(@"result = %@", serialCallBacks);
+        
+        
     }];
 //    [FFManager startWorkWithOption:FFHookOptionAll unrecogziedSelectorClassPrefixs:arr];
     
@@ -56,5 +61,24 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (NSArray *)sortStackArray:(NSArray *)callStacks
+{
+    @autoreleasepool {
+        NSMutableArray *results = [NSMutableArray array];
+        for (NSString *stack in callStacks) {
+            NSArray *tempArray = [stack componentsSeparatedByString:@" "];
+            NSMutableString *mutableStr = [NSMutableString string];
+            int i = 0;
+            for (NSString *tempStr in tempArray) {
+                if (![tempStr hasPrefix:@"0x"] && i > 0) {
+                    [mutableStr appendFormat:@"%@ ", tempStr];
+                }
+                i++;
+            }
+            [results addObject:mutableStr];
+        }
+        return results;
+    }
+}
 
 @end

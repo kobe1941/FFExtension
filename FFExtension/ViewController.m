@@ -22,7 +22,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    [self testUnrecognizedSelector];
+//    [self testUnrecognizedSelector];
 //    [self testNSStringHook];
 //    [self testArrayHook];
     
@@ -44,7 +44,16 @@
     
     
     
-    [self testForNSAttributedStringHook];
+//    [self testForNSAttributedStringHook];
+    
+    
+    NSMutableIndexSet *mutableSet = [NSMutableIndexSet indexSetWithIndex:1];
+    [mutableSet addIndex:4];
+    
+    NSMutableArray *mutableArray = [NSMutableArray new];
+    [mutableArray insertObjects:@[@234534, @909] atIndexes:mutableSet];
+    
+    
 }
 
 - (void)testForNSAttributedStringHook
