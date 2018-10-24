@@ -63,6 +63,9 @@
     [mutableArray insertObjects:@[@234534, @909] atIndexes:mutableSet];
 
     
+    [mutableSet addIndex:7];
+    [mutableArray objectsAtIndexes:mutableSet];
+    
 }
 
 - (void)testForNSAttributedStringHook
