@@ -47,12 +47,21 @@
 //    [self testForNSAttributedStringHook];
     
     
-    NSMutableIndexSet *mutableSet = [NSMutableIndexSet indexSetWithIndex:1];
-    [mutableSet addIndex:4];
+    NSMutableIndexSet *mutableSet = [NSMutableIndexSet indexSetWithIndex:0];
+    [mutableSet addIndex:5];
     
     NSMutableArray *mutableArray = [NSMutableArray new];
-    [mutableArray insertObjects:@[@234534, @909] atIndexes:mutableSet];
+    [mutableArray addObject:@134];
+    [mutableArray addObject:@890];
+    [mutableArray addObject:@340];
+    [mutableArray addObject:@890];
+    [mutableArray addObject:@340];
+    [mutableArray replaceObjectsAtIndexes:mutableSet withObjects:@[@12, @34]];
     
+    
+    
+    [mutableArray insertObjects:@[@234534, @909] atIndexes:mutableSet];
+
     
 }
 

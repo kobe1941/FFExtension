@@ -445,7 +445,7 @@
 
     __block BOOL flag = NO;
     [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
-        if (idx > objects.count) {
+        if (idx >= self.count + objects.count) {
             flag = YES;
             *stop = YES;
         }
@@ -474,7 +474,7 @@
     
     __block BOOL flag = NO;
     [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
-        if (idx > self.count) {
+        if (idx >= self.count) {
             flag = YES;
             *stop = YES;
         }
