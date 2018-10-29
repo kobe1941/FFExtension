@@ -18,7 +18,7 @@
 		4F4FA89121549FF800148F47 /* FFManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA89021549FF800148F47 /* FFManager.m */; };
 		4F4FA8972154BDF800148F47 /* NSObject+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA8962154BDF800148F47 /* NSObject+FFExtension.m */; };
 		4F4FA89A2154BE3200148F47 /* NSString+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA8992154BE3200148F47 /* NSString+FFExtension.m */; };
-		4F4FA89D2154BE4100148F47 /* NSArray+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA89C2154BE4100148F47 /* NSArray+FFExtension.m */; };
+		4F4FA89D2154BE4100148F47 /* NSArray+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA89C2154BE4100148F47 /* NSArray+FFExtension.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4F4FA8A02154BE4D00148F47 /* NSDictionary+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA89F2154BE4D00148F47 /* NSDictionary+FFExtension.m */; };
 		4F4FA8A32154CF0A00148F47 /* NSObject+methodSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA8A22154CF0A00148F47 /* NSObject+methodSwizzle.m */; };
 		4F4FA8A62154D86500148F47 /* SSZTestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA8A52154D86500148F47 /* SSZTestObject.m */; };
