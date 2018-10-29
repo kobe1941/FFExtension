@@ -26,4 +26,10 @@ Pod::Spec.new do |s|
         sp.compiler_flags = '-ObjC'
         sp.dependency 'FFExtension/Core'
     end
+
+    s.subspec 'Foundation' do |ssp|
+        ssp.source_files = 'FFExtension/Foundation/*.{h,m}'
+        ssp.dependency 'FFExtension/Core'
+        ssp.dependency 'FFExtension/MRC'
+    end
 end
