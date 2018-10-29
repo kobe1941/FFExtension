@@ -12,9 +12,11 @@ Pod::Spec.new do |s|
     s.description = 'if you have any problem or crash with use FFExtension, please issue me and paste detail crash logs,  Have a nice day(#^.^#).'
     s.requires_arc = true
     s.source_files = 'FFExtension/Classes/*.{h,m}'
+
     non_arc_files = 'FFExtension/Classes/MRC/*.{h,m}'
     s.exclude_files = non_arc_files
-    s.subspec 'no-arc' do |sp|
-    sp.source_files = non_arc_files
-    sp.requires_arc = false
+    s.subspec 'MRC' do |sp|
+        sp.source_files = non_arc_files
+        sp.requires_arc = false
+    end
 end
