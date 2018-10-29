@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
     s.name = 'FFExtension'
-    s.version = '1.1.6'
+    s.version = '1.1.4'
     s.platform = :ios, '8.0'
     s.ios.deployment_target = '8.0'
     s.license = 'MIT'
@@ -13,10 +13,17 @@ Pod::Spec.new do |s|
     s.requires_arc = true
     s.source_files = 'FFExtension/Classes/*.{h,m}'
 
+
+    s.subspec 'Core' do |ss|
+        ss.source_files = 'FFExtension/Core/*.{h,m}'
+    end
+
     non_arc_files = 'FFExtension/Classes/MRC/*.{h,m}'
     s.exclude_files = non_arc_files
     s.subspec 'MRC' do |sp|
         sp.source_files = non_arc_files
         sp.requires_arc = false
+        sp.compiler_flags = '-ObjC'
+        sp.dependency 'FFExtension/Core'
     end
 end
