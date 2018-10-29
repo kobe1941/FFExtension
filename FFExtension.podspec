@@ -11,11 +11,11 @@ Pod::Spec.new do |s|
     s.summary = 'To reduce the crash in ios app'
     s.description = 'if you have any problem or crash with use FFExtension, please issue me and paste detail crash logs,  Have a nice day(#^.^#).'
     s.requires_arc = true
-    s.source_files = 'FFExtension/Classes/*.{h,m}'
+    s.source_files = 'FFExtension/Classes/*'
 
 
     s.subspec 'Core' do |ss|
-        ss.source_files = 'FFExtension/Core/*.{h,m}'
+        ss.source_files = 'FFExtension/Classes/Core/*.{h,m}'
     end
 
     non_arc_files = 'FFExtension/Classes/MRC/*.{h,m}'
@@ -24,12 +24,12 @@ Pod::Spec.new do |s|
         sp.source_files = non_arc_files
         sp.requires_arc = false
         sp.compiler_flags = '-ObjC'
-        sp.dependency 'FFExtension/Core'
+        sp.dependency 'FFExtension/Classes/Core'
     end
 
     s.subspec 'Foundation' do |ssp|
-        ssp.source_files = 'FFExtension/Foundation/*.{h,m}'
-        ssp.dependency 'FFExtension/Core'
-        ssp.dependency 'FFExtension/MRC'
+        ssp.source_files = 'FFExtension/Classes/Foundation/*.{h,m}'
+        ssp.dependency 'FFExtension/Classes/Core'
+        ssp.dependency 'FFExtension/Classes/MRC'
     end
 end
