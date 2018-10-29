@@ -19,14 +19,14 @@
 		4F4FA8972154BDF800148F47 /* NSObject+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA8962154BDF800148F47 /* NSObject+FFExtension.m */; };
 		4F4FA89A2154BE3200148F47 /* NSString+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA8992154BE3200148F47 /* NSString+FFExtension.m */; };
 		4F4FA8A02154BE4D00148F47 /* NSDictionary+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA89F2154BE4D00148F47 /* NSDictionary+FFExtension.m */; };
-		4F4FA8A32154CF0A00148F47 /* NSObject+methodSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA8A22154CF0A00148F47 /* NSObject+methodSwizzle.m */; };
 		4F4FA8A62154D86500148F47 /* SSZTestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FA8A52154D86500148F47 /* SSZTestObject.m */; };
-		4F58AF4D215B862B00DEA3B2 /* FFExceptionProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F58AF4C215B862B00DEA3B2 /* FFExceptionProxy.m */; };
 		4F6E878A215A37EF00117AA5 /* NSSet+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F6E8789215A37EF00117AA5 /* NSSet+FFExtension.m */; };
 		4F6E878D215A3AC700117AA5 /* NSUserDefaults+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F6E878C215A3AC700117AA5 /* NSUserDefaults+FFExtension.m */; };
 		4F6E8790215A43AB00117AA5 /* NSCache+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F6E878F215A43AB00117AA5 /* NSCache+FFExtension.m */; };
 		4F7E44D42159130200170BA7 /* NSData+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F7E44D32159130200170BA7 /* NSData+FFExtension.m */; };
 		4FA323D021719CDE00C4C1AD /* NSAttributedString+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FA323CF21719CDE00C4C1AD /* NSAttributedString+FFExtension.m */; };
+		4FD280722186EEB80026A1CD /* NSObject+methodSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD2806E2186EEB80026A1CD /* NSObject+methodSwizzle.m */; };
+		4FD280732186EEB80026A1CD /* FFExceptionProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD280702186EEB80026A1CD /* FFExceptionProxy.m */; };
 		4FD993E02186E507000096A7 /* NSArray+FFExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD993DF2186E507000096A7 /* NSArray+FFExtension.m */; };
 /* End PBXBuildFile section */
 
@@ -72,12 +72,8 @@
 		4F4FA8992154BE3200148F47 /* NSString+FFExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+FFExtension.m"; sourceTree = "<group>"; };
 		4F4FA89E2154BE4D00148F47 /* NSDictionary+FFExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+FFExtension.h"; sourceTree = "<group>"; };
 		4F4FA89F2154BE4D00148F47 /* NSDictionary+FFExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+FFExtension.m"; sourceTree = "<group>"; };
-		4F4FA8A12154CF0A00148F47 /* NSObject+methodSwizzle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+methodSwizzle.h"; sourceTree = "<group>"; };
-		4F4FA8A22154CF0A00148F47 /* NSObject+methodSwizzle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+methodSwizzle.m"; sourceTree = "<group>"; };
 		4F4FA8A42154D86500148F47 /* SSZTestObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSZTestObject.h; sourceTree = "<group>"; };
 		4F4FA8A52154D86500148F47 /* SSZTestObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSZTestObject.m; sourceTree = "<group>"; };
-		4F58AF4B215B862B00DEA3B2 /* FFExceptionProxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFExceptionProxy.h; sourceTree = "<group>"; };
-		4F58AF4C215B862B00DEA3B2 /* FFExceptionProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FFExceptionProxy.m; sourceTree = "<group>"; };
 		4F6E8788215A37EF00117AA5 /* NSSet+FFExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSSet+FFExtension.h"; sourceTree = "<group>"; };
 		4F6E8789215A37EF00117AA5 /* NSSet+FFExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSSet+FFExtension.m"; sourceTree = "<group>"; };
 		4F6E878B215A3AC700117AA5 /* NSUserDefaults+FFExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+FFExtension.h"; sourceTree = "<group>"; };
@@ -86,9 +82,13 @@
 		4F6E878F215A43AB00117AA5 /* NSCache+FFExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSCache+FFExtension.m"; sourceTree = "<group>"; };
 		4F7E44D22159130200170BA7 /* NSData+FFExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+FFExtension.h"; sourceTree = "<group>"; };
 		4F7E44D32159130200170BA7 /* NSData+FFExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+FFExtension.m"; sourceTree = "<group>"; };
-		4F9405B7216B0C0800A06625 /* FFCommonMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFCommonMacro.h; sourceTree = "<group>"; };
 		4FA323CE21719CDE00C4C1AD /* NSAttributedString+FFExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+FFExtension.h"; sourceTree = "<group>"; };
 		4FA323CF21719CDE00C4C1AD /* NSAttributedString+FFExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+FFExtension.m"; sourceTree = "<group>"; };
+		4FD2806D2186EEB80026A1CD /* FFExceptionProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFExceptionProxy.h; sourceTree = "<group>"; };
+		4FD2806E2186EEB80026A1CD /* NSObject+methodSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+methodSwizzle.m"; sourceTree = "<group>"; };
+		4FD2806F2186EEB80026A1CD /* FFCommonMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFCommonMacro.h; sourceTree = "<group>"; };
+		4FD280702186EEB80026A1CD /* FFExceptionProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFExceptionProxy.m; sourceTree = "<group>"; };
+		4FD280712186EEB80026A1CD /* NSObject+methodSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+methodSwizzle.h"; sourceTree = "<group>"; };
 		4FD993DE2186E507000096A7 /* NSArray+FFExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+FFExtension.h"; sourceTree = "<group>"; };
 		4FD993DF2186E507000096A7 /* NSArray+FFExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+FFExtension.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -178,11 +178,10 @@
 		4F4FA88E21549FDB00148F47 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				4FD2806C2186EEB80026A1CD /* Core */,
 				4FD993DD2186E507000096A7 /* MRC */,
 				4F4FA88F21549FF800148F47 /* FFManager.h */,
 				4F4FA89021549FF800148F47 /* FFManager.m */,
-				4F4FA8A12154CF0A00148F47 /* NSObject+methodSwizzle.h */,
-				4F4FA8A22154CF0A00148F47 /* NSObject+methodSwizzle.m */,
 				4F4FA8952154BDF800148F47 /* NSObject+FFExtension.h */,
 				4F4FA8962154BDF800148F47 /* NSObject+FFExtension.m */,
 				4F4FA8982154BE3200148F47 /* NSString+FFExtension.h */,
@@ -199,11 +198,20 @@
 				4F6E878F215A43AB00117AA5 /* NSCache+FFExtension.m */,
 				4FA323CE21719CDE00C4C1AD /* NSAttributedString+FFExtension.h */,
 				4FA323CF21719CDE00C4C1AD /* NSAttributedString+FFExtension.m */,
-				4F58AF4B215B862B00DEA3B2 /* FFExceptionProxy.h */,
-				4F58AF4C215B862B00DEA3B2 /* FFExceptionProxy.m */,
-				4F9405B7216B0C0800A06625 /* FFCommonMacro.h */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		4FD2806C2186EEB80026A1CD /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				4FD2806D2186EEB80026A1CD /* FFExceptionProxy.h */,
+				4FD2806E2186EEB80026A1CD /* NSObject+methodSwizzle.m */,
+				4FD2806F2186EEB80026A1CD /* FFCommonMacro.h */,
+				4FD280702186EEB80026A1CD /* FFExceptionProxy.m */,
+				4FD280712186EEB80026A1CD /* NSObject+methodSwizzle.h */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 		4FD993DD2186E507000096A7 /* MRC */ = {
@@ -346,17 +354,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F7E44D42159130200170BA7 /* NSData+FFExtension.m in Sources */,
-				4F4FA8A32154CF0A00148F47 /* NSObject+methodSwizzle.m in Sources */,
 				4F4FA8A02154BE4D00148F47 /* NSDictionary+FFExtension.m in Sources */,
 				4F4FA86121549FB400148F47 /* ViewController.m in Sources */,
+				4FD280722186EEB80026A1CD /* NSObject+methodSwizzle.m in Sources */,
 				4FD993E02186E507000096A7 /* NSArray+FFExtension.m in Sources */,
 				4F4FA89121549FF800148F47 /* FFManager.m in Sources */,
 				4F4FA86C21549FB600148F47 /* main.m in Sources */,
 				4F4FA8A62154D86500148F47 /* SSZTestObject.m in Sources */,
 				4F4FA85E21549FB400148F47 /* AppDelegate.m in Sources */,
 				4F4FA8972154BDF800148F47 /* NSObject+FFExtension.m in Sources */,
+				4FD280732186EEB80026A1CD /* FFExceptionProxy.m in Sources */,
 				4F4FA89A2154BE3200148F47 /* NSString+FFExtension.m in Sources */,
-				4F58AF4D215B862B00DEA3B2 /* FFExceptionProxy.m in Sources */,
 				4F6E878A215A37EF00117AA5 /* NSSet+FFExtension.m in Sources */,
 				4F6E878D215A3AC700117AA5 /* NSUserDefaults+FFExtension.m in Sources */,
 				4FA323D021719CDE00C4C1AD /* NSAttributedString+FFExtension.m in Sources */,
