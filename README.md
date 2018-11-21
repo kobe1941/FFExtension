@@ -10,6 +10,25 @@
 
 
 
+To Avoid the classes out of bounds :
+
+```objective-c
+NSString
+NSArray
+NSDictionary
+NSSet
+NSCache
+NSUserDefaults，
+NSData 
+NSAttributedString
+```
+
+also , avoid   `unrecognized selector sent to instance`   crash by user customize.
+
+
+
+
+
 ### Start
 
 ```objective-c

@@ -40,7 +40,7 @@
     
 //    [self testExtraTestForString];
     
-//    [self testExtraForNSArrayHook];
+    [self testExtraForNSArrayHook];
     
     
     
