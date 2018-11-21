@@ -18,7 +18,7 @@ NSArray
 NSDictionary
 NSSet
 NSCache
-NSUserDefaults，
+NSUserDefaults
 NSData 
 NSAttributedString
 ```
