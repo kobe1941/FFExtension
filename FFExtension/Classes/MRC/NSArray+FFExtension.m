@@ -262,9 +262,12 @@
     
     __block BOOL flag = NO;
     [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
-        if (idx > self.count) {
+        if (idx >= self.count) {
             flag = YES;
             *stop = YES;
+            
+            NSString *msg = [NSString stringWithFormat:@"+[%@ %@], idx %ld is out of bounds 0...%ld", NSStringFromClass([self class]), NSStringFromSelector(_cmd), idx, (long)(self.count)];
+            [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
         }
     }];
     
@@ -307,9 +310,12 @@
     
     __block BOOL flag = NO;
     [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
-        if (idx > self.count) {
+        if (idx >= self.count) {
             flag = YES;
             *stop = YES;
+            
+            NSString *msg = [NSString stringWithFormat:@"+[%@ %@], idx %ld is out of bounds 0...%ld", NSStringFromClass([self class]), NSStringFromSelector(_cmd), idx, (long)self.count];
+            [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
         }
     }];
     
@@ -445,9 +451,12 @@
 
     __block BOOL flag = NO;
     [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
-        if (idx > self.count) {
+        if (idx >= self.count + objects.count) {
             flag = YES;
             *stop = YES;
+            
+            NSString *msg = [NSString stringWithFormat:@"+[%@ %@], idx %ld is out of bounds 0...%ld", NSStringFromClass([self class]), NSStringFromSelector(_cmd), idx, (long)(self.count+objects.count)];
+            [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
         }
     }];
     
@@ -474,9 +483,12 @@
     
     __block BOOL flag = NO;
     [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
-        if (idx > self.count) {
+        if (idx >= self.count) {
             flag = YES;
             *stop = YES;
+            
+            NSString *msg = [NSString stringWithFormat:@"+[%@ %@], idx %ld is out of bounds 0...%ld", NSStringFromClass([self class]), NSStringFromSelector(_cmd), idx, (long)(self.count)];
+            [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
         }
     }];
     
