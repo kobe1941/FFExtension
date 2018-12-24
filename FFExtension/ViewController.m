@@ -22,7 +22,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    [self testUnrecognizedSelector];
+//    [self testUnrecognizedSelector];
 //    [self testNSStringHook];
 //    [self testArrayHook];
     
@@ -33,7 +33,7 @@
 //    [self testStringMore];
 //    [self testForNSCacheHook];
 //    [self testForNSUserDefaultsHook];
-//    [self testForNSDataHook];
+    [self testForNSDataHook];
 //    [self testForNSSetHook];
     
 //    [self logAllMethods:NSClassFromString(@"__NSArrayM")];
@@ -44,7 +44,7 @@
     
     
     
-    [self testForNSAttributedStringHook];
+//    [self testForNSAttributedStringHook];
 }
 
 - (void)testForNSAttributedStringHook
@@ -280,9 +280,9 @@
     
 //    [self logAllMethods:NSClassFromString(@"NSData")];
     
-    NSData *data = [@"hufeng" dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [@"hufenggersgerg" dataUsingEncoding:NSUTF8StringEncoding];
     NSMutableData *mutableData = [[NSMutableData alloc] initWithData:data];
-    NSData *subData = [data subdataWithRange:NSMakeRange(2, 2)];
+    NSData *subData = [data subdataWithRange:NSMakeRange(2, 5)];
     const void * str = "fewfewgfewfew";
     
     
@@ -291,6 +291,19 @@
     [mutableData rangeOfData:subData options:NSDataSearchAnchored range:NSMakeRange(90, 12)];
     [data rangeOfData:subData options:NSDataSearchAnchored range:NSMakeRange(90, 12)];
     [mutableData rangeOfData:subData options:NSDataSearchAnchored range:NSMakeRange(90, 12)];
+    void *buffer = malloc(sizeof(char) * 10);
+    
+    [subData getBytes:buffer length:0];
+    [subData getBytes:buffer length:4];
+    [subData getBytes:buffer length:1];
+    [subData getBytes:buffer length:15];
+    [subData getBytes:buffer length:150];
+    
+    [subData getBytes:buffer range:NSMakeRange(0, 2)];
+    [subData getBytes:buffer range:NSMakeRange(0, 20)];
+    [subData getBytes:buffer range:NSMakeRange(0, 200)];
+    [subData getBytes:buffer range:NSMakeRange(0, 2000)];
+    
     [data getBytes:NULL length:40];
     [data subdataWithRange:NSMakeRange(0, 30)];
     [subData subdataWithRange:NSMakeRange(9, 12)];
