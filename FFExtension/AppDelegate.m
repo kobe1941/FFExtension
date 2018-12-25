@@ -22,10 +22,10 @@
     
     [[FFManager sharedInstance] startWorkWithOption:FFHookOptionAll unrecogziedSelectorClassPrefixs:arr callBackBlock:^(NSDictionary *exceptionDic) {
 //        [exceptionDic objectForKey:FF_Name]
-        NSLog(@"exceptionDic = %@", exceptionDic);
-        NSArray *callBacks = [exceptionDic objectForKey:FF_CallStackSymbols];
-        NSArray *serialCallBacks = [self sortStackArray:callBacks];
-        NSLog(@"result = %@", serialCallBacks);
+//        NSLog(@"exceptionDic = %@", exceptionDic);
+//        NSArray *callBacks = [exceptionDic objectForKey:FF_CallStackSymbols];
+//        NSArray *serialCallBacks = [self sortStackArray:callBacks];
+//        NSLog(@"result = %@", serialCallBacks);
         
         
     }];

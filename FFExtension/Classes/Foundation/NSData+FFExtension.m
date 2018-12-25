@@ -31,6 +31,7 @@
     [self ff_instancenSwizzleWithClass:inlineClass originSelector:@selector(subdataWithRange:) swizzleSelector:@selector(ff_subdataWithRange:)];
     [self ff_instancenSwizzleWithClass:inlineClass originSelector:@selector(rangeOfData:options:range:) swizzleSelector:@selector(ff_rangeOfData:options:range:)];
     [self ff_instancenSwizzleWithClass:inlineClass originSelector:@selector(getBytes:range:) swizzleSelector:@selector(ff_getBytes:range:)];
+    [self ff_instancenSwizzleWithClass:inlineClass originSelector:@selector(getBytes:length:) swizzleSelector:@selector(ff_getBytes:length:)];
     
     Class mutableClass = NSClassFromString(@"NSConcreteMutableData");
     [self ff_instancenSwizzleWithClass:mutableClass originSelector:@selector(writeToURL:options:error:) swizzleSelector:@selector(mutable_writeToURL:options:error:)];
@@ -47,7 +48,7 @@
 
     Class concreteClass = NSClassFromString(@"NSConcreteData");
     [self ff_instancenSwizzleWithClass:concreteClass originSelector:@selector(getBytes:range:) swizzleSelector:@selector(ff_getBytes:range:)];
-    [self ff_instancenSwizzleWithClass:concreteClass originSelector:@selector(getBytes:length:) swizzleSelector:@selector(ff_getBytes:length:)];    
+    [self ff_instancenSwizzleWithClass:concreteClass originSelector:@selector(getBytes:length:) swizzleSelector:@selector(ff_getBytes:length:)];
 }
 
 - (BOOL)ff_writeToURL:(NSURL *)url options:(NSDataWritingOptions)writeOptionsMask error:(NSError * _Nullable __autoreleasing *)errorPtr
@@ -78,7 +79,8 @@
         return [self super_subdataWithRange:range];
     }
     
-    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], range %@ is out of bounds 0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), NSStringFromRange(range), (long)self.length-1];
+    long tempLength = self.length > 0 ? self.length - 1 : self.length;
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], range %@ is out of bounds 0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), NSStringFromRange(range), (long)tempLength];
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     
     return nil;
@@ -90,7 +92,8 @@
         return [self ff_subdataWithRange:range];
     }
     
-    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], range %@ is out of bounds 0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), NSStringFromRange(range), (long)self.length-1];
+    long tempLength = self.length > 0 ? self.length - 1 : self.length;
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], range %@ is out of bounds 0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), NSStringFromRange(range), (long)tempLength];
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     
     return nil;
@@ -102,7 +105,8 @@
         return [self ff_rangeOfData:dataToFind options:mask range:searchRange];
     }
     
-    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], range %@ is out of bounds 0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), NSStringFromRange(searchRange), (long)self.length-1];
+    long tempLength = self.length > 0 ? self.length - 1 : self.length;
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], range %@ is out of bounds 0...%ld", NSStringFromClass([self class]),NSStringFromSelector(_cmd), NSStringFromRange(searchRange), (long)tempLength];
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     
     return NSMakeRange(0, 0);
@@ -110,11 +114,13 @@
 
 - (void)super_getBytes:(void *)buffer length:(NSUInteger)length
 {
+    ///< 这里如果不拦截length的越界，系统会报BAD_ACCESS
     if (buffer && length <= self.length) {
         return [self super_getBytes:buffer length:length];
     }
     
-    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], buffer is %p, length %lu is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), buffer, (long)length, (long)self.length-1];
+    long tempLength = self.length > 0 ? self.length - 1 : self.length;
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], buffer is %p, length %ld is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), buffer, (long)length, (long)tempLength];
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
@@ -124,27 +130,29 @@
         return [self super_getBytes:buffer range:range];
     }
     
-    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], buffer is %p, range %@ is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), buffer, NSStringFromRange(range), (long)self.length-1];
+    long tempLength = self.length > 0 ? self.length - 1 : self.length;
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], buffer is %p, range %@ is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), buffer, NSStringFromRange(range), tempLength];
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
+///< 这两个函数不用处理越界，系统可能内部兼容了
 - (void)ff_getBytes:(void *)buffer length:(NSUInteger)length
 {
-    if (buffer && length <= self.length) {
+    if (buffer) {
         return [self ff_getBytes:buffer length:length];
     }
     
-    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], buffer is %p, length %lu is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), buffer, (long)length, (long)self.length-1];
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], buffer can not be NULL", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
 - (void)ff_getBytes:(void *)buffer range:(NSRange)range
 {
-    if (buffer && range.location + range.length <= self.length) {
-        return [self ff_getBytes:buffer range:range];
+    if (buffer) {
+        return [self ff_getBytes:buffer range:range]; ///< 某些时候，这个函数会调用上述super_getBytes:range:
     }
     
-    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], buffer is %p, range %@ is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), buffer, NSStringFromRange(range), (long)self.length-1];
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], buffer can not be NULL", NSStringFromClass([self class]),NSStringFromSelector(_cmd)];
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
@@ -186,7 +194,8 @@
         return [self ff_replaceBytesInRange:range withBytes:bytes];
     }
     
-    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], bytes is %p, range %@ is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), bytes, NSStringFromRange(range), (long)self.length-1];
+    long tempLength = self.length > 0 ? self.length - 1 : self.length;
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], bytes is %p, range %@ is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), bytes, NSStringFromRange(range), tempLength];
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 
@@ -196,7 +205,8 @@
         return [self ff_replaceBytesInRange:range withBytes:replacementBytes length:replacementLength];
     }
     
-    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], bytes is %p, range %@ is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), replacementBytes, NSStringFromRange(range), (long)self.length-1];
+    long tempLength = self.length > 0 ? self.length - 1 : self.length;
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], bytes is %p, range %@ is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), replacementBytes, NSStringFromRange(range), tempLength];
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
 }
 

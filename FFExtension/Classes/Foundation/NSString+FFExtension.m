@@ -204,7 +204,8 @@
         return [self ff_rangeOfString:searchString options:mask range:rangeOfReceiverToSearch locale:locale];
     }
     
-    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], str = %@, range = %@, self.length = %lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), searchString, NSStringFromRange(rangeOfReceiverToSearch), (long)self.length-1];
+    long length = self.length > 0 ? self.length - 1 : self.length;
+    NSString *msg = [NSString stringWithFormat:@"+[%@ %@], str = %@, range = %@, self.length = %lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), searchString, NSStringFromRange(rangeOfReceiverToSearch), (long)length];
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];
     return NSMakeRange(0, 0);
 }

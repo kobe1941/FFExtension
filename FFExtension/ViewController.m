@@ -46,7 +46,7 @@
     
 //    [self testForNSAttributedStringHook];
     
-    
+    /*
     NSMutableIndexSet *mutableSet = [NSMutableIndexSet indexSetWithIndex:0];
     [mutableSet addIndex:5];
     
@@ -65,7 +65,7 @@
     
     [mutableSet addIndex:7];
     [mutableArray objectsAtIndexes:mutableSet];
-    
+    */
 }
 
 - (void)testForNSAttributedStringHook
@@ -312,7 +312,7 @@
     [mutableData rangeOfData:subData options:NSDataSearchAnchored range:NSMakeRange(90, 12)];
     [data rangeOfData:subData options:NSDataSearchAnchored range:NSMakeRange(90, 12)];
     [mutableData rangeOfData:subData options:NSDataSearchAnchored range:NSMakeRange(90, 12)];
-    void *buffer = malloc(sizeof(char) * 10);
+    void *buffer = malloc(sizeof(char) * 2);
     
     [subData getBytes:buffer length:0];
     [subData getBytes:buffer length:4];
@@ -320,12 +320,40 @@
     [subData getBytes:buffer length:15];
     [subData getBytes:buffer length:150];
     
+    [data getBytes:buffer length:0];
+    [data getBytes:buffer length:4];
+    [data getBytes:buffer length:1];
+    [data getBytes:buffer length:15];
+    [data getBytes:buffer length:150];
+    
+    [mutableData getBytes:buffer length:0];
+    [mutableData getBytes:buffer length:4];
+    [mutableData getBytes:buffer length:1];
+    [mutableData getBytes:buffer length:15];
+    [mutableData getBytes:buffer length:150];
+    
+    [data getBytes:NULL length:40];
+    [subData getBytes:NULL length:150];
+    [mutableData getBytes:NULL length:150];
+    
     [subData getBytes:buffer range:NSMakeRange(0, 2)];
     [subData getBytes:buffer range:NSMakeRange(0, 20)];
     [subData getBytes:buffer range:NSMakeRange(0, 200)];
     [subData getBytes:buffer range:NSMakeRange(0, 2000)];
+    [subData getBytes:NULL range:NSMakeRange(0, 2)];
     
-    [data getBytes:NULL length:40];
+    [data getBytes:buffer range:NSMakeRange(0, 2)];
+    [data getBytes:buffer range:NSMakeRange(0, 20)];
+    [data getBytes:buffer range:NSMakeRange(0, 200)];
+    [data getBytes:buffer range:NSMakeRange(0, 2000)];
+    [data getBytes:NULL range:NSMakeRange(0, 2)];
+    
+    [mutableData getBytes:buffer range:NSMakeRange(0, 2)];
+    [mutableData getBytes:buffer range:NSMakeRange(0, 20)];
+    [mutableData getBytes:buffer range:NSMakeRange(0, 200)];
+    [mutableData getBytes:buffer range:NSMakeRange(0, 2000)];
+    [mutableData getBytes:NULL range:NSMakeRange(0, 2)];
+    
     [data subdataWithRange:NSMakeRange(0, 30)];
     [subData subdataWithRange:NSMakeRange(9, 12)];
     [data getBytes:str range:NSMakeRange(3, 90)];
@@ -370,6 +398,7 @@
     [mutableData appendData:nil];
     [mutableData appendBytes:nil length:0];
     [mutableData appendBytes:nil length:100];
+    [mutableData appendBytes:str length:10];
     [mutableData appendBytes:str length:100];
     
     [mutableData replaceBytesInRange:NSMakeRange(10, 10) withBytes:nil];

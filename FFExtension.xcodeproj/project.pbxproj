@@ -188,11 +188,11 @@
 		4FD2806C2186EEB80026A1CD /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				4FD2806D2186EEB80026A1CD /* FFExceptionProxy.h */,
-				4FD2806E2186EEB80026A1CD /* NSObject+methodSwizzle.m */,
 				4FD2806F2186EEB80026A1CD /* FFCommonMacro.h */,
+				4FD2806D2186EEB80026A1CD /* FFExceptionProxy.h */,
 				4FD280702186EEB80026A1CD /* FFExceptionProxy.m */,
 				4FD280712186EEB80026A1CD /* NSObject+methodSwizzle.h */,
+				4FD2806E2186EEB80026A1CD /* NSObject+methodSwizzle.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -210,8 +210,8 @@
 				4FD280842186F3850026A1CD /* NSString+FFExtension.m */,
 				4FD280762186F3850026A1CD /* NSDictionary+FFExtension.h */,
 				4FD280802186F3850026A1CD /* NSDictionary+FFExtension.m */,
-				4FD280812186F3850026A1CD /* NSCache+FFExtension.m */,
 				4FD280752186F3850026A1CD /* NSCache+FFExtension.h */,
+				4FD280812186F3850026A1CD /* NSCache+FFExtension.m */,
 				4FD280822186F3850026A1CD /* NSData+FFExtension.h */,
 				4FD280792186F3850026A1CD /* NSData+FFExtension.m */,
 				4FD2807D2186F3850026A1CD /* NSUserDefaults+FFExtension.h */,
