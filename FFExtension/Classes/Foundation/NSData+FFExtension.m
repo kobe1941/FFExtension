@@ -190,7 +190,7 @@
 
 - (void)ff_replaceBytesInRange:(NSRange)range withBytes:(const void *)bytes
 {
-    if (bytes && range.location + range.length <= self.length) {
+    if (bytes) { ///< 这个函数不需要对长度加保护，加了反而误事
         return [self ff_replaceBytesInRange:range withBytes:bytes];
     }
     
@@ -204,7 +204,7 @@
     if (range.location + range.length <= self.length) {
         return [self ff_replaceBytesInRange:range withBytes:replacementBytes length:replacementLength];
     }
-    
+
     long tempLength = self.length > 0 ? self.length - 1 : self.length;
     NSString *msg = [NSString stringWithFormat:@"+[%@ %@], bytes is %p, range %@ is out of bounds 0...%lu", NSStringFromClass([self class]),NSStringFromSelector(_cmd), replacementBytes, NSStringFromRange(range), tempLength];
     [[FFExceptionProxy sharedInstance] reportExceptionWithMessage:msg extraDic:nil];

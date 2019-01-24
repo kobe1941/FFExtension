@@ -401,10 +401,13 @@
     [mutableData appendBytes:str length:10];
     [mutableData appendBytes:str length:100];
     
+    
+    [mutableData replaceBytesInRange:NSMakeRange(120, 30) withBytes:str];
     [mutableData replaceBytesInRange:NSMakeRange(10, 10) withBytes:nil];
-    [mutableData replaceBytesInRange:NSMakeRange(120, 10) withBytes:str];
-    [mutableData replaceBytesInRange:NSMakeRange(0, 10) withBytes:str length:60];
-    [mutableData replaceBytesInRange:NSMakeRange(0, 1000) withBytes:nil length:6];
+
+    [mutableData replaceBytesInRange:NSMakeRange(20, 10) withBytes:str length:60];
+    [mutableData replaceBytesInRange:NSMakeRange(20, 10) withBytes:nil length:60];
+    [mutableData replaceBytesInRange:NSMakeRange(0, 100) withBytes:nil length:6];
     [mutableData replaceBytesInRange:NSMakeRange(0, 1000) withBytes:str length:600];
     [mutableData resetBytesInRange:NSMakeRange(21, 900)];
     
