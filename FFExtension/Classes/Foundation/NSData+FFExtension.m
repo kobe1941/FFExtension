@@ -190,7 +190,7 @@
 
 - (void)ff_replaceBytesInRange:(NSRange)range withBytes:(const void *)bytes
 {
-    if (bytes) { ///< 这个函数不需要对长度加保护，加了反而误事
+    if (bytes && range.location <= self.length) { ///< 这个函数不需要对长度加保护，加了反而误事
         return [self ff_replaceBytesInRange:range withBytes:bytes];
     }
     

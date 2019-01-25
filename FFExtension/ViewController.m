@@ -337,6 +337,8 @@
     [mutableData getBytes:NULL length:150];
     
     [subData getBytes:buffer range:NSMakeRange(0, 2)];
+    [subData getBytes:buffer range:NSMakeRange(5, 2)];
+    [subData getBytes:buffer range:NSMakeRange(15, 2)];
     [subData getBytes:buffer range:NSMakeRange(0, 20)];
     [subData getBytes:buffer range:NSMakeRange(0, 200)];
     [subData getBytes:buffer range:NSMakeRange(0, 2000)];
@@ -402,7 +404,8 @@
     [mutableData appendBytes:str length:100];
     
     
-    [mutableData replaceBytesInRange:NSMakeRange(120, 30) withBytes:str];
+    [mutableData replaceBytesInRange:NSMakeRange(124, 30) withBytes:str];
+    [mutableData replaceBytesInRange:NSMakeRange(1200, 30) withBytes:str];
     [mutableData replaceBytesInRange:NSMakeRange(10, 10) withBytes:nil];
 
     [mutableData replaceBytesInRange:NSMakeRange(20, 10) withBytes:str length:60];
