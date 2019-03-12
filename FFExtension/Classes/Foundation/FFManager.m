@@ -83,9 +83,9 @@
             [NSDictionary startHook];
         }
         
-        if (option & FFHookOptionNSData) {
-            [NSData startHook];
-        }
+//        if (option & FFHookOptionNSData) {
+//            [NSData startHook];
+//        }
         
         if (option & FFHookOptionNSSet) {
             [NSSet startHook];

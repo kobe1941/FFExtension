@@ -33,7 +33,7 @@
 //    [self testStringMore];
 //    [self testForNSCacheHook];
 //    [self testForNSUserDefaultsHook];
-    [self testForNSDataHook];
+//    [self testForNSDataHook];
 //    [self testForNSSetHook];
     
 //    [self logAllMethods:NSClassFromString(@"__NSArrayM")];
@@ -406,6 +406,7 @@
     
     [mutableData replaceBytesInRange:NSMakeRange(124, 30) withBytes:str];
     [mutableData replaceBytesInRange:NSMakeRange(1200, 30) withBytes:str];
+    [mutableData replaceBytesInRange:NSMakeRange(10, 10) withBytes:NULL];
     [mutableData replaceBytesInRange:NSMakeRange(10, 10) withBytes:nil];
 
     [mutableData replaceBytesInRange:NSMakeRange(20, 10) withBytes:str length:60];

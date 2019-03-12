@@ -15,7 +15,7 @@ typedef NS_OPTIONS(NSUInteger, FFHookOption){
     FFHookOptionNSString = 1 << 1,
     FFHookOptionNSArray = 1 << 2,
     FFHookOptionNSDictionary = 1 << 3,
-    FFHookOptionNSData = 1 << 4,
+//    FFHookOptionNSData = 1 << 4, ///< 会跟高德SDK的加解密函数冲突，暂时无法解决，先去掉
     FFHookOptionNSSet = 1 << 5,
     FFHookOptionNSUserDefaults = 1 << 6,
     FFHookOptionNSCache = 1 << 7,
