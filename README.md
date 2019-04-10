@@ -2,9 +2,13 @@
 
 ![pod](https://img.shields.io/badge/pod-1.0.7-orange.svg)  [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE) [![weibo status](https://img.shields.io/badge/weibo-%40Zombie%E7%AC%AC%E4%B8%83%E7%AB%A0-brightgreen.svg)](https://weibo.com/1247589445)
 
-
-
 `ARC`  `iOS8.0+`
+
+
+
+友情链接 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
+
+
 
 ### [中文介绍](http://www.zoomfeng.com/blog/ffextension.html)
 
