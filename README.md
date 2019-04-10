@@ -36,8 +36,6 @@ also , avoid   `unrecognized selector sent to instance`   crash by user customiz
 
 
 
-
-
 ### Start
 
 ```objective-c
@@ -56,6 +54,8 @@ __weak typeof(self) weakSelf = self;
         [weakSelf reportExecptionToBugly:exceptionDic];
 }];
 ```
+
+如上所述，传入@"SSZ"则可以保护所有以 SSZ 开头的类，避免 `unrecognized selector sent to instance` 这个类型的崩溃。
 
 
 
