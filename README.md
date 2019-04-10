@@ -1,6 +1,6 @@
 # FFExtension   
 
-![pod](https://img.shields.io/badge/pod-1.0.7-orange.svg)  ![](https://img.shields.io/badge/license-MIT-green.svg)  [![weibo status](https://img.shields.io/badge/weibo-%40Zombie%E7%AC%AC%E4%B8%83%E7%AB%A0-brightgreen.svg)](https://weibo.com/1247589445)
+![pod](https://img.shields.io/badge/pod-1.0.7-orange.svg)  [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE) [![weibo status](https://img.shields.io/badge/weibo-%40Zombie%E7%AC%AC%E4%B8%83%E7%AB%A0-brightgreen.svg)](https://weibo.com/1247589445)
 
 
 
