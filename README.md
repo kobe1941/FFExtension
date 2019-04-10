@@ -12,7 +12,7 @@
 
 所有被hook的函数都是直接从系统API选取的，基本上能拦截掉绝大部分的常见越界类和空值类数据引起的崩溃。
 
-
+KVO，NSTimer强引用这类能用代码规范解决的，本库不做额外的防护。
 
 To Avoid the classes out of bounds :
 
