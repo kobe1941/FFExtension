@@ -12,6 +12,8 @@
 
 ### [中文介绍](http://www.zoomfeng.com/blog/ffextension.html)
 
+主要用于降低iOS APP的常见崩溃，比如数组字典等容器的越界和插入空值，以及可选的unrecognized selector sent to instance这类崩溃。
+
 最新版本已经去掉对NSData的hook，会跟高德的SDK用到的某个函数有点冲突，我这边测试用例过不了就直接去掉了。
 
 所有被hook的函数都是直接从系统API选取的，基本上能拦截掉绝大部分的常见越界类和空值类数据引起的崩溃。
