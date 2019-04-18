@@ -815,7 +815,18 @@
 
 - (void)testNSStringHook
 {
+    NSArray *tempArray = [[self class] findAllOf:NSString.class];
+    NSLog(@"tempArray = %@", tempArray);
+    
+    [self logAllMethods:NSClassFromString(@"NSBigMutableString")];
+    
+    
     NSString *str = @"nsstring";
+    
+    Class class = NSClassFromString(@"NSBigMutableString");
+    NSString *bigStr = [[class alloc] initWithString:str];
+    [bigStr substringWithRange:NSMakeRange(10, 30)];
+    
     
     [str characterAtIndex:80];
     

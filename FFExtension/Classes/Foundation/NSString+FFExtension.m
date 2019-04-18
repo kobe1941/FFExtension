@@ -69,7 +69,13 @@
     Class tagClass = NSClassFromString(@"NSTaggedPointerString");
     [self ff_instancenSwizzleWithClass:tagClass originSelector:@selector(characterAtIndex:) swizzleSelector:@selector(ff_characterAtIndex:)];
     [self ff_instancenSwizzleWithClass:tagClass originSelector:@selector(substringWithRange:) swizzleSelector:@selector(ff_substringWithRange:)];
-    [self ff_instancenSwizzleWithClass:tagClass originSelector:@selector(characterAtIndex:) swizzleSelector:@selector(ff_characterAtIndex:)];    
+    
+    
+    Class bigClass = NSClassFromString(@"NSBigMutableString"); ///< 某些系统的键盘会用到这个类
+    [self ff_instancenSwizzleWithClass:bigClass originSelector:@selector(characterAtIndex:) swizzleSelector:@selector(ff_characterAtIndex:)];
+    [self ff_instancenSwizzleWithClass:bigClass originSelector:@selector(substringWithRange:) swizzleSelector:@selector(ff_substringWithRange:)];
+    [self ff_instancenSwizzleWithClass:bigClass originSelector:@selector(replaceCharactersInRange:withString:) swizzleSelector:@selector(ff_replaceCharactersInRange:withString:)];
+    // getCharacters:range:
 }
 
 + (instancetype)ff_stringWithUTF8String:(const char *)nullTerminatedCString
