@@ -66,6 +66,14 @@
     [mutableSet addIndex:7];
     [mutableArray objectsAtIndexes:mutableSet];
     */
+    
+    [self testByHufeng];
+}
+
+- (void)testByHufeng
+{
+    NSString *str = [[NSClassFromString(@"NSConcreteMutableAttributedString") alloc] initWithString:nil];
+    NSLog(@"str = %@", str);
 }
 
 - (void)testForNSAttributedStringHook

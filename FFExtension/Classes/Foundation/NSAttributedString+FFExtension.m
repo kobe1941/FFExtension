@@ -39,6 +39,7 @@
     
     
     Class mutableClass = NSClassFromString(@"NSConcreteMutableAttributedString");
+    [self ff_instancenSwizzleWithClass:mutableClass originSelector:@selector(initWithString:) swizzleSelector:@selector(ff_initWithString:)];
     [self ff_instancenSwizzleWithClass:mutableClass originSelector:@selector(replaceCharactersInRange:withString:) swizzleSelector:@selector(ff_replaceCharactersInRange:withString:)];
     [self ff_instancenSwizzleWithClass:mutableClass originSelector:@selector(setAttributes:range:) swizzleSelector:@selector(ff_setAttributes:range:)];
     [self ff_instancenSwizzleWithClass:mutableClass originSelector:@selector(addAttribute:value:range:) swizzleSelector:@selector(ff_addAttribute:value:range:)];
