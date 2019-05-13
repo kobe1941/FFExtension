@@ -105,6 +105,11 @@
     });
 }
 
+- (void)updateUnrecogziedSelectorClassPrefixs:(NSArray<NSString *> *)classPrefixs
+{
+    [NSObject updateUnrecogziedSelectorClassPrefixs:classPrefixs];
+}
+
 #pragma mark - FFExceptionDelegate
 - (void)ff_captureExceptionWithErrorDic:(NSDictionary *)errorDic
 {

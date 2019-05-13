@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "SSZTestObject.h"
 #import <objc/runtime.h>
-
+#import "FFManager.h"
 
 ///< NSSet/NSMutableSet, NSOrderedSet/NSMutableOrderedSet, NSUserDefault
 @interface ViewController ()
@@ -22,7 +22,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-//    [self testUnrecognizedSelector];
+    [[FFManager sharedInstance] updateUnrecogziedSelectorClassPrefixs:@[@"SSZ", @"UI"]];
+    
+    [self testUnrecognizedSelector];
 //    [self testNSStringHook];
 //    [self testArrayHook];
     
@@ -67,7 +69,7 @@
     [mutableArray objectsAtIndexes:mutableSet];
     */
     
-    [self testByHufeng];
+//    [self testByHufeng];
 }
 
 - (void)testByHufeng
@@ -901,6 +903,12 @@
     SSZTestObject *test = [SSZTestObject new];
     
     [test performSelector:@selector(efgaegggre:) withObject:@"fwe"];
+    
+    
+    UIView *view = [UIView new];
+    [view performSelector:@selector(wfewfwf) withObject:@"vfwe"];
+    
+    [test performSelector:@selector(class) withObject:@"fwef"];
     
 //    NSNull *null = [NSNull null];
 //    [null performSelector:@selector(length)];

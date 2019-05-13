@@ -42,4 +42,11 @@ typedef void(^FFExceptionBlock)(NSDictionary *exceptionDic);
 - (void)startWorkWithOption:(FFHookOption)option unrecogziedSelectorClassPrefixs:(NSArray<NSString *> *)classPrefixs callBackBlock:(FFExceptionBlock)block;
 
 
+/**
+ 用来更新数组的接口，方便用接口下发数据来配置，不用发版也能避免某些崩溃
+
+ @param classPrefixs 需要防护的类名前缀数组，内部会去重
+ */
+- (void)updateUnrecogziedSelectorClassPrefixs:(NSArray<NSString *> *)classPrefixs;
+
 @end
