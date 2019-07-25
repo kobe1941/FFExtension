@@ -69,12 +69,21 @@
     [mutableArray objectsAtIndexes:mutableSet];
     */
     
-//    [self testByHufeng];
+    [self testByHufeng];
 }
 
 - (void)testByHufeng
 {
     NSString *str = [[NSClassFromString(@"NSConcreteMutableAttributedString") alloc] initWithString:nil];
+    NSLog(@"str = %@", str);
+    
+    str = [[NSClassFromString(@"NSConcreteAttributedString") alloc] initWithString:nil attributes:nil];
+    NSLog(@"str = %@", str);
+
+    str = [[NSClassFromString(@"NSConcreteMutableAttributedString") alloc] initWithString:@"" attributes:@{}];
+    str = [[NSClassFromString(@"NSConcreteMutableAttributedString") alloc] initWithString:@"" attributes:nil];
+    str = [[NSClassFromString(@"NSConcreteMutableAttributedString") alloc] initWithString:nil attributes:@{}];
+    str = [[NSClassFromString(@"NSConcreteMutableAttributedString") alloc] initWithString:nil attributes:nil];
     NSLog(@"str = %@", str);
 }
 
